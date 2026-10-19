@@ -35,7 +35,11 @@ Look for the originating spec, in this order:
 
 Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
 
-On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
+When the diff changes domain types, functions, state transitions, or their tests, call the Skill tool with "codebase-design" for functional and type-contract guidance. That skill must be available for this branch, including when skills are installed individually. Carry the applicable guidance and its source into the Standards brief. Review admitted inputs, totality assumptions, expected errors, invariant enforcement, composition, and observable effects against the changed contract. Judge encapsulated mutation by its observable contract and justification. Match verification to risk and behaviour; purity alone does not require property tests.
+
+Repository standards override this guidance. In their absence, label functional-design recommendations as judgement calls and cite the contract and hunk concerned. Distinguish compiler enforcement, runtime checks, testing evidence, and assumptions; passing checks are not proof of every domain guarantee.
+
+On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: an adapted set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
 - **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
 - **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
@@ -44,14 +48,14 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - **Mysterious Name**: a function, variable, or type whose name doesn't reveal what it does or holds. → rename it; if no honest name comes, the design's murky.
 - **Duplicated Code**: the same logic shape appears in more than one hunk or file in the change. → extract the shared shape, call it from both.
-- **Feature Envy**: a method that reaches into another object's data more than its own. → move the method onto the data it envies.
+- **Feature Envy**: logic depends on another module's private representation. → colocate the operation with that knowledge or expose a cohesive function interface. Pure transformations over explicit domain data are not a smell merely because the data lives elsewhere.
 - **Data Clumps**: the same few fields or params keep travelling together (a type wanting to be born). → bundle them into one type, pass that.
 - **Primitive Obsession**: a primitive or string standing in for a domain concept that deserves its own type. → give the concept its own small type.
-- **Repeated Switches**: the same `switch`/`if`-cascade on the same type recurs across the change. → replace with polymorphism, or one map both sites share.
+- **Repeated Switches**: the same domain decision is duplicated across the change. → centralize that decision when it must evolve together. Exhaustive matches implementing distinct operations over a sum type can remain separate; choose polymorphism only when it improves the contract.
 - **Shotgun Surgery**: one logical change forces scattered edits across many files in the diff. → gather what changes together into one module.
 - **Divergent Change**: one file or module is edited for several unrelated reasons. → split so each module changes for one reason.
 - **Speculative Generality**: abstraction, parameters, or hooks added for needs the spec doesn't have. → delete it; inline back until a real need shows.
-- **Message Chains**: long `a.b().c().d()` navigation the caller shouldn't depend on. → hide the walk behind one method on the first object.
+- **Message Chains**: navigation exposes representation the caller should not depend on. → hide that knowledge behind a function or module interface. A composition pipeline is not a smell solely because it chains operations.
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
@@ -63,7 +67,8 @@ Issue both sub-agent calls together, in the foreground, and aggregate the report
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- The applicable functional and type-contract guidance from step 3, with its source and repository-override rule, when that branch applies.
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk; and (c) when functional guidance is supplied, concerns supported by the changed contract and hunk, citing that guidance. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells and functional-design recommendations are judgement calls unless a documented rule establishes the requirement. Documented repo standards override both. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** should include:
 

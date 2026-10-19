@@ -10,7 +10,8 @@ Surface architectural friction and propose **deepening opportunities**: refactor
 
 This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
-- Call the Skill tool with "codebase-design" for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", "one adapter = hypothetical seam, two = real"). Use these terms exactly in every suggestion, and don't drift into "component," "service," "API," or "boundary."
+- Call the Skill tool with "codebase-design" for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", and seams justified by variation, effects, or invariants). Read its `FUNCTIONAL-CONTRACTS.md` before assessing purity, totality, or domain types. Use these terms exactly in every suggestion, and don't drift into "component," "service," "API," or "boundary."
+- If the harness has no Skill tool, read the installed `codebase-design/SKILL.md` and its same-directory references. If unavailable, identify the missing dependency; a full repository checkout is not required.
 - The domain language in `GLOSSARY.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate.
 
 ## Process
@@ -28,7 +29,8 @@ Then spawn a sub-agent to walk the codebase. Don't follow rigid heuristics; expl
 
 - Where does understanding one concept require bouncing between many small modules?
 - Where are modules **shallow**, with an interface nearly as complex as the implementation?
-- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
+- Where do callers violate domain contracts or mishandle effects, even when individual functions are correct? Preserve useful pure composition and its law tests while improving orchestration coverage.
+- Where do hidden inputs, partial operations, or representable invalid states make behavior hard to reason about?
 - Where do tightly-coupled modules leak across their seams?
 - Which parts of the codebase are untested, or hard to test through their current interface?
 
@@ -45,7 +47,7 @@ For each candidate, render a card with:
 - **Files**: which files/modules are involved
 - **Problem**: why the current architecture is causing friction
 - **Solution**: plain English description of what would change
-- **Benefits**: explained in terms of locality and leverage, and how tests would improve
+- **Benefits**: explained in terms of locality and leverage, explicit contracts and effects, and which domain and integration evidence will be preserved or added
 - **Before / After diagram**: side-by-side, custom-drawn, illustrating the shallowness and the deepening
 - **Recommendation strength**: one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
 

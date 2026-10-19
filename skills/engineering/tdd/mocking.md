@@ -54,6 +54,6 @@ const api = {
 
 The SDK approach means:
 - Each mock returns one specific shape
-- No conditional logic in test setup
+- Simple mock setup per external operation; generators and independent state models may need conditional logic
 - Easier to see which endpoints a test exercises
 - Type safety per endpoint

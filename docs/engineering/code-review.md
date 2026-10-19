@@ -21,7 +21,7 @@ You must supply the fixed point. If you do not, the skill asks for one rather th
 
 ## Prerequisites
 
-The Standards axis needs nothing. It reads whatever the repo documents (`CODING_STANDARDS.md`, `CONTRIBUTING.md`, and the like) and falls back on a built-in baseline when the repo documents nothing.
+The Standards axis needs no existing standards file. Reviewing changed domain contracts also requires [codebase-design](https://aihero.dev/skills-codebase-design) to be available, including with a selective installation. It reads whatever the repo documents (`CODING_STANDARDS.md`, `CONTRIBUTING.md`, and the like) and falls back on a built-in baseline when the repo documents nothing.
 
 The Spec axis needs a spec to exist and be findable. It looks in this order:
 
@@ -37,15 +37,26 @@ Step 1 depends on the tracker doc, which [setup-matt-pocock-skills](https://aihe
 | | Standards | Spec |
 | --- | --- | --- |
 | Question | Is it built right? | Is it the right thing? |
-| Reads | The repo's documented standards, plus the smell baseline | The originating issue or spec |
-| Reports | Documented breaches (can be hard), and smells (always judgement calls) | Missing or partial requirements, scope creep, requirements implemented wrongly |
-| Every finding cites | The standards file and the rule, or the named smell plus the hunk | The line of the spec |
+| Reads | The repo's documented standards, the smell baseline, and applicable functional-contract guidance | The originating issue or spec |
+| Reports | Documented breaches (can be hard), smells and functional-design recommendations (judgement calls) | Missing or partial requirements, scope creep, requirements implemented wrongly |
+| Every finding cites | The standards rule, named smell, or functional-contract guidance, plus the affected hunk | The line of the spec |
 
 This design exists to avoid a generic review skill that does not know your standards. Such a skill flags what is deliberate in your codebase and misses the invariants your codebase depends on. So the repo's own documentation is the [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source) on the Standards axis, and **the repo always overrides**.
 
-The **smell baseline** sits under the repo's standards. It is twelve code smells from chapter 3 of Fowler's _Refactoring_: Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession, Repeated Switches, Shotgun Surgery, Divergent Change, Speculative Generality, Message Chains, Middle Man, Refused Bequest. Each is a labelled heuristic ("possible Feature Envy"), never a hard violation. Each states what the smell is and how to fix it, so a finding comes with a fix attached rather than only a complaint. Both axes skip anything your linter already enforces.
+The **smell baseline** sits under the repo's standards. It adapts twelve code smells from chapter 3 of Fowler's _Refactoring_: Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession, Repeated Switches, Shotgun Surgery, Divergent Change, Speculative Generality, Message Chains, Middle Man, Refused Bequest. Each is a labelled heuristic ("possible Feature Envy"), never a hard violation. Each states what the smell is and how to fix it, so a finding comes with a fix attached rather than only a complaint. Pure transformations, exhaustive matches for distinct operations, and composition pipelines can be sound designs. The adapted remedies target representation coupling and duplicated decisions. Both axes skip anything your linter already enforces.
+
+Changes to domain types, functions, transitions, or their tests also bring in `codebase-design`. The Standards reviewer checks admitted inputs, totality assumptions, expected errors, invariant enforcement, composition, and observable effects. Repository rules still take precedence. Functional-design recommendations remain judgement calls unless a documented standard establishes the requirement.
 
 ## Common questions
+
+**Will it push functional code toward classes or demand property tests for every function?**
+
+No. A pure function over domain data, an exhaustive match, or a composition pipeline can be the appropriate design. The reviewer checks evidence against the changed contract: examples, unit tests, properties, and integration tests each serve different needs. A trivial function does not need generated tests merely to satisfy a preference. Encapsulated mutation is assessed by its observable contract and justification.
+
+**Does passing typechecking establish totality or prove an invariant?**
+
+Only claim what the actual checks establish. The reviewer looks for admitted inputs, termination assumptions, construction and validation rules, and evidence for the remaining obligations. Passing generated cases supports a property within the tested scope; it does not prove the property for every input.
+
 
 **It collides with Claude Code's own `/code-review`. What do I do?**
 
@@ -84,7 +95,8 @@ No. It diffs `<fixed-point>...HEAD`. The three-dot form measures from the merge-
 
 - It refuses to start on a bad ref or an empty diff, before any sub-agent is spawned.
 - The report arrives as two separate blocks under `## Standards` and `## Spec`, not one merged list.
-- Every Standards finding names either a rule in one of your repo's files or one of the twelve smells, with the hunk quoted; every Spec finding quotes a line of the spec.
+- Every Standards finding names a repository rule, a baseline smell, or applicable functional-contract guidance, with the affected hunk identified; every Spec finding quotes a line of the spec.
+- Functional-design findings explain the contract at risk and respect documented repository choices.
 - The closing summary gives a worst issue per axis and declines to pick an overall winner.
 - With no spec available, the Spec block says so instead of listing requirements it inferred from the code.
 

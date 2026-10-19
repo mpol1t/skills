@@ -20,7 +20,7 @@ Where the work currently lives decides whether this is the right skill:
 | One concrete behaviour you want test-first, with no spec | [tdd](https://aihero.dev/skills-tdd) directly |
 | Already built, and you want it checked | [code-review](https://aihero.dev/skills-code-review) directly |
 
-The same-session case is worth naming because the skill's own first line doesn't cover it. `SKILL.md` says "the spec or tickets", which pushes the [model](https://www.aihero.dev/ai-coding-dictionary/model) to look for a file that doesn't exist. If the plan lives only in the thread, say so when you invoke it.
+The same-session case is supported directly: an agreed conversation can supply the work without an intermediate spec file.
 
 ## Prerequisites
 
@@ -28,12 +28,14 @@ The same-session case is worth naming because the skill's own first line doesn't
 
 If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) configured the tracker they live on. `code-review` reads the same configuration to find the originating spec at close-out.
 
+Changed domain behavior uses [codebase-design](https://aihero.dev/skills-codebase-design) for functional contracts, alongside `tdd` for verification. Include those dependencies when installing selected skills.
+
 ## What one run does
 
 A run has five steps, in order:
 
-1. Read the ticket or spec and work out the seams.
-2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
+1. Read the work and its applicable contracts, following parent-spec references where needed, and recover agreed seams.
+2. Drive [tdd](https://aihero.dev/skills-tdd) at those seams, establishing the smallest useful types and signatures for one behavior before its red-green slice.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
 5. Run [code-review](https://aihero.dev/skills-code-review), then commit to the current branch.
@@ -44,9 +46,15 @@ One run covers one ticket. The tickets [to-tickets](https://aihero.dev/skills-to
 
 The skill's central idea is the **seam**, the public boundary you observe behaviour at without reaching inside. Tests live at seams. When the seam is agreed before any code exists, the tests last, and you can rewrite the implementation underneath without changing them.
 
-The "pre-agreed" part matters, and it is also the skill's weakest point. Nothing inside `implement` agrees the seams. `tdd` is the skill that asks, and it refuses to write a test at an unconfirmed seam. So in practice the agreement happens either upstream in the spec, or in the first exchange of the run. If it happens nowhere, the run becomes "just write the code" and nothing warns you. Naming the seams in the spec is what stops that.
+The agreement travels with the contract and verification decisions in the spec or ticket. `implement` follows parent-spec references when needed and uses `tdd` to resolve missing agreements. It reuses existing agreements rather than asking again. Stable pure-domain interfaces and integration interfaces may both be needed when they cover different risks.
+
+Verification stays proportionate: examples for concrete cases, properties for useful laws, and integration checks for effects. A justified example-only decision survives implementation. Before review, the agent accounts for contract obligations and assumptions, including temporary holes or unsafe assertions introduced during development.
 
 ## Common questions
+
+**Will type-driven development or property testing make a small change elaborate?**
+
+They should not. Type design is limited to the current behavior slice, and the agent chooses tests for useful evidence. A trivial function can use focused example-based unit tests or adequate existing coverage without generators or a new harness.
 
 **It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
 
@@ -78,6 +86,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 
 - The session opens by reading the ticket or spec and restating what it will build, rather than asking you what to build.
 - You can see an actual `tdd` Skill tool call in the trace, not just tests appearing in the diff.
+- Each behavior starts from a small contract, and the checks match that contract without speculative types or automatic generated testing.
 - Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end.
 - The run reaches a commit on your current branch without you prompting it to carry on.
 - The diff is one ticket's worth of change: a vertical slice through every layer, not several tickets swept together.

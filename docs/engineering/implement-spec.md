@@ -19,6 +19,7 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 
 - **An issue tracker.** The skill reads the tickets from, and resolves them on, the tracker [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) configured. If none has been configured, it stops and tells you to run that first rather than guessing.
 - **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
+- **The design and testing skills.** Implementers use [codebase-design](https://aihero.dev/skills-codebase-design) for changed domain contracts and [tdd](https://aihero.dev/skills-tdd) for verification. Include these dependencies in selected-skill installations.
 - **A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) that runs subagents in the background and gives each one a git worktree.** The skill exists to run tickets at the same time, so on a harness that runs subagents one at a time, it is only a slower `implement`.
 
 ## The integration branch
@@ -26,12 +27,14 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 Everything lands on one branch. Each implementer:
 
 1. confirms its worktree is based on the integration branch before it starts,
-2. builds its ticket with [tdd](https://aihero.dev/skills-tdd), red-green one slice at a time,
+2. reads the applicable contracts and agreed seams, then builds with [tdd](https://aihero.dev/skills-tdd), types and signatures first within each behavior slice,
 3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
 
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
 Implementers talk to the orchestrator through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer) (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
+
+Each implementer reports the relevant verification and remaining assumptions. The merger rechecks affected shared contracts and integration behavior: passing each slice independently does not establish that their combined effects preserve the invariants.
 
 ## Common questions
 
@@ -49,7 +52,7 @@ Both happen when `code-review` runs anywhere other than the one point the skill 
 
 **Does it drive tdd like implement does?**
 
-It does now, though it didn't at first. Users running the in-progress version noticed that "the implementer subagents don't inherit the /tdd directive", so red-green stopped as soon as they scaled up from one ticket to a whole spec. Each implementer now builds its ticket with `tdd`. There is still no step where you agree seams interactively, as there is in an `implement` session, so name the seams in the spec or the tickets if you want them pinned.
+Each implementer uses `tdd` and reads the contract and verification decisions carried in its ticket or parent spec. Existing seam agreements and justified example-only choices survive that handoff. Missing agreements are resolved through `tdd`; a new agent does not silently select a different test strategy.
 
 **Two implementers running in parallel collided on the same file, or picked different names for the same thing.**
 
@@ -71,7 +74,8 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 
 - Several implementers are running at once whenever the graph allows, not one after another.
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
-- Every ticket's trace shows `tdd` running, with a failing test before the code.
+- Every ticket's trace shows `tdd` selecting proportionate evidence, with types and signatures before the behavior and a meaningful red-green check when adding a test.
+- Integration checks catch interactions across slices rather than relying only on separate green reports.
 - Merges into the integration branch are fast-forwards, not conflict resolutions.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 

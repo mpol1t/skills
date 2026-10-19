@@ -1,11 +1,13 @@
 ---
 name: codebase-design
-description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.
+description: Design deep modules and functional contracts. Use when shaping domain types or interfaces, reasoning about purity, totality or effects, finding deepening opportunities, or when another skill needs the shared design vocabulary.
 ---
 
 # Codebase Design
 
 Design **deep modules**: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface. Use this language and these principles wherever code is being designed or restructured. The aim is leverage for callers, locality for maintainers, and testability for everyone.
+
+When designing domain types or behavior, or reviewing purity, totality, or effects, read [FUNCTIONAL-CONTRACTS.md](FUNCTIONAL-CONTRACTS.md) for the shared defaults on purity, totality, per-slice type-first development, and verification. This is a reference: apply it to the current task; it does not initiate a redesign.
 
 ## Glossary
 
@@ -62,7 +64,8 @@ When designing an interface, ask:
 - **Depth is a property of the interface, not the implementation.** A deep module can be internally composed of small, mockable, swappable parts; they just aren't part of the interface. A module can have **internal seams** (private to its implementation, used by its own tests) as well as the **external seam** at its interface.
 - **The deletion test.** Imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
 - **The interface is the test surface.** Callers and tests cross the same seam. If you want to test *past* the interface, the module is probably the wrong shape.
-- **One adapter means a hypothetical seam. Two adapters means a real one.** Don't introduce a seam unless something actually varies across it.
+- **A seam needs a concrete purpose.** Variation, effect isolation, or protection of a domain invariant can justify one. Name the purpose; a second adapter is evidence of variation, not a prerequisite.
+- **Preserve useful composition.** Small pure functions can carry stable domain contracts. Judge extractions by reasoning and caller complexity, not implementation size alone.
 
 ## Designing for testability
 
@@ -92,7 +95,7 @@ Good interfaces make testing natural:
    }
    ```
 
-3. **Small surface area.** Fewer methods = fewer tests needed. Fewer params = simpler test setup.
+3. **Explicit contracts.** Minimize what callers must learn while keeping inputs, outcomes, and effects visible. Verification follows semantic cases and invariants, not method or parameter count.
 
 ## Relationships
 
@@ -110,5 +113,5 @@ Good interfaces make testing natural:
 
 ## Going deeper
 
-- **Deepening a cluster given its dependencies**, see [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, and replace-don't-layer testing.
+- **Deepening a cluster given its dependencies**, see [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, and preservation of distinct test evidence.
 - **Exploring alternative interfaces**, see [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md): spin up parallel sub-agents to design the interface several radically different ways, then compare on depth, locality, and seam placement.

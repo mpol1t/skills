@@ -26,10 +26,12 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `tdd` to build the ticket;
+   - reads the ticket's contracts and verification decisions, following parent-spec references where needed, and carries forward agreed seams;
+   - calls the Skill tool with `codebase-design` for changed domain contracts, then separately with `tdd` to build one behavior at a time, beginning with its smallest useful types and signatures; if a required skill is unavailable, reports the missing dependency;
+   - chooses examples, properties, and integration checks according to behavior and risk, preserves justified example-only decisions, and reports verification of applicable invariants plus remaining assumptions;
    - merges the integration branch tip into its own branch before reporting done
 
-5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
+5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**. Recheck affected shared contracts and integration behavior after merging: individually passing slices do not establish that their combined effects preserve the spec's invariants.
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 

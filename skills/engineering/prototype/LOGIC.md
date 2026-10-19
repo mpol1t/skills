@@ -21,16 +21,18 @@ Before writing code, write down what state model and what question you're protot
 
 ### 2. Isolate the logic in a portable module
 
+This branch requires `codebase-design`. Call the Skill tool with "codebase-design", or read its installed `SKILL.md` when the harness has no Skill tool, then read its same-directory `FUNCTIONAL-CONTRACTS.md`. If unavailable, identify the missing dependency instead of assuming a sibling repository path exists. Keep the model limited to the question being explored.
+
 Put the actual logic (the bit that's answering the question) in a single `<script>` block written as a small, pure module that could be lifted out and dropped into the real codebase later. The page around it is throwaway; this module isn't.
 
 The right shape depends on the question:
 
-- **A pure reducer**: `(state, action) => state`. Good when actions are discrete events and state is a single value.
+- **A pure reducer**: `(state, action) => next state or rejection`. Good when actions are discrete events and state is a single value.
 - **A state machine**: explicit states and transitions. Good when "which actions are even legal right now" is part of the question.
 - **A small set of pure functions** over a plain data type. Good when there's no implicit current state, just transformations.
-- **A class or module with a clear method surface** when the logic genuinely owns ongoing internal state.
+- **An explicit transition function with a stateful driver** when the interaction owns ongoing state. The driver stores state; the domain operation receives it and returns the next state or a defined rejection.
 
-Pick whichever shape best fits the question being asked, *not* whichever is easiest to wire to a page. Keep it pure: no DOM, no `document`, no button handlers reaching inside it. The page calls into it; nothing flows the other direction. This is what makes the prototype useful past its own lifetime: once the question's answered, the validated reducer / machine / function set lifts into the real module on its own.
+Pick whichever shape best fits the question being asked, *not* whichever is easiest to wire to a page. Keep the domain computation pure: make its observations explicit inputs and return its decisions. The page owns time, randomness, storage, and rendering. Model illegal actions with defined outcomes; use a no-op only when the domain calls for one. No DOM or button handlers reach inside the computation. The page calls into it; nothing flows the other direction. This is what makes the prototype useful past its own lifetime: once the question is answered, the reducer / machine / function set can inform the real module. Manual exploration is evidence about the design; production adoption still requires type, runtime-validation, and behavioral checks appropriate to the contract.
 
 ### 3. Build the shareable HTML file
 
@@ -55,7 +57,7 @@ Send them the file, or open it for them. They'll click through the walkthroughs 
 
 ### 5. Capture the answer and the prototype
 
-Once the prototype has answered its question, capture the answer, then capture the prototype the way the [SKILL](SKILL.md) describes. The logic-specific mapping: the validated reducer / machine / function set lifts into the real module (the decision, absorbed); the HTML shell rides along to the throwaway branch that keeps the prototype as a primary source, and being one self-contained file, it stays trivially re-runnable there.
+Once the prototype has answered its question, capture the answer, then capture the prototype the way the [SKILL](SKILL.md) describes. The logic-specific mapping: the explored reducer / machine / function set informs the real module, with its contracts verified during implementation (the decision, absorbed); the HTML shell rides along to the throwaway branch that keeps the prototype as a primary source, and being one self-contained file, it stays trivially re-runnable there.
 
 ## Anti-patterns
 

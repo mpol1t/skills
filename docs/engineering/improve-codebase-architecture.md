@@ -35,11 +35,11 @@ It writes in two places. The report goes to `<tmpdir>/architecture-review-<times
 
 The skill rests on one idea: **depth**. A deep module puts a lot of behaviour behind a small, stable interface. A shallow module exposes its implementation through an interface nearly as wide as the code beneath it. The report looks for three forms of shallowness:
 
-- Pure functions extracted only for testability, while the real bugs are in how callers use them (no **locality**).
+- Callers that violate domain contracts or mishandle effects, even when individual functions are correct. Useful pure composition and its law tests remain valuable.
 - Modules that leak across their **seams**.
 - A concept you cannot understand without opening five files.
 
-For each one, it proposes the deepening that fixes it.
+For each one, it proposes a change that improves locality and reasoning. It also checks hidden inputs, partial operations, and invalid states. A seam can isolate an effect with one production adapter. Consolidation preserves distinct domain coverage alongside integration tests.
 
 Each candidate is a card with the files involved, the friction, a plain-English solution, the benefit in terms of **locality** and **leverage**, a before/after diagram, and a strength badge.
 
@@ -56,6 +56,11 @@ The report ends with a **Top recommendation**, the candidate it would do first. 
 When you pick a candidate, a [grilling](https://aihero.dev/skills-grilling) session starts on it. It covers the constraints, what goes behind the seam, which tests survive, and what the deepened interface should look like. The output of that session is a decision, not a diff. From there the normal flow applies: take the decision into [to-spec](https://aihero.dev/skills-to-spec), then [to-tickets](https://aihero.dev/skills-to-tickets), then [implement](https://aihero.dev/skills-implement).
 
 ## Common questions
+
+**Will it merge my pure functions and delete their tests?**
+
+Only when the proposed change improves the contracts and locality, with useful evidence preserved. Small pure functions can be valuable compositions. Domain laws and examples survive unless their obligations disappear or are demonstrably covered elsewhere; integration tests cover effects and orchestration.
+
 
 **It grilled me for an hour about one idea instead of showing me options. Can I turn that off?**
 
@@ -87,7 +92,7 @@ Rarely, so know that before you start. The skill exists to output findings, so i
 
 **Does it work in Codex or another harness?**
 
-Partly. The exploration step names Claude Code's `Agent` tool with `subagent_type=Explore` directly. A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) without that tool may skip the parallel exploration instead of using its own equivalent. The skill still runs, but the scan is less thorough. Someone has proposed a harness-neutral rewrite, but it is not merged.
+The exploration instructions use harness-neutral sub-agent dispatch. In a [harness](https://www.aihero.dev/ai-coding-dictionary/harness) without a Skill tool, the agent reads the installed design skill and its references. `codebase-design` must be available; the skill does not assume a full repository checkout.
 
 **How do I actually implement deep modules in TypeScript?**
 
@@ -99,7 +104,7 @@ The skill does not ship a good answer. People often ask for a `TYPESCRIPT.md` wi
 - The candidates are in files you edited recently, not in parts of the repo nobody touches.
 - No code changed during the run. The only new file is the HTML report in your temp directory.
 - It stops after the report and asks which candidate you want. It does not continue on its own.
-- Each card explains the payoff as locality or leverage, and says which tests get simpler, not just "this is cleaner."
+- Each card explains the payoff as locality or leverage and identifies domain and integration evidence to preserve or add.
 - When you reject a candidate for a lasting reason, it offers to record an ADR, so the next run does not suggest it again.
 
 ## Where it fits

@@ -1,6 +1,6 @@
 ## What it does
 
-`to-spec` turns the conversation you have just had into a **[spec](https://www.aihero.dev/ai-coding-dictionary/spec)**, and publishes it to your issue tracker as a single issue.
+`to-spec` turns the conversation you have just had into a **[spec](https://www.aihero.dev/ai-coding-dictionary/spec)**. A draft request stays local for iteration; otherwise it publishes to your configured issue tracker as a single issue. Producing or agreeing a spec does not start implementation.
 
 It does not interview you. When you reach for it, the deciding is already done. So it synthesises what is known (from the thread, the codebase, your `GLOSSARY.md` and ADRs) and does not start a new round of questions. The spec records decisions you already made. It is not a place to make new ones.
 
@@ -19,7 +19,7 @@ Reach for it when the build is too big for one agent [session](https://www.aiher
 
 ## Prerequisites
 
-`to-spec` publishes the spec as an issue, so [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must first configure a tracker and the triage-label vocabulary for this repo. Either kind of tracker works: a real tracker like GitHub, or local markdown files under `.scratch/`, which work with no extra setup.
+For publication, [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must configure a tracker and the triage-label vocabulary for this repo. The tracker can be a hosted service or local markdown files. Changed domain contracts also use [codebase-design](https://aihero.dev/skills-codebase-design); include it when installing selected skills.
 
 ## The spec is a decision record
 
@@ -29,11 +29,21 @@ So the spec does not validate or decide anything. It records what you decided, i
 
 ## Seams before prose
 
-Before it writes anything, `to-spec` sketches the **seams** where the feature will be tested, and checks them with you. It prefers existing seams to new ones, and picks the highest seam it can. The ideal number of seams for a change is one.
+Before it writes anything, `to-spec` identifies the **seams** where the feature will be tested. It reuses agreements already made and checks new or changed seams with you. Existing interfaces are preferred, with the smallest useful set covering distinct risks: stable domain interfaces for calculations and laws, integration interfaces for effects and orchestration.
+
+The spec preserves admitted inputs, legal transitions, expected failures, invariants, and effect ownership. It distinguishes what types enforce from runtime validation, tests, and assumptions. Testing decisions explain why examples, properties, integration checks, or existing coverage fit the behavior. Trivial behavior stays simple.
 
 Other skills use those agreed seams later. [tdd](https://aihero.dev/skills-tdd) works only at seams you agreed in advance. [code-review](https://aihero.dev/skills-code-review) reviews the diff against the spec, so a seam nobody agreed to shows up as a review finding. Both connections go through this document. That is why you should take the seam conversation seriously here, and not leave it for implementation.
 
 ## Common questions
+
+**Does agreeing the spec authorize implementation?**
+
+No. The skill returns the requested artifact and stops. Asking to draft or iterate also keeps it from publishing or applying a ready label. Explicitly invoke an implementation step when you want the build to begin.
+
+**Does every domain function need property-based tests?**
+
+No. The spec records the useful evidence for each contract. A focused example-based unit test can be sufficient; generated cases earn their place when a meaningful law adds coverage.
 
 **Where did `/to-prd` go?**
 It is this skill, renamed in v1.1. "Spec" is now the one term used throughout, and the old `to-prd` slug no longer works, so reinstall under the new name. The old vocabulary is replaced by the pair *spec* and *tickets*. The spec is the destination and the decisions that fix it. The [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) are the steps that get there. If you change direction, delete the unfinished tickets and keep the spec.
@@ -65,7 +75,8 @@ A tracker issue may not return a very large spec in full, and there is no local 
 ## It's working if
 
 - It starts writing instead of asking you a new round of questions.
-- It shows you the seams before it writes, and proposes as few as it can.
+- It reuses agreed seams and explains the distinct risk covered by each new one.
+- Its contracts and test choices are clear enough for a fresh implementer, including justified example-only choices.
 - It uses your project's nouns, not generic product-management boilerplate.
 - You remember making every decision in it. It invented nothing to fill a section.
 - The out-of-scope section lists real things. The things you refused are usually the most useful lines on the page.
