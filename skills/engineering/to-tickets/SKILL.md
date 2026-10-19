@@ -32,6 +32,8 @@ Break the work into **tracer bullet** tickets.
 - A completed slice is demoable or verifiable on its own
 - Each slice is sized to fit in a single fresh context window
 - Any prefactoring should be done first
+- Carry applicable domain contracts, assumptions, and agreed test seams into each slice. Include legal inputs/transitions, invariants, expected failures, and verification choices where relevant. Read referenced decisions before carrying them forward; a fresh implementer must not need the prior conversation. Mark missing agreements as unresolved rather than inventing them.
+- Keep type design within the behavior it supports. A separate shared-contract slice is justified only when it genuinely blocks other behavior slices.
 
 </vertical-slice-rules>
 
@@ -76,6 +78,8 @@ Do NOT close or modify any parent issue.
 
 **Status:** ready-for-agent
 
+**Contract and verification:** applicable guarantees, agreed seams, and the evidence this slice must provide. Preserve justified example-only choices and note any unresolved agreement. Keep trivial behavior brief.
+
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
 
@@ -100,6 +104,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 - A reference to each blocking ticket, or "None (can start immediately)". Omit this section when blockers were set as native edges.
 
+## Contract and verification
+
+Applicable guarantees, agreed seams, and the evidence this slice must provide. Preserve justified example-only choices and note any unresolved agreement. Keep trivial behavior brief.
+
 </issue-template>
 
-In either form, avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+In either form, avoid specific file paths and implementation snippets: they go stale fast. Exception: inline a concise type, state-machine, reducer, or schema sketch when it records an agreed contract more precisely than prose. Note prototype provenance where applicable. Keep only the decision-rich parts, not a working demo.

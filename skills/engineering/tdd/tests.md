@@ -2,7 +2,7 @@
 
 ## Good Tests
 
-**Integration-style**: Test through real interfaces, not mocks of internal parts.
+**Behavior through real interfaces**: A focused unit test of a public pure function and an integration test can both satisfy this standard. Choose examples or properties independently of that scope.
 
 ```typescript
 // GOOD: Tests observable behavior
@@ -60,7 +60,7 @@ test("createUser makes user retrievable", async () => {
 });
 ```
 
-**Tautological tests**: Expected value restates the implementation, so the test passes by construction.
+**Copied oracles**: Computing the expected value with the same algorithm risks reproducing the same mistake. Use an independently justified expectation.
 
 ```typescript
 // BAD: Expected value is recomputed the way the code computes it

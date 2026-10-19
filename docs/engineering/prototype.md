@@ -12,11 +12,15 @@ Reach for it the moment you hit a question you can't settle by talking: a state 
 
 You will also arrive here without choosing to. [wayfinder](https://aihero.dev/skills-wayfinder) files `prototype` decision [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) on its map, and you work one with this skill.
 
+## Prerequisites
+
+The logic branch requires the installed [codebase-design](https://aihero.dev/skills-codebase-design) skill for purity and totality guidance. The UI branch does not acquire that dependency.
+
 ## Two branches
 
 The question picks the branch, and the branches produce different artifacts:
 
-- **"Does this logic / state model feel right?"**: a **single shareable HTML file**. One self-contained page, no build and no server, that someone opens by double-clicking. It carries a labelled state panel that re-renders after every click, free-play buttons for poking at the model in any order, and tabbed **guided walkthroughs** (one scenario per tab, each with the ordered buttons to press underneath it). Everything is labelled in domain language, so you can hand it to a designer, a PM or a domain expert and let them try the model themselves. The logic behind the page is a small pure module (a reducer, a machine, a set of functions) with no DOM code in it, so you can move the validated version straight into the real code.
+- **"Does this logic / state model feel right?"**: a **single shareable HTML file**. One self-contained page, no build and no server, that someone opens by double-clicking. It carries a labelled state panel that re-renders after every click, free-play buttons for poking at the model in any order, and tabbed **guided walkthroughs** (one scenario per tab, each with the ordered buttons to press underneath it). Everything is labelled in domain language, so you can hand it to a designer, a PM or a domain expert and let them try the model themselves. The logic behind the page is a small pure module (a reducer, a machine, a set of functions) with explicit inputs and a separate stateful page driver. It informs the real implementation, where its contracts still need verification.
 - **"What should this look like?"**: several **radically different** UI variations on one route, switchable from a floating bottom bar and a `?variant=` URL param. Variants must disagree about structure, not colour; three card grids with small tweaks answer nothing. They render inside a real page wherever possible, against real data and real density, because a variant judged on an empty page always looks fine.
 
 Both keep state in memory, start with no setup, and show you the full state after every step. The moment you find yourself hardening one (adding a test, wiring the real database, generalising for a case you might want later), you have stopped prototyping.
@@ -31,11 +35,16 @@ The **prototype** is the runnable evidence the answer came from, and you do not 
 
 ## Common questions
 
+**Does a working logic demo prove the implementation is ready to ship?**
+
+No. Clicking through scenarios provides evidence about the design. The page owns state, time, randomness, and rendering; pure transitions receive observations explicitly and return a next state or a defined rejection. Adoption in production still needs appropriate type, runtime-validation, and behavioral checks. Keep that verification in implementation rather than hardening the throwaway demo.
+
+
 **Wait, isn't the prototype supposed to be deleted?**
 Not any more. It used to be: build it, keep the answer, bin the code. The strongest objection to that was not about speed. It was *who picks up the work next [session](https://www.aihero.dev/ai-coding-dictionary/session), and what do they have to work from?* A prose summary of a prototype loses the thing that made it convincing. So the skill now treats the prototype as a [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source). It lands on a `prototype/<name>` branch out of main and the implementation issue points at it. What changed is where the code lives, not the discipline; it still never merges into main.
 
 **It used to build a terminal app. Where did that go?**
-The logic branch now emits a single shareable HTML file instead. A terminal app can only be driven by someone with the repo cloned and a runtime installed, which rules out the people whose opinion the prototype needs: the designer, the PM, the domain expert who knows what the state model is supposed to mean. One self-contained file that opens by double-click and still works after being emailed can be driven by anyone. The pure logic module underneath is unchanged, and is still the part you move into the real code.
+The logic branch now emits a single shareable HTML file instead. A terminal app can only be driven by someone with the repo cloned and a runtime installed, which rules out the people whose opinion the prototype needs: the designer, the PM, the domain expert who knows what the state model is supposed to mean. One self-contained file that opens by double-click and still works after being emailed can be driven by anyone. The pure logic module underneath still informs the real implementation, with production checks appropriate to its contract.
 
 **An agent told me to `/prototype` when I should have been implementing.**
 This is a known naming problem. An agent that does not know the flow reads `prototype`, a generic and appealing word, as "the obvious next step" once tickets exist. So agents recommend it by name even where the design was settled in conversation. If you already know what to build, the next step is `/implement`, per ticket. Reach for a prototype only when a specific design question is unresolved and talking won't resolve it.
@@ -54,6 +63,7 @@ It can be, if you prototype questions you could have answered by talking, or let
 - You can say in one sentence what question the prototype exists to answer, and it's written at the top of the demo, not just in your head.
 - Someone who doesn't read code can drive the logic demo. They open the file, press the buttons in a walkthrough tab, and describe what they see in their own words.
 - Someone says "wait, that shouldn't be possible" or "huh, I assumed X". That's a bug in the *idea*, which is what the prototype is for.
+- Illegal actions have visible, defined outcomes, and the next implementation step distinguishes explored behavior from verified production contracts.
 - The UI variants disagree about layout and information hierarchy, not just colour and copy, and the feedback you get is "the header from B with the sidebar from C".
 - It is answered in one sitting. If you're still building it a day later, the question was too big; split it.
 - When it's over, main contains the decision and none of the prototype, and the implementation issue points at the branch that still holds it.

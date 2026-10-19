@@ -30,6 +30,8 @@ This is the rule people break most often. One team ran a 26-ticket stack sliced 
 
 Two things happen before anything is published. `to-tickets` looks for prefactoring (the principle "make the change easy, then make the easy change") and orders that work first. Then it presents the breakdown as a numbered list and quizzes you on it: is the granularity right, are the blocking edges real, should anything merge or split. Nothing reaches the tracker until you approve, and that quiz is the place to push back.
 
+Each slice carries the applicable domain contracts, assumptions, agreed test seams, and verification choices. A fresh implementer should be able to recover legal inputs, important invariants, and expected failures without the previous conversation. Type design stays with its behavior unless a shared contract genuinely blocks other slices. A justified example-only test choice survives the handoff.
+
 ## Blocking edges
 
 The edges are the point of the artifact. They work in two ways, depending on the tracker:
@@ -54,6 +56,10 @@ One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechani
 Where even the batches can't stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. CI only has to be green at that ticket.
 
 ## Common questions
+
+**Will the tickets preserve the testing decisions from the spec?**
+
+Both ticket formats now include contract and verification information. The agent carries forward relevant guarantees and agreed seams, and marks unresolved agreements explicitly. This addresses the missing handoff described in [issue 1078](https://github.com/mattpocock/skills/issues/1078). Simple behavior can have a short entry; the section is not a demand for property tests.
 
 **It produced twelve tickets for a three-line change.**
 Over-decomposition is the most reported problem with this skill, and many users see it. The [model](https://www.aihero.dev/ai-coding-dictionary/model) defaults to atomic units and loses the grouping that would make them meaningful. The quiz step is where you fix this. Ask it to merge tickets, and it will. There is also a lower limit. If the whole change fits in one context window, you don't need this skill at all. Go straight to [implement](https://aihero.dev/skills-implement).
@@ -84,7 +90,7 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 - Every ticket has an answer to "what can I demo when this is done?", and the answer is behaviour, not a layer.
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
 - The ticket at the top has no blockers and can be started immediately.
-- Nothing in a ticket body is a file path or a line number, except a snippet a prototype produced.
+- Tickets preserve contracts and agreed verification choices; concise type or state sketches appear only when they express an agreed decision better than prose.
 - Each ticket reads like something a fresh session could finish without you in the room.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
 

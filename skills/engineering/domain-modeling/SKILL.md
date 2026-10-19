@@ -53,6 +53,10 @@ When the user uses vague or overloaded terms, propose a precise canonical term. 
 
 When domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.
 
+For the behaviour under discussion, resolve which combinations of facts are impossible, which state transitions are allowed, and which conditions must remain true after each transition. Distinguish domain guarantees from observations that can become stale, such as availability or permission checked earlier. Keep unresolved constraints as questions in the design discussion.
+
+When translating those constraints into types, function contracts, or enforcement at an effect, call the Skill tool with "codebase-design". That skill must be available for this branch, including when skills are installed individually. Keep representation and enforcement decisions in the design or spec; glossary entries remain definitions of domain concepts.
+
 ### Cross-reference with code
 
 When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?"

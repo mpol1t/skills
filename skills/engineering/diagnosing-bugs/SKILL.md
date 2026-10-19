@@ -29,7 +29,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 4. **Headless browser script** (Playwright / Puppeteer) that drives the UI and asserts on DOM/console/network.
 5. **Replay a captured trace.** Save a real network request / payload / event log to disk; replay it through the code path in isolation.
 6. **Throwaway harness.** Spin up a minimal subset of the system (one service, mocked deps) that exercises the bug code path with a single function call.
-7. **Property / fuzz loop.** If the bug is "sometimes wrong output", run 1000 random inputs and look for the failure mode.
+7. **Property / fuzz loop.** For input-dependent failures, name the violated contract and choose relevant inputs within a bounded search. Call the Skill tool with "tdd" as a reference and read its `properties.md` for generators, shrinking, and replay. Keep this diagnosis flow and its symptom-driven seam selection; do not start a separate TDD loop or seam interview. This branch requires `tdd` to be installed; if unavailable, report the missing dependency and use another suitable feedback loop. Capture the counterexample and tool-specific replay details. Replay against the defective implementation and observe the same contract violation before diagnosis; a search without a counterexample is not a red-capable repro.
 8. **Bisection harness.** If the bug appeared between two known states (commit, dataset, version), automate "boot at state X, check, repeat" so you can `git bisect run` it.
 9. **Differential loop.** Run the same input through old-version vs new-version (or two configs) and diff outputs.
 10. **HITL bash script.** Last resort. If a human must click, drive _them_ with `scripts/hitl-loop.template.sh` so the loop is still structured. Captured output feeds back to you.
@@ -121,7 +121,7 @@ A correct seam is one where the test exercises the **real bug pattern** as it oc
 
 If a correct seam exists:
 
-1. Turn the minimised repro into a failing test at that seam.
+1. Turn the minimised repro into a failing test at that seam. A concrete example is sufficient; retain or add a property when it supplies useful evidence across related cases. For generated failures, preserve a readable counterexample as well as replay details, including the input feature responsible for the original failure.
 2. Watch it fail. If you forced the red by mutating code or a fixture, `diff` against a pristine copy to prove the mutation landed before you trust it.
 3. Apply the fix.
 4. Watch it pass.

@@ -6,17 +6,21 @@ disable-model-invocation: true
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
+Stay within the requested artifact stage. A request to draft or iterate produces a draft, without publishing or applying a ready label. Agreement on a design or spec does not authorize implementation; finish by handing back the spec.
+
 The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
 
 ## Process
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
+2. For changed domain behavior, call the Skill tool with "codebase-design" to express the agreed functional contracts and type decisions. If that dependency is unavailable, identify it rather than silently claiming its guidance was applied. Record settled decisions and flag unresolved obligations instead of inventing guarantees.
 
-Check with the user that these seams match their expectations.
+Sketch the smallest useful set of seams covering the feature's contracts and failure modes. Prefer existing interfaces. Stable pure-domain interfaces can carry laws and example-based unit tests; integration seams cover effects and orchestration. Keep seams that provide distinct evidence. Choose tests by behavior and risk, keeping trivial behavior simple.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+Check new or changed seams with the user; carry forward existing agreements without asking again.
+
+3. Write the spec using the template below. For a draft request, return the draft for iteration. Otherwise publish it to the configured project issue tracker and apply the `ready-for-agent` triage label, with no additional triage. Neither branch starts implementation.
 
 <spec-template>
 
@@ -51,10 +55,12 @@ A list of implementation decisions that were made. This can include:
 - Schema changes
 - API contracts
 - Specific interactions
+- Admitted inputs, legal states and transitions, expected failures, and effect ownership for changed domain behavior
+- Relevant invariants, how types or runtime validation enforce them, and remaining assumptions or justified partiality
 
 Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
 
-Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+Exception: inline a concise type, state-machine, reducer, or schema sketch when it records an agreed contract more precisely than prose. Note prototype provenance where applicable. Keep only the decision-rich parts, not a working demo.
 
 ## Testing Decisions
 
@@ -63,6 +69,9 @@ A list of testing decisions that were made. Include:
 - A description of what makes a good test (only test external behavior, not implementation details)
 - Which modules will be tested
 - Prior art for the tests (i.e. similar types of tests in the codebase)
+- Agreed seams and the distinct failure modes each covers
+- Relevant laws and preconditions, with the rationale for examples, properties, integration checks, or existing adequate coverage; omit generated testing where it adds no useful evidence
+- Which guarantees are compiler-enforced, runtime-enforced, tested, or assumed
 
 ## Out of Scope
 

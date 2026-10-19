@@ -30,7 +30,7 @@ The skill's leading word is **flow**, a path *through* the skills rather than a 
 - **On-ramps**, for a situation that generates work and then merges onto the main flow: incoming bug reports, something broken, or an effort too foggy and too large to hold in one session.
 - **Codebase health**, upkeep rather than feature work. [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) surveys the code for deepening opportunities, and each one it finds re-enters the main flow as an idea.
 - **Standalones**, which sit off every flow and which you use on their own: the prototype, the questionnaire, the research run.
-- **A vocabulary layer underneath**, the two references the other skills pull in when the words rather than the process are the problem.
+- **A vocabulary and design layer underneath**, where [domain-modeling](https://aihero.dev/skills-domain-modeling) sharpens domain meanings and [codebase-design](https://aihero.dev/skills-codebase-design) owns functional contracts, types, totality, and module design. [tdd](https://aihero.dev/skills-tdd) owns proportionate test selection and property technique.
 
 ## The phase boundary
 
@@ -47,6 +47,14 @@ The skill's other key idea is the **phase boundary**. A phase is a chunk of work
 People often get two of these wrong, which is why the router gives the order and not only the list. `/handoff` looks like the general way to move between context windows, but it is not. All it gives you is portability. `/compact` is the last option in the tree, not the first, because each of the four options above it is cheaper or more precise.
 
 ## Common questions
+
+**Where do functional programming and property tests fit in the flow?**
+
+Use `codebase-design` for purity, total versus partial functions, and contracts that support composition. Use `tdd` to choose useful examples, properties, or integration evidence. Specs and tickets carry those decisions into implementation and review. A small function can stay with example-based unit tests; the flow does not demand property tests everywhere.
+
+**Does agreeing a design start the build?**
+
+No. The router names the next step for you to invoke. A draft or design agreement stays at that stage until you explicitly ask for implementation.
 
 **Isn't there just a list of the skills in the right order?**
 

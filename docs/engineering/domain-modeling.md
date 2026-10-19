@@ -4,6 +4,8 @@
 
 It is the **active** discipline, not the passive one. Any skill can read `GLOSSARY.md` to borrow its vocabulary. This skill is for when you are *changing* the model, which is why it interrupts you. It writes a term into `GLOSSARY.md` at the moment you settle it, in the middle of the conversation, rather than producing a tidy glossary at the end. A glossary written at the end is a summary of a [session](https://www.aihero.dev/ai-coding-dictionary/session); the inline version is the session's output.
 
+The scenarios also expose impossible combinations, permitted state transitions, and conditions that must survive a transition. It distinguishes a domain guarantee from a fact that can become stale, such as an earlier availability check. [codebase-design](https://aihero.dev/skills-codebase-design) handles the translation into types and function contracts.
+
 ## When to reach for it
 
 Type `/domain-modeling`, or the agent reaches for it automatically when a task fits. In practice, automatic invocation is the weakest part of the skill. When `grill-with-docs` or `wayfinder` say to load it, [models](https://www.aihero.dev/ai-coding-dictionary/model) often load `grilling` and skip this one. If a [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) session runs and `GLOSSARY.md` is unchanged at the end, that is what happened. Invoke it by name alongside the other skill.
@@ -21,7 +23,7 @@ Reach for it when the *words* are the problem:
 
 ## Prerequisites
 
-None up front. The skill writes into two places and creates both lazily:
+Domain discovery needs no existing artifacts. Translating constraints into types or function contracts requires `codebase-design` to be available, including with a selective installation. The skill writes into two places and creates both lazily:
 
 - **`GLOSSARY.md`** at the repo root. The skill creates it when you settle the first term. In a repo with a `GLOSSARY-MAP.md` at the root, terms go into the per-context `GLOSSARY.md` the map points at instead.
 - **`docs/adr/`**. The skill creates it with the first ADR that clears the bar.
@@ -51,6 +53,11 @@ It cross-references **code** and the committed `GLOSSARY.md` and ADRs, and nothi
 
 ## Common questions
 
+**Do types and invariants belong in the glossary?**
+
+Keep definitions of domain concepts there. The discussion can establish that a cancelled order cannot ship, but the state representation, transition contract, and enforcement strategy belong in the design or spec. An earlier check of stock or permission may become stale, so the design also needs to say where that condition is enforced when the action occurs.
+
+
 **My `GLOSSARY.md` is 500 lines. 1,000. 3,000. What do I do?**
 The size is a symptom. The cause is that the file has taken in implementation detail and decisions that never belonged in a glossary. The fix is a direct instruction: `/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`. Run it against a bloated file and most of it goes. Only split it with a `GLOSSARY-MAP.md` once the file is lean and still covers two domains that a reader would not want to hold at once. Splitting a bloated file gives you several bloated files. The skill's guidance here is not yet strong enough to prevent the growth in the first place, and the issue tracking that is still open.
 
@@ -79,6 +86,7 @@ No, and there is no plan for a skill that does. A domain language you do not und
 - It refuses to write an ADR for something you could undo tomorrow, and says which of the three tests failed.
 - New entries define what a thing *is* in one or two sentences and name the words you are giving up under `_Avoid_`.
 - It quotes your code back at you when your code and your sentence disagree.
+- The design names illegal states and transitions, and distinguishes enduring guarantees from observations that need checking again.
 - `GLOSSARY.md` gets shorter as often as it gets longer.
 
 ## Where it fits

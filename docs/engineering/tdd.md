@@ -2,11 +2,11 @@
 
 `tdd` builds a feature or fixes a bug test-first: one failing test, then just enough code to pass it, then the next behaviour. It carries the standards that make that loop produce tests worth keeping: what a good test is, where tests go, what mocks are for, and the three anti-patterns that make a suite worthless.
 
-It writes no test at a seam you have not agreed to first. Before any test exists, it names the public boundaries it intends to test at and stops for your confirmation. Testing effort is finite, and this step spends it on the critical paths instead of on every edge case. `tdd` is also a **reference**, not a driver. It contains the rules of the loop, and something else (you, or [implement](https://aihero.dev/skills-implement)) runs the [session](https://www.aihero.dev/ai-coding-dictionary/session) that applies them.
+It writes no test at a seam you have not agreed to first. It reuses seams already agreed in the conversation or spec and asks you to confirm only new or changed ones, explaining what each catches and misses. Testing effort is finite, and this step spends it on the critical paths instead of on every edge case. `tdd` is also a **reference**, not a driver. It contains the rules of the loop, and something else (you, or [implement](https://aihero.dev/skills-implement)) runs the [session](https://www.aihero.dev/ai-coding-dictionary/session) that applies them.
 
 ## When to reach for it
 
-Type `/tdd`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it automatically when a task fits: building a feature or fixing a bug test-first, or when you say "red-green-refactor".
+Type `/tdd`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it automatically when a task fits: building a feature or fixing a bug test-first, when you request integration or property-based tests, or when you say "red-green-refactor".
 
 Reach for it when there is a concrete behaviour to build, with an input and an observable output, and you want tests that survive a refactor.
 
@@ -16,9 +16,18 @@ Reach for it when there is a concrete behaviour to build, with an input and an o
 | The behaviour isn't pinned down yet | [to-spec](https://aihero.dev/skills-to-spec), which also agrees the test seams before any code is written |
 | The question is really the shape of the interface, not the tests | [codebase-design](https://aihero.dev/skills-codebase-design) |
 | You have a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) or [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) and want the whole build run for you | [implement](https://aihero.dev/skills-implement), which drives `tdd` per ticket |
-| Config, wiring, glue, type annotations, straight CRUD delegation | Nothing here fits well; see the open gap below |
+| Config, wiring, glue, type annotations, straight CRUD delegation | Choose a focused test only if it adds independent behavioral evidence |
 
-That last row is a real gap. The skill decides *where* the seams go, but nothing in it decides *whether* a change is worth the loop at all. If you run it on a change with no independent source of truth to assert against, you get a test that restates the implementation. That is the tautological anti-pattern the skill warns about, reached from the other direction. It is [issue #746](https://github.com/mattpocock/skills/issues/746), and it is open. Until it closes, you make that call yourself, or write the rule into your `CLAUDE.md`.
+Choose tests for the behavior and risk:
+
+| Evidence needed | Useful choice |
+| --- | --- |
+| A concrete scenario or simple function | A focused example-based test |
+| A meaningful law across varied inputs | A property, with suitable generators and independent assertions |
+| Effects or collaboration | Integration coverage at the relevant interface |
+| Behavior already covered adequately | Explain that evidence instead of adding a redundant test |
+
+Unit versus integration describes scope; example versus property describes style. A property-based test can be a unit test, and a simple example-based unit test can be the best choice.
 
 ## Prerequisites
 
@@ -28,23 +37,27 @@ That last row is a real gap. The skill decides *where* the seams go, but nothing
 
 The skill rests on three terms.
 
-**Red-green.** Write the failing test, then only enough code to pass it. Do not write code for the test after next. There is no refactor phase. The skill dropped it in June 2026 because agents almost never performed it, and because review and implementation work better as separate sessions. Refactoring belongs to [code-review](https://aihero.dev/skills-code-review).
+**Red-green.** Establish the smallest useful types and signature for the current behavior, then write an example or property and watch it fail for that missing behavior before implementing it. Typechecking verifies type contracts; behavior needs its own evidence. Do not write code for the test after next. There is no refactor phase. The skill dropped it in June 2026 because agents almost never performed it, and because review and implementation work better as separate sessions. Refactoring belongs to [code-review](https://aihero.dev/skills-code-review).
 
-**Vertical slice.** Write one test at one seam, then the minimal implementation, then repeat. The first cycle is a **tracer bullet** that proves a single path end to end. The opposite is horizontal slicing: all the tests first, then all the code. Tests written in bulk verify *imagined* behaviour. They check the shape of things rather than what a user does, and they commit you to a test structure before you understand the implementation.
+**Vertical slice.** Develop types, one example or property, and the minimal implementation for one behavior at an agreed seam, then repeat. A property can exercise many inputs within that slice. The first cycle is a **tracer bullet** that proves a single path end to end. The opposite is horizontal slicing: all the tests first, then all the code. Tests written in bulk verify *imagined* behaviour. They check the shape of things rather than what a user does, and they commit you to a test structure before you understand the implementation.
 
-**Pre-agreed seam.** A seam is the public boundary you observe behaviour at without reaching inside. The rule has no exceptions. No test goes at an unconfirmed seam. In the full chain the seams are agreed earlier, during [to-spec](https://aihero.dev/skills-to-spec): "`/tdd` is told to only work at pre-agreed test seams, `/code-review` checks that only agreed-upon test seams were used." Invoked on its own, `tdd` asks you directly.
+**Pre-agreed seam.** A seam is the public boundary you observe behaviour at without reaching inside. The rule has no exceptions. No test goes at an unconfirmed seam. In the full chain the seams are agreed earlier, during [to-spec](https://aihero.dev/skills-to-spec): "`/tdd` is told to only work at pre-agreed test seams, `/code-review` checks that only agreed-upon test seams were used." Invoked on its own, `tdd` asks you about new seams. Existing agreement carries forward.
 
 The three anti-patterns it is written to prevent:
 
 | Anti-pattern | The tell |
 | --- | --- |
 | Implementation-coupled | The test breaks when you rename an internal function, though behaviour did not change. Mocked internal collaborators, asserted call counts, database queries used to verify instead of the interface. |
-| Tautological | The expected value is computed the way the code computes it, so the test passes by construction. Expected values have to come from somewhere else: a known-good literal, a worked example, the spec. |
+| Uninformative oracle | The assertion derives from the result without an independent constraint, or copies an algorithm and risks sharing its mistakes. Expectations need an independent example, law, or simpler model. |
 | Horizontal slicing | A batch of tests landed before any implementation. |
 
 Mocks are for system boundaries only: external APIs, time, randomness, sometimes the filesystem or the database. Never mock your own modules.
 
 ## Common questions
+
+**Does using properties mean replacing example-based unit tests?**
+
+No. Use a property when a meaningful law across many inputs adds useful evidence. Keep clear examples for small functions, concrete scenarios, and important regressions. Generated failures need replayable counterexamples that preserve the original contract violation. A passing run supplies sampled evidence, not a proof of totality or purity.
 
 **Why doesn't it refactor? The description says "red-green-refactor".**
 
@@ -52,7 +65,7 @@ Because the refactor step was removed and the description was not. The removal w
 
 **It asked me to choose a test seam and I had no idea which to pick.**
 
-This is the most-reported friction with the skill ([issue #607](https://github.com/mattpocock/skills/issues/607)). The prompt lists candidate seams by name only, with nothing about what each one catches or misses, so you are choosing between labels. There is no fix shipped yet. The practical workaround is to ask the agent for the trade-offs before answering: what does the component-level seam miss that the integration seam catches, and how much slower is it. It is also why the chain agrees seams up front in `to-spec`, where you have the whole feature in view rather than one prompt.
+Seam selection has caused confusion ([issue #607](https://github.com/mattpocock/skills/issues/607)). This version explains what each proposed seam catches and misses. Public domain interfaces can carry fast examples and properties; integration interfaces cover effects and collaboration. Useful domain coverage stays when integration coverage is added.
 
 **It wrote the implementation before the test, even though the skill says red first.**
 
@@ -76,10 +89,12 @@ No. Run against one ticket, it can propose work that belongs to a sibling ticket
 
 ## It's working if
 
-- It stops and names the seams it intends to test at, and waits, before any test file exists.
+- It reuses agreed seams and explains the trade-offs before asking you to confirm a new one.
 - One test appears, goes red, gets just enough code to pass, and only then does the next test appear, not a batch of tests followed by a batch of code.
 - Test names read as capabilities ("user can checkout with valid cart"), not as internals ("checkout calls paymentService.process").
-- Expected values in assertions are literals you can trace to the spec, not values recomputed the way the code computes them.
+- Examples, laws, and reference models have expectations you can trace to the contract.
+- Generated failures include a small counterexample and a replay that demonstrates the same failure.
+- A simple function gets a focused example or a reason its existing coverage is sufficient.
 - Renaming an internal function breaks nothing in the suite.
 - Mocks appear only at external boundaries (the payment API, the clock) and never around your own modules.
 
