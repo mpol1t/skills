@@ -30,7 +30,7 @@ The skill's leading word is **flow**, a path *through* the skills rather than a 
 - **On-ramps**, for a situation that generates work and then merges onto the main flow: incoming bug reports, something broken, or an effort too foggy and too large to hold in one session.
 - **Codebase health**, upkeep rather than feature work. [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) surveys the code for deepening opportunities, and each one it finds re-enters the main flow as an idea.
 - **Standalones**, which sit off every flow and which you use on their own: the prototype, the questionnaire, the research run.
-- **A vocabulary and design layer underneath**, where [domain-modeling](https://aihero.dev/skills-domain-modeling) sharpens domain meanings and [codebase-design](https://aihero.dev/skills-codebase-design) owns functional contracts, types, totality, and module design. [tdd](https://aihero.dev/skills-tdd) owns proportionate test selection and property technique.
+- **A vocabulary and design layer underneath**, where `domain-modeling` sharpens domain meanings and `codebase-design` owns functional contracts, types, totality, and module design. `tdd` owns proportionate test selection and property technique.
 
 ## The phase boundary
 
