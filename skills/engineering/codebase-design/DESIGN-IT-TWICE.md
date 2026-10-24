@@ -2,6 +2,8 @@
 
 When the user wants to explore alternative interfaces for a chosen deepening candidate, use this parallel sub-agent pattern. Based on "Design It Twice" (Ousterhout): your first idea is unlikely to be the best.
 
+Use [ADVERSARIAL-REVIEW.md](ADVERSARIAL-REVIEW.md) for expert and model selection, independent context briefs, challenge rounds, and evidence-based stopping. The process below specializes that protocol for alternative interfaces.
+
 Uses the vocabulary in [SKILL.md](SKILL.md): **module**, **interface**, **seam**, **adapter**, **leverage**.
 
 ## Process
@@ -18,7 +20,7 @@ Show this to the user, then immediately proceed to Step 2. The user reads and th
 
 ### 2. Spawn sub-agents
 
-Spawn 3+ sub-agents in parallel. Each must produce a **radically different** interface for the deepened module.
+Choose enough independent sub-agents to explore the defensible alternatives, usually two or three. Each must produce a **radically different** interface for the deepened module. Run independent assessments in parallel when available.
 
 Prompt each sub-agent with a separate technical brief (file paths, coupling details, dependency category from [DEEPENING.md](DEEPENING.md), what sits behind the seam). The brief is independent of the user-facing problem-space explanation in Step 1. Give each agent a different design constraint:
 
@@ -40,5 +42,7 @@ Each sub-agent outputs:
 ### 3. Present and compare
 
 Present designs sequentially so the user can absorb each one, then compare them in prose. Contrast by **depth** (leverage at the interface), **locality** (where change concentrates), **seam placement**, and the visibility of domain contracts and effects.
+
+Challenge material differences against real callers, the deletion test, and concrete failure scenarios. Send focused objections back to the relevant designers before recommending a choice; preserve unresolved tradeoffs rather than forcing consensus.
 
 After comparing, give your own recommendation: which design you think is strongest and why. If elements from different designs would combine well, propose a hybrid. Be opinionated: the user wants a strong read, not a menu.
