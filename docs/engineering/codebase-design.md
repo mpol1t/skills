@@ -2,7 +2,7 @@
 
 `codebase-design` supplies a shared vocabulary for **deep modules** and functional contracts. It is a reference applied to the current design question, so invoking it alone does not authorize a new architecture project.
 
-For consequential plans, specs, or ticket graphs, it also supplies independent adversarial review. The invoking [agent](https://www.aihero.dev/ai-coding-dictionary/agent) selects expertise, available [models](https://www.aihero.dev/ai-coding-dictionary/model), and [context](https://www.aihero.dev/ai-coding-dictionary/context) deliberately, then resolves supported objections rather than collecting votes.
+For consequential plans, specs, or ticket graphs, it also supplies independent adversarial review. The invoking agent selects expertise, available models, and context deliberately, then resolves supported objections rather than collecting votes.
 
 A small interface is useful when it reduces what callers must understand. The reference also makes inputs, valid states, outcomes, and effects explicit so callers can reason about composition. It uses language-neutral defaults and project-native mechanisms.
 
@@ -13,9 +13,9 @@ Type `/codebase-design`, or the agent reaches for it automatically when a design
 | Your question | Where to start |
 | --- | --- |
 | How should a module expose its domain types, behavior, or effects? | `codebase-design` |
-| Which part of the codebase needs redesigning? | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
-| What does a domain term mean, and which states are possible? | [domain-modeling](https://aihero.dev/skills-domain-modeling) |
-| Which examples, properties, and integration checks provide useful evidence? | [tdd](https://aihero.dev/skills-tdd) |
+| Which part of the codebase needs redesigning? | [improve-codebase-architecture](improve-codebase-architecture.md) |
+| What does a domain term mean, and which states are possible? | [domain-modeling](domain-modeling.md) |
+| Which examples, properties, and integration checks provide useful evidence? | [tdd](tdd.md) |
 
 ## Depth and functional contracts
 
@@ -75,4 +75,4 @@ Its interface-design guidance lives here. When exploring alternatives is useful,
 
 ## Where it fits
 
-`codebase-design` is a **reach-for-it-anytime standalone** reference underneath the engineering flow. [domain-modeling](https://aihero.dev/skills-domain-modeling) supplies the domain meanings; [tdd](https://aihero.dev/skills-tdd) supplies the verification loop. Skills consuming these references require the corresponding installed skills. [ask-matt](https://aihero.dev/skills-ask-matt) maps the whole set.
+`codebase-design` is a **reach-for-it-anytime standalone** reference underneath the engineering flow. [domain-modeling](domain-modeling.md) supplies the domain meanings; [tdd](tdd.md) supplies the verification loop. Skills consuming these references require the corresponding installed skills. [ask-matt](ask-matt.md) maps the whole set.

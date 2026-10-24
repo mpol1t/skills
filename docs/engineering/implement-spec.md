@@ -1,6 +1,6 @@
 ## What it does
 
-`implement-spec` builds a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) and its [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) on one **integration branch**. The orchestrating [agent](https://www.aihero.dev/ai-coding-dictionary/agent) gives each ticket to a fresh implementer [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) in a separate worktree and branch, coordinates independent review and repairs, and verifies the integrated result.
+`implement-spec` builds a spec and its tickets on one **integration branch**. The orchestrating agent gives each ticket to a fresh implementer subagent in a separate worktree and branch, coordinates independent review and repairs, and verifies the integrated result.
 
 The tickets form a **task graph**. Each ticket follows a sequential pipeline, while independent tickets can run alongside one another when their prerequisites are satisfied. A dependant becomes ready only after its prerequisites have been reviewed, integrated, and verified.
 
@@ -11,15 +11,15 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 | Your situation | Reach for |
 | --- | --- |
 | A spec split into tickets whose dependencies should drive the build | `/implement-spec` |
-| One ticket you want to drive in your own [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) | [implement](https://aihero.dev/skills-implement) |
-| A spec that is not split into tickets yet | [to-tickets](https://aihero.dev/skills-to-tickets) first |
-| A small piece of agreed work with no useful task graph | [implement](https://aihero.dev/skills-implement) directly |
+| One ticket you want to drive in your own context window | [implement](implement.md) |
+| A spec that is not split into tickets yet | [to-tickets](to-tickets.md) first |
+| A small piece of agreed work with no useful task graph | [implement](implement.md) directly |
 
 ## Prerequisites
 
-- **An issue tracker**, configured by [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills), and tickets with explicit blocking edges.
-- **The design, testing, and review skills.** Workers use [codebase-design](https://aihero.dev/skills-codebase-design), [tdd](https://aihero.dev/skills-tdd), and [code-review](https://aihero.dev/skills-code-review). Include these dependencies in selective installations.
-- **A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) that supports delegated agents and isolated worktrees.** The graph can be a chain; concurrency is useful only where independent work is ready.
+- **An issue tracker**, configured by [setup-matt-pocock-skills](setup-matt-pocock-skills.md), and tickets with explicit blocking edges.
+- **The design, testing, and review skills.** Workers use [codebase-design](codebase-design.md), [tdd](tdd.md), and [code-review](code-review.md). Include these dependencies in selective installations.
+- **A harness that supports delegated agents and isolated worktrees.** The graph can be a chain; concurrency is useful only where independent work is ready.
 - **A working verification environment in each worktree.** Required fixtures, local services, and manual acceptance prerequisites must be accounted for. A skipped required check is unresolved verification.
 
 ## The dependency pipeline
@@ -30,7 +30,7 @@ Across tickets, the orchestrator works the **frontier** of ready work. Separate 
 
 An expand-contract migration can explicitly defer a guarantee to its final integrate-and-verify ticket. Each intermediate slice still meets its own declared obligations, and final acceptance waits for the deferred guarantees.
 
-The orchestrator keeps durable ticket states and accepted integration commits through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer). Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
+The orchestrator keeps durable ticket states and accepted integration commits through context pointers. Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
 
 ## Common questions
 
@@ -77,6 +77,6 @@ No. The configured tracker determines close-out. A PR is created when that workf
 
 ## Where it fits
 
-`implement-spec` is the orchestrated build step after [to-tickets](https://aihero.dev/skills-to-tickets), which supplies its dependency graph. Use [implement](https://aihero.dev/skills-implement) when you prefer to drive one ticket yourself. [Code-review](https://aihero.dev/skills-code-review) provides the independent Standards and Spec assessments within the pipeline and at whole-spec close-out.
+`implement-spec` is the orchestrated build step after [to-tickets](to-tickets.md), which supplies its dependency graph. Use [implement](implement.md) when you prefer to drive one ticket yourself. [Code-review](code-review.md) provides the independent Standards and Spec assessments within the pipeline and at whole-spec close-out.
 
-[Ask-matt](https://aihero.dev/skills-ask-matt) maps these choices to the rest of the flow.
+[Ask-matt](ask-matt.md) maps these choices to the rest of the flow.

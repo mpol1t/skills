@@ -34,9 +34,9 @@ The skill's leading word is **flow**, a path *through* the skills rather than a 
 
 ## Independent challenge and implementation
 
-The primary conversation carries agreed decisions through planning. Consequential assumptions can receive independent challenge in fresh [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) contexts without clearing that conversation. The orchestrator chooses relevant expertise, available model capabilities, and how much history each task needs. Material objections are resolved against evidence; agreement between agents does not replace a human product decision.
+The primary conversation carries agreed decisions through planning. Consequential assumptions can receive independent challenge in fresh subagent contexts without clearing that conversation. The orchestrator chooses relevant expertise, available model capabilities, and how much history each task needs. Material objections are resolved against evidence; agreement between agents does not replace a human product decision.
 
-For implementation, [implement-spec](https://aihero.dev/skills-implement-spec) owns the ticket pipeline. Each ticket proceeds through implementation, committed review, repair verification, and integration in order. Independent ready tickets can progress together in separate worktrees. Integration is serialized, and affected checks must pass before dependants start. [Implement](https://aihero.dev/skills-implement) remains the human-invoked route for driving a ticket yourself.
+For implementation, [implement-spec](implement-spec.md) owns the ticket pipeline. Each ticket proceeds through implementation, committed review, repair verification, and integration in order. Independent ready tickets can progress together in separate worktrees. Integration is serialized, and affected checks must pass before dependants start. [Implement](implement.md) remains the human-invoked route for driving a ticket yourself.
 
 ## The phase boundary
 
