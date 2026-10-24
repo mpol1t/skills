@@ -1,6 +1,6 @@
 ---
 name: codebase-design
-description: Design deep modules and functional contracts. Use when shaping domain types or interfaces, reasoning about purity, totality or effects, finding deepening opportunities, or when another skill needs the shared design vocabulary.
+description: Design deep modules and functional contracts. Use when shaping domain types or interfaces, reasoning about purity, totality or effects, finding deepening opportunities, challenging consequential plans, specs, or ticket dependencies, or when another skill needs the shared design vocabulary.
 ---
 
 # Codebase Design
@@ -8,6 +8,8 @@ description: Design deep modules and functional contracts. Use when shaping doma
 Design **deep modules**: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface. Use this language and these principles wherever code is being designed or restructured. The aim is leverage for callers, locality for maintainers, and testability for everyone.
 
 When designing domain types or behavior, or reviewing purity, totality, or effects, read [FUNCTIONAL-CONTRACTS.md](FUNCTIONAL-CONTRACTS.md) for the shared defaults on purity, totality, per-slice type-first development, and verification. This is a reference: apply it to the current task; it does not initiate a redesign.
+
+For consequential design, planning, specification, or ticketing decisions where an independent perspective could change the outcome, read [ADVERSARIAL-REVIEW.md](ADVERSARIAL-REVIEW.md). Apply it to the current artifact and authorization; routine decisions need no cohort.
 
 ## Glossary
 

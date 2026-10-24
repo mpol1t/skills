@@ -2,7 +2,7 @@
 
 `ask-matt` is the router over the skills in this repo. You describe the situation you are in (an idea you cannot start, a pile of incoming bug reports, a session that has run long), and it names the skill or the sequence of skills that fits, plus where the human decisions in that sequence sit.
 
-It recommends and stops. It does not grill, write a spec, open a file or fire the skill it just named; what you get back is the next thing to type, and you type it. It is also a hand-written map of the skills in this repo rather than a scan of what you have installed, so it will not route you over your own skills or another author's.
+It recommends and stops. It reads the relevant skills before recommending a route, but does not grill, write a spec or fire the skill it just named; what you get back is the next thing to type, and you type it. It is also a hand-written map of the skills in this repo rather than a scan of what you have installed, so it will not route you over your own skills or another author's.
 
 ## When to reach for it
 
@@ -26,11 +26,17 @@ The tracker-dependent routes (triage, `to-spec`, `to-tickets`, `implement`) assu
 
 The skill's leading word is **flow**, a path *through* the skills rather than a single skill. When you name your situation, the router places you at a step on a flow. That is a different answer from "here is the skill that matches your keywords". There are five kinds of route, and the skill itself describes them in full:
 
-- **The main flow**, idea to ship. Grill, spec, tickets, implement (one ticket at a time, or the whole task graph in parallel with implement-spec), review, then retro, which feeds what the build taught back into the agent's environment. It has two branches. One is a prototype detour, for when a question needs runnable code to settle it. The other is the spec-and-tickets split, which is only worth its cost when the build spans more than one session.
+- **The main flow**, idea to ship. Grill, spec, tickets, implement (one ticket at a time, or the dependency pipeline with implement-spec), review, then retro, which feeds what the build taught back into the agent's environment. It has two branches. One is a prototype detour, for when a question needs runnable code to settle it. The other is the spec-and-tickets split, which is only worth its cost when the build spans more than one session.
 - **On-ramps**, for a situation that generates work and then merges onto the main flow: incoming bug reports, something broken, or an effort too foggy and too large to hold in one session.
 - **Codebase health**, upkeep rather than feature work. improve-codebase-architecture surveys the code for deepening opportunities, and each one it finds re-enters the main flow as an idea.
 - **Standalones**, which sit off every flow and which you use on their own: the prototype, the questionnaire, the research run.
-- **A vocabulary and design layer underneath**, where `domain-modeling` sharpens domain meanings and `codebase-design` owns functional contracts, types, totality, and module design. `tdd` owns proportionate test selection and property technique.
+- **A vocabulary and design layer underneath**, where `domain-modeling` sharpens domain meanings and `codebase-design` owns functional contracts, types, totality, module design, and selective independent challenge of consequential plans. `tdd` owns proportionate test selection and property technique.
+
+## Independent challenge and implementation
+
+The primary conversation carries agreed decisions through planning. Consequential assumptions can receive independent challenge in fresh [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) contexts without clearing that conversation. The orchestrator chooses relevant expertise, available model capabilities, and how much history each task needs. Material objections are resolved against evidence; agreement between agents does not replace a human product decision.
+
+For implementation, [implement-spec](https://aihero.dev/skills-implement-spec) owns the ticket pipeline. Each ticket proceeds through implementation, committed review, repair verification, and integration in order. Independent ready tickets can progress together in separate worktrees. Integration is serialized, and affected checks must pass before dependants start. [Implement](https://aihero.dev/skills-implement) remains the human-invoked route for driving a ticket yourself.
 
 ## The phase boundary
 
@@ -51,6 +57,10 @@ People often get two of these wrong, which is why the router gives the order and
 **Where do functional programming and property tests fit in the flow?**
 
 Use `codebase-design` for purity, total versus partial functions, and contracts that support composition. Use `tdd` to choose useful examples, properties, or integration evidence. Specs and tickets carry those decisions into implementation and review. A small function can stay with example-based unit tests; the flow does not demand property tests everywhere.
+
+**Should I ask several agents to implement everything in parallel?**
+
+Use the dependency graph to identify independent ready work. `implement-spec` gives each implementer a separate worktree and coordinates review before integration. Shared contracts may require ordering even when files differ. Multiple implementers in one worktree create conflicts in the working directory, index, and branch state.
 
 **Does agreeing a design start the build?**
 

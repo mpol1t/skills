@@ -20,7 +20,9 @@ Sketch the smallest useful set of seams covering the feature's contracts and fai
 
 Check new or changed seams with the user; carry forward existing agreements without asking again.
 
-3. Write the spec using the template below. For a draft request, return the draft for iteration. Otherwise publish it to the configured project issue tracker and apply the `ready-for-agent` triage label, with no additional triage. Neither branch starts implementation.
+3. Write the spec using the template below. For consequential specs with uncertain contracts or substantial failure risks, call the Skill tool with "codebase-design" and use its adversarial-review guidance to challenge the draft against the agreed conversation and source decisions. Ask independent reviewers to find omitted guarantees, contradictions, unsupported assumptions, and verification gaps. Correct synthesis errors; record unresolved choices rather than reopening the interview or inventing agreement. A material unresolved obligation prevents an agent-ready publication; return the draft and identify what remains unsettled.
+
+4. Return or publish the spec. For a draft request or a material unresolved obligation, return the draft for iteration. Otherwise publish it to the configured project issue tracker and apply the `ready-for-agent` triage label, with no additional triage. Neither branch starts implementation.
 
 <spec-template>
 

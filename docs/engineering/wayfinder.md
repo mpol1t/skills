@@ -24,6 +24,8 @@ Greenfield is not a requirement. People use wayfinder routinely on legacy and ha
 
 The map and its tickets live on the repo's issue tracker, so wayfinder needs the tracker setup from [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills). That step writes a "Wayfinding operations" section. The section describes how to express the map, its child tickets, blocking edges, and frontier queries on GitHub, GitLab, or local markdown. Wayfinder finds that doc through the pointer in your `CLAUDE.md` / `AGENTS.md`, not at a fixed path. With no tracker configured, it falls back to local markdown files.
 
+Consequential decisions and disputed dependencies also use [codebase-design](https://aihero.dev/skills-codebase-design) for independent challenge; include it when installing selected skills.
+
 The tracker does real work. Its native blocking links show the frontier in the tracker's own UI. On a tracker without native dependency links (a self-hosted Gitea, say), wayfinder infers blockers from the map text. That works, but you must supervise it more closely.
 
 ## The map, the fog, and the frontier
@@ -55,6 +57,10 @@ Every ticket carries a `wayfinder:<type>` label. Each ticket is either **[HITL](
 Research is the only exception to *one ticket per session*.
 
 ## Common questions
+
+**Can specialist agents settle a decision ticket for me?**
+
+They can independently challenge consequential decisions or disputed dependencies through codebase-design. The current session coordinates their evidence and focused follow-up. On a human-in-the-loop ticket, your answer still resolves the choice. Unresolved tradeoffs remain visible in the ticket; agreement among specialists does not clear the fog by itself.
 
 **How is this different from `/grill-with-docs`? Which should I start with?**
 Session count, not project size. `/grill-with-docs` is single-session planning; wayfinder is multi-session planning. If you can hold the whole thing in one conversation, grilling is cheaper and better, and wayfinder is slower and denser for that case. The community shorthand is that wayfinder only makes sense if the work does not fit into a single session. This is by far the most-asked wayfinder question. People keep asking it because the skill descriptions do not tell you where your own task sits on that line. You have to judge the session count yourself.
@@ -88,6 +94,7 @@ It is this skill. v1.1 renamed it to `wayfinder`, and you invoke it as `/wayfind
 
 ## It's working if
 
+- Specialist critiques expose assumptions and disagreements while human decisions remain yours.
 - The destination is written down and agreed before a single ticket exists.
 - Every open ticket reads as a question. Any ticket that reads "build the X" is either mis-typed or belongs downstream of the map.
 - You can look at your tracker and see which tickets are takeable without opening the map, because native blocking shows the frontier.

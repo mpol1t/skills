@@ -37,7 +37,11 @@ Break the work into **tracer bullet** tickets.
 
 </vertical-slice-rules>
 
-Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately.
+Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately. Derive edges from acceptance criteria as well as data and types: a shared mechanism, foundation, or interface another ticket introduces is a prerequisite. A prerequisite releases its dependants after review, integration, and the agreed verification, not merely after implementation. For intentionally non-green intermediate migration slices, state the permitted intermediate failures and the final verification gate explicitly.
+
+For each proposed parallel group, check that its shared dependencies will be integrated before the group starts and its contracts permit independent work. Different files or domain labels do not establish independence. Order shared foundations and unsettled contracts first; keep naturally independent slices parallel. Check for missing blockers and cycles.
+
+For consequential breakdowns, call the Skill tool with "codebase-design" and use its adversarial-review guidance before the user quiz. Give independent reviewers the source requirements and draft graph to challenge missing behavior, hidden blockers, shared-contract conflicts, and unnecessary slicing. Resolve supported objections and preserve unresolved choices for the user; the cohort does not approve the breakdown on their behalf.
 
 **Wide refactors are the exception to vertical slicing.** A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand–contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own ticket blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a ticket blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify ticket; green is promised only there.
 

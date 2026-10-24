@@ -19,13 +19,13 @@ Reach for it when the build is too big for one agent [session](https://www.aiher
 
 ## Prerequisites
 
-For publication, [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must configure a tracker and the triage-label vocabulary for this repo. The tracker can be a hosted service or local markdown files. Changed domain contracts also use [codebase-design](https://aihero.dev/skills-codebase-design); include it when installing selected skills.
+For publication, [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must configure a tracker and the triage-label vocabulary for this repo. The tracker can be a hosted service or local markdown files. Changed domain contracts and consequential spec reviews also use [codebase-design](https://aihero.dev/skills-codebase-design); include it when installing selected skills.
 
 ## The spec is a decision record
 
 The spec exists because context windows end. You settled many things while [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling): the shape of the solution, the choices you argued through, and what you deliberately refused. All of that is in one conversation that you are about to clear. The spec keeps it.
 
-So the spec does not validate or decide anything. It records what you decided, in your project's own vocabulary, so a fresh session can pick up the work without you explaining it again. If the spec states something you never said, that is a defect.
+The spec records what you decided, in your project's own vocabulary, so a fresh session can pick up the work without you explaining it again. If the spec states something you never said, that is a defect.
 
 ## Seams before prose
 
@@ -36,6 +36,10 @@ The spec preserves admitted inputs, legal transitions, expected failures, invari
 Other skills use those agreed seams later. [tdd](https://aihero.dev/skills-tdd) works only at seams you agreed in advance. [code-review](https://aihero.dev/skills-code-review) reviews the diff against the spec, so a seam nobody agreed to shows up as a review finding. Both connections go through this document. That is why you should take the seam conversation seriously here, and not leave it for implementation.
 
 ## Common questions
+
+**Can reviewers change what we agreed?**
+
+Independent specialists can challenge consequential drafts for omitted guarantees, contradictions, and unsupported assumptions. They correct the synthesis against your decisions, not substitute their preferences. A material unresolved choice leaves a draft with that gap stated; it does not become an agent-ready issue through consensus. The skill still does not reopen the interview.
 
 **Does agreeing the spec authorize implementation?**
 
@@ -78,6 +82,7 @@ A tracker issue may not return a very large spec in full, and there is no local 
 - It reuses agreed seams and explains the distinct risk covered by each new one.
 - Its contracts and test choices are clear enough for a fresh implementer, including justified example-only choices.
 - It uses your project's nouns, not generic product-management boilerplate.
+- Review catches contradictions and omissions without silently inventing new agreements.
 - You remember making every decision in it. It invented nothing to fill a section.
 - The out-of-scope section lists real things. The things you refused are usually the most useful lines on the page.
 

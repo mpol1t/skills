@@ -41,7 +41,9 @@ The edges are the point of the artifact. They work in two ways, depending on the
 | Local markdown | Text in one file per ticket under `.scratch/<feature>/issues/<NN>-<slug>.md`, numbered blockers-first | Top to bottom, by hand |
 | A real tracker (GitHub, Linear) | Native blocking links, or sub-issues where the tracker has them | Any ticket whose blockers are done is on the **frontier** and can be grabbed |
 
-The edges live in the ticket either way. The tracker only decides whether anything can act on them in parallel. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
+The edges live in the ticket either way. A prerequisite releases its dependants after review, integration, and the agreed verification. The tracker records the edges; independent sessions or an orchestrator act on them. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
+
+A consequential breakdown receives independent challenge through [codebase-design](https://aihero.dev/skills-codebase-design) before the approval quiz. Reviewers cross-check acceptance criteria against sibling outputs, shared foundations, and interface decisions. This catches hidden prerequisites that separate domain labels or file paths can disguise. The agent resolves supported findings, and you still approve the breakdown. Include codebase-design when installing selected skills for this flow.
 
 ## The wide-refactor exception
 
@@ -56,6 +58,10 @@ One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechani
 Where even the batches can't stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. CI only has to be green at that ticket.
 
 ## Common questions
+
+**Tickets share no blockers. Can they safely run in parallel?**
+
+Only when their shared foundations and contracts permit independent work. A ticket that needs a mechanism another slice introduces is blocked by it, even if no domain type flows between them. Foundation collisions and undecided shared interfaces have caused duplicate implementations and merge conflicts in real runs. The breakdown now checks those dependencies and keeps naturally independent slices parallel.
 
 **Will the tickets preserve the testing decisions from the spec?**
 
@@ -83,12 +89,13 @@ A very large spec can outgrow what a tracker issue serves back cleanly. There is
 The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that only work in another ticket can satisfy, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it, because a slice that delivers new behaviour fails at the base commit by construction. The check is still worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
 
 **The tickets are published. How do I actually run them?**
-The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. Give each ticket a fresh context, and clear between them. [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so you update the ticket's state yourself.
+The skill stops at the artifact, and there is no auto-dispatch mode. For manual dispatch, select tickets whose prerequisites are integrated and verified, then give each independent implementer a fresh context and separate worktree. [implement-spec](https://aihero.dev/skills-implement-spec) can instead orchestrate the graph, including per-ticket review and serialized integration. [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so you update the ticket's state yourself.
 
 ## It's working if
 
 - Every ticket has an answer to "what can I demo when this is done?", and the answer is behaviour, not a layer.
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
+- Proposed parallel groups have settled shared contracts and do not depend on mechanisms another member is about to introduce.
 - The ticket at the top has no blockers and can be started immediately.
 - Tickets preserve contracts and agreed verification choices; concise type or state sketches appear only when they express an agreed decision better than prose.
 - Each ticket reads like something a fresh session could finish without you in the room.
@@ -102,4 +109,4 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-Upstream is [to-spec](https://aihero.dev/skills-to-spec), which hands it a settled spec to slice against. Keep both in one context window, with no clear between them. Downstream is [implement](https://aihero.dev/skills-implement), which builds one ticket per fresh session, driving [tdd](https://aihero.dev/skills-tdd) for the tests and closing with [code-review](https://aihero.dev/skills-code-review). [implement-spec](https://aihero.dev/skills-implement-spec) is the other way down. It reads the same blocking edges as a task graph and builds every ready ticket in parallel on one integration branch. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+Upstream is [to-spec](https://aihero.dev/skills-to-spec), which hands it a settled spec to slice against. Keep both in one context window, with no clear between them. Downstream is [implement](https://aihero.dev/skills-implement), which builds one ticket per fresh session, driving [tdd](https://aihero.dev/skills-tdd) for the tests and closing with [code-review](https://aihero.dev/skills-code-review). [implement-spec](https://aihero.dev/skills-implement-spec) is the other way down. It reads the same blocking edges as a task graph and runs independent ready tickets in separate worktrees and integrates them onto one branch after review. Dependants wait for integration and verification. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
