@@ -3,6 +3,9 @@ name: code-review
 description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
 ---
 
+Load model-invoked dependencies through the harness's skill loader. If no loader is exposed, resolve their installed `SKILL.md` paths from the available skill catalog and read those entry points, preserving invocation policy. Report unavailable dependencies instead of guessing an installation directory or using this repository's human-facing docs as instructions.
+
+
 Two-axis review of a committed candidate against a fixed point supplied by the user or calling workflow:
 
 - **Standards**: does the code conform to this repo's documented coding standards?
@@ -64,7 +67,7 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
 
-Use fresh contexts for independent first assessments. Select expertise and available model capability for each axis; another model can add perspective but does not replace source-grounded review. Supply the artifacts below without the implementer's conversation or the other axis's conclusions. For re-review, include prior findings and the repair scope from step 1.
+Use fresh contexts for independent first assessments. Select expertise and available model capability for each axis; another model can add perspective but does not replace source-grounded review. Supply the artifacts below without the implementer's conversation or the other axis's conclusions. Give each reviewer the resolved absolute paths of any required installed skill entry points and supporting sources, checked for accessibility from its workspace; resolve relative links against the source file rather than the target project. For re-review, include prior findings and the repair scope from step 1.
 
 **Standards sub-agent prompt** should include:
 

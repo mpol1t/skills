@@ -35,6 +35,11 @@ Consensus is optional. Material objections need evidence or an explicit tradeoff
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Does independent review require different models?**
 
 The orchestrator chooses among the models the environment exposes. Diversity can be useful, but it does not guarantee independent mistakes. Distinct questions, independent first passes, and source checks matter too. With one available model, fresh agents can still assess independently, with that diversity limitation stated. When delegation is unavailable, the agent reports the limitation and performs local checks without claiming an independent review.

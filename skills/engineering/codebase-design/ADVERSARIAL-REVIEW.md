@@ -16,7 +16,7 @@ Control context deliberately:
 - **Continuation or specialist follow-up:** preserve relevant working context when reconstructing it would lose useful detail. Supply newly discovered evidence explicitly.
 - **Challenge round:** share the competing claims and supporting evidence after the independent assessments, then ask agents to address specific objections.
 
-Each brief identifies its scope, source pointers, expected output, model choice where controllable, and context choice. Agents read the necessary sources; freshness is not permission to omit requirements. The orchestrator retains the original assessments so synthesis cannot silently erase dissent.
+Each brief identifies its scope, source pointers, expected output, model choice where controllable, and context choice. Resolve required skill entry points through the available skill catalog and pass their absolute installed paths, with the source paths for relevant supporting files, in each fresh agent's brief. Verify that the recipient can access them; resolve relative links from their containing file, not the project working directory. If a required source is unavailable, report the missing dependency rather than substituting human-facing repository docs. Agents read the necessary sources; freshness is not permission to omit requirements. The orchestrator retains the original assessments so synthesis cannot silently erase dissent.
 
 ## Resolve and stop
 

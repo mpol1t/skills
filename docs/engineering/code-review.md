@@ -49,6 +49,11 @@ Changes to domain types, functions, transitions, or their tests also bring in `c
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Will it push functional code toward classes or demand property tests for every function?**
 
 No. A pure function over domain data, an exhaustive match, or a composition pipeline can be the appropriate design. The reviewer checks evidence against the changed contract: examples, unit tests, properties, and integration tests each serve different needs. A trivial function does not need generated tests merely to satisfy a preference. Encapsulated mutation is assessed by its observable contract and justification.

@@ -37,6 +37,11 @@ Other skills use those agreed seams later. [tdd](tdd.md) works only at seams you
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Can reviewers change what we agreed?**
 
 Independent specialists can challenge consequential drafts for omitted guarantees, contradictions, and unsupported assumptions. They correct the synthesis against your decisions, not substitute their preferences. A material unresolved choice leaves a draft with that gap stated; it does not become an agent-ready issue through consensus. The skill still does not reopen the interview.

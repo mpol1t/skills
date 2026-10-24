@@ -11,6 +11,8 @@ When designing domain types or behavior, or reviewing purity, totality, or effec
 
 For consequential design, planning, specification, or ticketing decisions where an independent perspective could change the outcome, read [ADVERSARIAL-REVIEW.md](ADVERSARIAL-REVIEW.md). Apply it to the current artifact and authorization; routine decisions need no cohort.
 
+Resolve supporting-file links relative to the file containing the link, starting from this installed `SKILL.md`, rather than the project working directory. Use this installed skill's supporting files; the repository's separate human-facing `docs/` tree is not a runtime dependency.
+
 ## Glossary
 
 Use these terms exactly: don't substitute "component," "service," "API," or "boundary." Consistent language is the whole point.

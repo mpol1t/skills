@@ -54,6 +54,10 @@ People often get two of these wrong, which is why the router gives the order and
 
 ## Common questions
 
+**Will installed skills find these docs links?**
+
+These links navigate this fork for readers. Agents load installed skill entry points through the harness or its catalog and resolve bundled supporting files from their containing file. Fresh agents receive resolved paths, so they do not need this repository's docs tree.
+
 **Where do functional programming and property tests fit in the flow?**
 
 Use `codebase-design` for purity, total versus partial functions, and contracts that support composition. Use `tdd` to choose useful examples, properties, or integration evidence. Specs and tickets carry those decisions into implementation and review. A small function can stay with example-based unit tests; the flow does not demand property tests everywhere.

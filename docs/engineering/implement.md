@@ -52,6 +52,11 @@ Verification stays proportionate: examples for concrete cases, properties for us
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Will type-driven development or property testing make a small change elaborate?**
 
 They should not. Type design is limited to the current behavior slice, and the agent chooses tests for useful evidence. A trivial function can use focused example-based unit tests or adequate existing coverage without generators or a new harness.

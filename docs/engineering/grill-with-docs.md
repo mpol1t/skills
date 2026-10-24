@@ -46,6 +46,11 @@ For consequential design choices, the interviewing agent can orchestrate indepen
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Should I use this or `/wayfinder`?**
 Scope decides it. Use this for anything you can settle in one session; use [wayfinder](wayfinder.md) when the effort is too big to hold in one, and it charts the work as a map of decision tickets first. Wayfinder is slower and denser, and reaching for it on a well-scoped feature is the common mistake. It does not replace this skill, and it can start a grilling session for the parts of the map that suit one.
 

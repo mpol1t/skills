@@ -37,6 +37,8 @@ The route most work travels. You have an idea and want it built.
 
 ### Context hygiene
 
+Installed skills are located through the harness loader or skill catalog. Supporting-file links resolve from their containing file, starting at the installed `SKILL.md`; fresh agents receive resolved entry-point and required supporting-source paths. The repository's human-facing docs are navigation, not runtime dependencies.
+
 Keep the primary conversation through steps 1–3 so the grilling, spec, and tickets build on the same decisions. For consequential design, specification, or dependency questions, `/codebase-design` supplies selective independent challenge: the orchestrator chooses expertise, available models, and fresh or inherited context for each task, then resolves material objections against evidence while preserving dissent and human decisions. Fresh critics receive the relevant facts and artifacts before peer conclusions; their separate contexts do not require clearing the primary conversation. Each manual ticket implementation and each new `/implement-spec` ticket implementer starts fresh from its ticket; a small same-session build can retain the agreed conversation. Repairs return to the same implementer, while reviewers assess committed checkpoints independently. Run `/retro` in the session it's looking back on, before you clear; after clearing, point it at that session's log instead.
 
 The limit on this is the **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**: the window (~150k tokens on state-of-the-art models) within which the model still reasons sharply. If a session approaches it before `/to-tickets`, don't push on degraded; `/compact` at the nearest phase boundary and carry on (see Phase boundaries).

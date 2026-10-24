@@ -4,6 +4,9 @@ description: "Implement a spec's ticket graph through isolated workers, independ
 disable-model-invocation: true
 ---
 
+Load model-invoked dependencies through the harness's skill loader. If no loader is exposed, resolve their installed `SKILL.md` paths from the available skill catalog and read those entry points, preserving invocation policy. Report unavailable dependencies instead of guessing an installation directory or using this repository's human-facing docs as instructions.
+
+
 Implement the provided spec and its tickets on a single **integration branch**. The invoking agent is the **orchestrator**: it owns scheduling, review dispositions, and integration. Each ticket moves through a pipeline:
 
 **Implement → checkpoint → review → repair and re-review as needed → integrate → verify.**
@@ -34,6 +37,7 @@ Each implementer receives a precise brief containing:
 
 - The assigned ticket, parent spec, acceptance criteria, contracts, repository rules, and relevant decisions or research pointers.
 - Its exclusive worktree and branch, based on the accepted integration SHA, plus any local prerequisites needed to run checks. Preserve existing work when resuming; reconcile a stale base without discarding changes.
+- The resolved absolute installed `SKILL.md` paths for required model-invoked dependencies, accessible from the worker's workspace, alongside their registered names. Workers load those entry points using the loader or catalog fallback above; supporting files resolve relative to their containing file.
 - Instructions to call the Skill tool with `codebase-design` for changed domain contracts, then separately with `tdd` to build one behavior at a time from its smallest useful types and signatures. Report unavailable dependencies.
 - The ticket's agreed verification choices: examples, properties, integration checks, applicable invariants, and justified assumptions. Check worktree fixtures and tooling explicitly; skipped or unavailable checks are not passing evidence.
 - The required handback: committed candidate SHA, review base SHA, verification results from that committed tree, assumptions, and blockers. Use an isolated checkout if excluded working changes could influence checks; bind evidence and local prerequisites to the candidate SHA. The orchestrator owns the independent review and integration stages.
@@ -42,7 +46,7 @@ This worker contract is part of this skill. `implement` remains a human-invoked 
 
 ## 3. Review each candidate and resolve findings
 
-For each committed candidate, dispatch a fresh review agent with instructions to call the Skill tool with `code-review`. Supply the exact base and candidate SHAs, ticket as the immediate spec, parent contracts, standards, and verification evidence. Parent requirements inform the slice without treating later tickets' behavior as missing from this ticket. The review skill supplies the independent Standards and Spec axes.
+For each committed candidate, dispatch a fresh review agent with instructions to call the Skill tool with `code-review`. Supply the resolved installed `code-review` entry-point path and its required dependency paths as well as the exact base and candidate SHAs, ticket as the immediate spec, parent contracts, standards, and verification evidence. Parent requirements inform the slice without treating later tickets' behavior as missing from this ticket. The review skill supplies the independent Standards and Spec axes.
 
 Return actionable findings to the same implementer. Keep finding IDs and dispositions: fixed, rejected with evidence, or awaiting a decision. Requirement violations and defects block acceptance; optional recommendations require judgement rather than automatic implementation. Preserve the separate review axes when making dispositions.
 
@@ -62,7 +66,7 @@ If the configured tracker closes work through PRs, or the user requested one, op
 
 ## 5. Verify the whole spec and hand off
 
-Once all ticket obligations, including deferred integration guarantees, are met, run the required whole-spec checks and dispatch a fresh agent to call the Skill tool with `code-review` over the integration branch's recorded initial base and exact current SHA, using the entire spec. This review checks cross-ticket behavior and scope.
+Once all ticket obligations, including deferred integration guarantees, are met, run the required whole-spec checks and dispatch a fresh agent to call the Skill tool with `code-review` over the integration branch's recorded initial base and exact current SHA, using the entire spec. Supply the same installed entry-point and dependency paths as for ticket review. This review checks cross-ticket behavior and scope.
 
 Return supported findings to the responsible implementer where available. Run final repairs through the same isolated worker, checkpoint, focused re-review, serialized integration, and verification stages. Apply the same evidence and progress criteria as ticket review. Record the final accepted SHA only after blocking findings are resolved and required checks pass on that tree.
 

@@ -58,6 +58,11 @@ Research is the only exception to *one ticket per session*.
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Can specialist agents settle a decision ticket for me?**
 
 They can independently challenge consequential decisions or disputed dependencies through codebase-design. The current session coordinates their evidence and focused follow-up. On a human-in-the-loop ticket, your answer still resolves the choice. Unresolved tradeoffs remain visible in the ticket; agreement among specialists does not clear the fog by itself.

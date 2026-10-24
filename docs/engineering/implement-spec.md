@@ -34,6 +34,11 @@ The orchestrator keeps durable ticket states and accepted integration commits th
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **How is this different from running `/implement` on each ticket myself?**
 
 With `implement`, you dispatch each ticket and keep track of its dependants. `implement-spec` owns that coordination, including ticket review, repair verification, and final whole-spec review. It uses its own worker instructions rather than invoking the user-only `implement` skill.

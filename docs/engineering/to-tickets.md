@@ -59,6 +59,11 @@ Where even the batches can't stay green alone, they share an integration branch 
 
 ## Common questions
 
+**Does the agent need this repository to use an installed skill?**
+
+No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
+
+
 **Tickets share no blockers. Can they safely run in parallel?**
 
 Only when their shared foundations and contracts permit independent work. A ticket that needs a mechanism another slice introduces is blocked by it, even if no domain type flows between them. Foundation collisions and undecided shared interfaces have caused duplicate implementations and merge conflicts in real runs. The breakdown now checks those dependencies and keeps naturally independent slices parallel.

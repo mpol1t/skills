@@ -9,3 +9,5 @@ Run `implement-spec` as a dependency-driven pipeline with isolated ticket worktr
 Checkpoint `implement` changes before review. Pin code reviews to immutable commits, distinguish supported defects from optional recommendations, and verify repairs before accepting work. Sync the skill docs and routing map.
 
 Keep updated docs cross-references within this fork and remove upstream dictionary hyperlinks. Update the writing guide to preserve fork-local documentation.
+
+Resolve supporting files from installed skill entry points, discover dependencies through the harness or skill catalog, and pass accessible installed paths to fresh agents. Installed workflows do not depend on repository docs.
