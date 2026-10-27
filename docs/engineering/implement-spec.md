@@ -42,7 +42,7 @@ The orchestrator considers the whole pipeline when capacity becomes available. R
 | No useful action is ready, but active work can advance | Wait for a result using the harness's available mechanisms |
 | Neither ready nor active work can advance | Report the blocker and preserve the checkpoint |
 
-Ticket sizing and changes to tracked dependencies remain your decisions. Newly discovered safety dependencies constrain work immediately while any tracker change awaits agreement. The aim is less avoidable delay; this guidance has not established a measured speedup.
+Issue sizing and changes to tracked dependencies remain your decisions. Newly discovered safety dependencies constrain work immediately while any tracker change awaits agreement. The aim is less avoidable delay; this guidance has not established a measured speedup.
 
 ## Common questions
 
