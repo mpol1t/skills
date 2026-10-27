@@ -6,7 +6,7 @@ Status: Implementation authorized by the user through `implement-spec`. Local de
 
 During long implementation runs, the orchestrator can spend time waiting for agents while useful coordination and preparation remain available. The problem can become more visible after context compaction, when the orchestrator must reconstruct the state of multiple workers and their dependencies. The number of wait calls alone does not establish a delay: waiting is appropriate when nothing useful can advance.
 
-The current skill permits independent tickets to progress concurrently and requires a durable ledger, but does not explicitly guide scheduling around pending results, proactive preparation, or recovery of active scheduling state. The goal is to reduce avoidable delay while preserving review, verification, isolation, and dependency guarantees, and keeping agent communication proportionate.
+The current skill permits independent issues to progress concurrently and requires a durable ledger, but does not explicitly guide scheduling around pending results, proactive preparation, or recovery of active scheduling state. The goal is to reduce avoidable delay while preserving review, verification, isolation, and dependency guarantees, and keeping agent communication proportionate.
 
 ## Solution
 
@@ -26,7 +26,7 @@ Make scheduling a continuous, lightweight responsibility of the orchestrator. It
 10. As a user, I want scheduling state recoverable after compaction, so that long runs do not lose track of active work.
 11. As a user, I want recovery to verify stale or uncertain state, so that it does not duplicate workers or integrate unchecked changes.
 12. As a user, I want existing review and verification gates preserved, so that faster coordination does not weaken the result.
-13. As a user, I want control over ticket sizing and tracked graph changes, so that the orchestrator does not silently reshape the agreed work.
+13. As a user, I want control over issue sizing and tracked graph changes, so that the orchestrator does not silently reshape the agreed work.
 14. As a user, I want meaningful bottlenecks reported at handoff, so that I can judge whether the workflow needs further improvement.
 
 ## Implementation Decisions
@@ -38,7 +38,7 @@ This is an additive amendment to the existing `implement-spec` skill, reviewed a
 ### Confirmed requirements
 
 - Optimize orchestration for less avoidable waiting and better coordination across the whole pipeline. Do not optimize the number of wait calls as a proxy for success.
-- The user owns ticket sizing. Within an issue's existing scope, the orchestrator may adjust supporting delegation, such as read-only exploration or brief preparation, while preserving a fresh implementer per ticket, its exclusive worktree and branch, and the same implementer's context for repairs and stale-base reconciliation. Final repairs return to the responsible implementer where available, as in the original skill. This does not authorize multiple implementers to share that worktree or replace required independent review. Ask before splitting or otherwise changing tracked issues or their dependency graph; do not change acceptance criteria without agreement. Routine tracker actions already authorized by the workflow remain permitted. Immediately record and enforce newly discovered safety dependencies locally; only the corresponding tracker change awaits agreement.
+- The user owns issue sizing. Within an issue's existing scope, the orchestrator may adjust supporting delegation, such as read-only exploration or brief preparation, while preserving a fresh implementer per issue, its exclusive worktree and branch, and the same implementer's context for repairs and stale-base reconciliation. Final repairs return to the responsible implementer where available, as in the original skill. This does not authorize multiple implementers to share that worktree or replace required independent review. Ask before splitting or otherwise changing tracked issues or their dependency graph; do not change acceptance criteria without agreement. Routine tracker actions already authorized by the workflow remain permitted. Immediately record and enforce newly discovered safety dependencies locally; only the corresponding tracker change awaits agreement.
 - Preserve existing worker isolation, review and repair, sole-writer integration, exact-SHA evidence, verification, and the rule that only integrated and verified work releases implementation dependencies.
 - Allow independent scheduling and preparation while integration checks are pending. A pending integration is provisional, not accepted. No further integration or dependent release may occur until required checks pass; workers start from the last accepted integration SHA. On failure, preserve the failure and accepted checkpoints and follow the existing repair and review process. Independent work may continue if safe.
 - When likely to remove a later delay at modest cost, prepare review briefs using the available authoritative artifacts before candidates arrive, but dispatch review only with the committed candidate SHA, base, and relevant evidence. Refresh prepared material if the contracts or evidence change. Preserve reviewer independence.
@@ -82,7 +82,7 @@ Evaluate observable scheduling decisions and artifacts using realistic scenarios
 | Newly discovered safety dependency | Record and enforce it immediately, and ask before changing the tracked graph. |
 | Compaction during active work, followed by a duplicate delayed result | Reconcile the scheduling snapshot with available actual state, resume without duplicate ownership, and do not accept stale evidence. |
 | Agent or check state unavailable after recovery | Mark the state unknown, preserve checkpoints, and do not treat missing evidence as success or start a potentially conflicting writer. |
-| Tracked issue appears too large | Leave ticket sizing to the user; adapt internal delegation only within its scope and ask before tracked graph changes. |
+| Tracked issue appears too large | Leave issue sizing to the user; adapt internal delegation only within its scope and ask before tracked graph changes. |
 | Harness lacks event or wait-any support | Use available mechanisms and make no unsupported wake-up guarantees. |
 
 Review the updated skill and its human-facing docs together. Check that the router still accurately describes the flow when the changed behavior affects it. Behavioral scenarios supplement repository consistency checks; neither constitutes a controlled production performance evaluation.
@@ -106,7 +106,7 @@ At minimum, cover these requirement groups, including their details in the origi
 
 ## Out of Scope
 
-- Automatic ticket sizing, decomposition, acceptance-criteria changes, or tracker graph changes without user agreement.
+- Automatic issue sizing, decomposition, acceptance-criteria changes, or tracker graph changes without user agreement.
 - Speculative implementation of work whose prerequisite is not integrated and verified.
 - Relaxing review, verification, isolation, or integration guarantees.
 - A new orchestration service, mandatory telemetry system, fixed polling interval, or guaranteed speedup.

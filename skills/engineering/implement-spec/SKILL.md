@@ -38,7 +38,7 @@ When no worthwhile action is ready and active work can still advance, wait for a
 
 ### Recovery and message reconciliation
 
-After compaction or resumption, reconcile the ledger with available agent/session state, worktrees, branches, commits, and check evidence before dispatch or integration. Retain finding dispositions and review/repair budget state so recovery cannot reset a stalled loop. Reconcile duplicate, delayed, or superseded messages with current ownership, ticket state, and candidate SHA before acting.
+After compaction or resumption, reconcile the ledger with available agent/session state, worktrees, branches, commits, and check evidence before dispatch or integration. Retain finding dispositions and review/repair budget state so recovery cannot reset a stalled loop. Reconcile duplicate, delayed, or superseded messages with current ownership, issue state, and candidate SHA before acting.
 
 Unobservable state is unknown, not finished. Preserve committed and uncommitted work and avoid duplicate writers. Recover ownership and evidence from reliable artifacts; an inaccessible worker is not proof it stopped. If safe ownership or required evidence cannot be established, preserve checkpoints and report the uncertainty as a blocker without advancing the affected gate.
 
@@ -55,7 +55,7 @@ Each implementer receives a precise brief containing:
 - The resolved absolute installed `SKILL.md` paths for required model-invoked dependencies, accessible from the worker's workspace, alongside their registered names. Workers load those entry points using the loader or catalog fallback above; supporting files resolve relative to their containing file.
 - Instructions to call the Skill tool with `codebase-design` for changed domain contracts, then separately with `tdd` to build one behavior at a time from its smallest useful types and signatures. Report unavailable dependencies.
 - The ticket's agreed verification choices: examples, properties, integration checks, applicable invariants, and justified assumptions. Check worktree fixtures and tooling explicitly; skipped or unavailable checks are not passing evidence.
-- Early signals when a discovery can change another agent's work, scheduling, a contract, or a decision: identify the ticket and impact promptly. Routine progress chatter is unnecessary; final handbacks remain required. Pause affected work and preserve state when a shared-contract change may conflict.
+- Early signals when a discovery can change another agent's work, scheduling, a contract, or a decision: identify the issue and impact promptly. Routine progress chatter is unnecessary; final handbacks remain required. Pause affected work and preserve state when a shared-contract change may conflict.
 - The required handback: committed candidate SHA, review base SHA, verification results from that committed tree, assumptions, and blockers. Use an isolated checkout if excluded working changes could influence checks; bind evidence and local prerequisites to the candidate SHA. The orchestrator owns the independent review and integration stages.
 
 This worker contract is part of this skill. `implement` remains a human-invoked entry point; delegation does not invoke it or duplicate its review stage.

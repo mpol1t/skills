@@ -30,7 +30,7 @@ Across tickets, the orchestrator works the **frontier** of ready work. Separate 
 
 An expand-contract migration can explicitly defer a guarantee to its final integrate-and-verify ticket. Each intermediate slice still meets its own declared obligations, and final acceptance waits for the deferred guarantees.
 
-The orchestrator keeps ticket states, active ownership, pending checks, and accepted and provisional integration commits in one durable ledger. After compaction or interruption, it checks that snapshot against available agent, Git, and verification evidence before dispatching or integrating. Unknown worker state remains unresolved, so a lost session does not silently create a second writer. Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
+The orchestrator keeps issue states, active ownership, pending checks, and accepted and provisional integration commits in one durable ledger. After compaction or interruption, it checks that snapshot against available agent, Git, and verification evidence before dispatching or integrating. Unknown worker state remains unresolved, so a lost session does not silently create a second writer. Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
 
 ## Keeping the frontier moving
 
