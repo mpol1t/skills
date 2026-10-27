@@ -23,7 +23,7 @@ The route most work travels. You have an idea and want it built.
    - **`/handoff`** back what you learned, and reference it from the original idea thread.
 3. **Branch: is this a multi-session build?**
    - **Yes** → **`/to-spec`** (turn the thread into a spec), then **`/to-tickets`** to split it into tracer-bullet tickets, each declaring its **blocking edges**. Then work the tickets one of two ways:
-     - **`/implement`** per ticket, **`/clear`ing context between each one**. On a local tracker that's one file per ticket under `.scratch/<feature>/issues/`, worked blockers-first by hand; on a real tracker the edges become native blocking links, so any ticket whose blockers are done can be grabbed. Each ticket is self-contained, so the last one's context is disposable.
+     - **`/implement`** per ticket, **`/clear`ing context between each one**. On a local tracker that's one file per ticket under `.scratch/<feature>/issues/`, worked blockers-first by hand; on a real tracker the edges become native blocking links, so Issues whose prerequisites are integrated and verified can be selected once requirements and authorization are settled. Each ticket is self-contained, so the last one's context is disposable.
      - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph** and coordinates their implementation, review, repair, and integration on one **integration branch**. Fresh implementers own separate worktrees and branches; independent tickets on the ready **frontier** can progress in parallel. Integration is serialized, and dependants start after their prerequisites are integrated and verified. It keeps coordination moving while workers or checks run, then reconciles its ledger with actual state after compaction. Issue sizing stays with you. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
    - **No** → **`/implement`** right here, in the same context window.
 
@@ -49,7 +49,7 @@ A starting situation that generates work, then merges onto the main flow.
 
 - **Bugs and requests piling up** → **`/triage`**. It moves issues through triage roles and produces agent-ready issues, which **`/implement`** later picks up.
 
-  Triage is only for issues **you didn't create**: bug reports, incoming feature requests, anything that arrives raw. Tickets that `/to-tickets` produced are already agent-ready, so **don't triage them**.
+  Triage is only for issues **you didn't create**: bug reports, incoming feature requests, anything that arrives raw. Issues produced by `/to-tickets` use its own requirements check, so no additional triage pass is needed. Material unanswered questions remain drafts by default; a readiness label does not satisfy dependencies or authorize implementation.
 
 - **Something's broken** → **`/diagnosing-bugs`**. For the hard ones: the bug that resists a first glance, the intermittent flake, the regression that crept in between two known-good states. It refuses to theorise until it has a **tight feedback loop** (one command that already goes red on *this* bug), then fixes with a regression test. Once the fix is in, run **`/retro`** in the same session to ask what would have prevented the bug; where the real finding is that there's no good seam to lock it down, that's a job for **`/improve-codebase-architecture`**.
 
@@ -63,9 +63,11 @@ Not feature work, just upkeep.
 
 - **`/improve-codebase-architecture`** runs whenever you have a spare moment to keep the codebase good for agents to operate in. It surfaces **deepening opportunities**; picking one _generates an idea_ you can take into the main flow at `/grill-with-docs`. It's the survey that finds the candidates; **`/codebase-design`** (below) is the bench you design the chosen one on.
 
-## Vocabulary underneath
+## Shared guidance underneath
 
-Two model-invoked references that run *beneath* the other skills, each the single source of truth for its vocabulary. Reach for them directly when the **words**, not the process, are the problem; or let the skills above pull them in.
+Model-invoked references run *beneath* the other skills. Reach for them directly when their guidance is useful, or let the workflows load them during existing steps.
+
+- **`/issue-brief`** owns implementation Issue format and interpretation. `/to-tickets` and `/triage` use it to compose briefs; `/implement` and `/implement-spec` use it to identify authoritative requirements, essential references, and prerequisites. It accepts equivalent existing formats and reports material gaps. It adds no required human step and does not publish or dispatch work. Parent specs, decision questions, and PR-remediation briefs retain their own roles.
 
 - **`/domain-modeling`**: sharpen the project's *domain* language: challenge a fuzzy term, resolve an overloaded word ("account" doing three jobs), record a hard-to-reverse decision as an ADR. It's the active discipline `/grill-with-docs` drives to keep `GLOSSARY.md` a clean glossary.
 - **`/codebase-design`** owns deep-module vocabulary and functional contracts: purity, total versus partial functions, type-driven design, composition, and explicit effects. Reach for it when deciding which states and operations an interface admits, how to reason about composition, or how to organize independent challenge for consequential design and planning decisions. `/tdd` owns test selection and property-testing technique; stable pure-domain laws and integration checks can cover different obligations.

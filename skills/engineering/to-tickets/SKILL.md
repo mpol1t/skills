@@ -27,7 +27,7 @@ Look for opportunities to prefactor the code to make the implementation easier. 
 
 ### 3. Draft vertical slices
 
-Break the work into **tracer bullet** tickets.
+Call the Skill tool with "issue-brief" to compose the implementation briefs. Break the work into **tracer bullet** tickets.
 
 <vertical-slice-rules>
 
@@ -40,7 +40,7 @@ Break the work into **tracer bullet** tickets.
 
 </vertical-slice-rules>
 
-Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately. Derive edges from acceptance criteria as well as data and types: a shared mechanism, foundation, or interface another ticket introduces is a prerequisite. A prerequisite releases its dependants after review, integration, and the agreed verification, not merely after implementation. For intentionally non-green intermediate migration slices, state the permitted intermediate failures and the final verification gate explicitly.
+Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers is eligible for implementation once its requirements are settled and implementation is authorized. Derive edges from acceptance criteria as well as data and types: a shared mechanism, foundation, or interface another ticket introduces is a prerequisite. A prerequisite releases its dependants after review, integration, and the agreed verification, not merely after implementation. For intentionally non-green intermediate migration slices, state the permitted intermediate failures and the final verification gate explicitly.
 
 For each proposed parallel group, check that its shared dependencies will be integrated before the group starts and its contracts permit independent work. Different files or domain labels do not establish independence. Order shared foundations and unsettled contracts first; keep naturally independent slices parallel. Check for missing blockers and cycles.
 
@@ -66,55 +66,22 @@ Iterate until the user approves the breakdown.
 
 ### 5. Publish the tickets to the configured tracker
 
-Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured; the tickets are the same either way, only the shape of the blocking edges changes:
+Before publication, apply the material-gap check from "issue-brief". Return drafts with unresolved material questions by default. If the user explicitly requests unfinished planning publication, retain an unfinished status rather than labeling it ready-for-agent. Approval of a breakdown does not settle missing requirements or authorize implementation.
 
-- **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below: one ticket per file, never a single combined file.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
+Publish the approved, sufficiently specified tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured; the tickets are the same either way, only the shape of the blocking edges changes:
+
+- **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the shared brief inside the local wrapper below: one ticket per file, never a single combined file.
+- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the shared brief as the body. Use the platform's native blocking relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label to sufficiently specified tickets unless instructed otherwise; dependency satisfaction remains separate.
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
 Do NOT close or modify any parent issue.
 
-<local-ticket-template>
+## Publication wrappers
 
-# <NN>: <Ticket title>
+The shared brief comes from "issue-brief"; keep its format and interpretation rules there.
 
-**What to build:** the end-to-end behaviour this ticket makes work, from the user's perspective, not a layer-by-layer implementation list.
+- **Local:** title each file `# <NN>: <Issue title>`, identify its parent/source when applicable, and record its actual status. List explicit blockers by number/title, or None, in Context and dependencies. Then use the shared brief's sections without duplicating that metadata.
+- **Tracker:** use the Issue title and shared brief body. Preserve source-parent linkage through the tracker's sub-issue operation. Use explicit parent/source references when needed for retrieval; native blockers replace a duplicate blocker list. Retain consequential dependency rationale.
 
-**Blocked by:** the numbers/titles of the tickets that gate this one, or "None (can start immediately)".
-
-**Status:** ready-for-agent
-
-**Contract and verification:** applicable guarantees, agreed seams, and the evidence this slice must provide. Preserve justified example-only choices and note any unresolved agreement. Keep trivial behavior brief.
-
-- [ ] Acceptance criterion 1
-- [ ] Acceptance criterion 2
-
-</local-ticket-template>
-
-<issue-template>
-
-## Parent
-
-A reference to the parent issue on the tracker (if the source was an existing issue, otherwise omit this section).
-
-## What to build
-
-The end-to-end behaviour this ticket makes work, from the user's perspective, not layer-by-layer implementation.
-
-## Acceptance criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-## Blocked by
-
-- A reference to each blocking ticket, or "None (can start immediately)". Omit this section when blockers were set as native edges.
-
-## Contract and verification
-
-Applicable guarantees, agreed seams, and the evidence this slice must provide. Preserve justified example-only choices and note any unresolved agreement. Keep trivial behavior brief.
-
-</issue-template>
-
-In either form, avoid specific file paths and implementation snippets: they go stale fast. Exception: inline a concise type, state-machine, reducer, or schema sketch when it records an agreed contract more precisely than prose. Note prototype provenance where applicable. Keep only the decision-rich parts, not a working demo.
+Concise agreed contract sketches remain part of the brief where useful; keep prototype provenance and decision-rich content rather than a working demo.

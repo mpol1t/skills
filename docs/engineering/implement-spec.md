@@ -18,11 +18,15 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 ## Prerequisites
 
 - **An issue tracker**, configured by [setup-matt-pocock-skills](setup-matt-pocock-skills.md), and tickets with explicit blocking edges.
-- **The design, testing, and review skills.** Workers use [codebase-design](codebase-design.md), [tdd](tdd.md), and [code-review](code-review.md). Include these dependencies in selective installations.
+- **The shared brief, design, testing, and review skills.** Intake uses [issue-brief](issue-brief.md); workers use [codebase-design](codebase-design.md), [tdd](tdd.md), and [code-review](code-review.md). Include these dependencies in selective installations.
 - **A harness that supports delegated agents and isolated worktrees.** The graph can be a chain; concurrency is useful only where independent work is ready.
 - **A working verification environment in each worktree.** Required fixtures, local services, and manual acceptance prerequisites must be accounted for. A skipped required check is unresolved verification.
 
 ## The dependency pipeline
+
+At intake, [issue-brief](issue-brief.md) identifies the authoritative implementation requirements and material gaps. The orchestrator retrieves designated triage briefs, essential references, and native blocking relationships, accepting equivalent legacy layouts. A missing body-level blocker list does not imply independence, and sub-Issue parentage does not itself imply a prerequisite. Unavailable essential context or dependency information stays an explicit gap.
+
+Worker and review briefs preserve the selected source identity, applicable parent constraints, verification prerequisites, consequential dependency rationale, and any deferred guarantees. Review stays within the assigned slice. A ready label records neither dependency satisfaction nor authorization; required integration and manual acceptance evidence still control release.
 
 Within a ticket, implementation comes before review, repairs before re-review, and integration before releasing dependants. The implementer commits a checkpoint before review so the reviewer can inspect an exact base and candidate commit. A fresh review agent coordinates the independent assessment. Supported findings return to the same implementer, preserving useful working knowledge. Focused re-review checks the repairs and affected behavior.
 
@@ -95,7 +99,7 @@ No. The configured tracker determines close-out. A PR is created when that workf
 - Ready, independent tickets can progress together, while shared contracts and dependencies determine ordering.
 - Each ticket has an identifiable checkpoint, independent review, and verified repair commits.
 - A dependant starts only after its prerequisites are integrated and affected checks pass.
-- Ticket reviews stay within ticket scope, and final review checks the combined spec.
+- Issue reviews use the same authoritative brief as the worker, stay within slice scope, and final review checks the combined spec.
 - Review-ready candidates get attention while independent implementation continues; preparation does not hold up actionable results.
 - Interrupted or blocked work preserves ownership, accepted commits, findings, and budget state, with uncertain evidence reported explicitly.
 - The report distinguishes completed code, unresolved verification, and tracker or PR state.

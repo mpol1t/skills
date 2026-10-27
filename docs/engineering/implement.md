@@ -26,15 +26,15 @@ The same-session case is supported directly: an agreed conversation can supply t
 
 `implement` commits to the branch you are on. It does not create one, and it does not ask. Check you are on the branch you want the work on before you start.
 
-If the tickets came from [to-tickets](to-tickets.md), [setup-matt-pocock-skills](setup-matt-pocock-skills.md) configured the tracker they live on. `code-review` reads the same configuration to find the originating spec at close-out.
+If the tickets came from [to-tickets](to-tickets.md), [setup-matt-pocock-skills](setup-matt-pocock-skills.md) configured the tracker they live on. Issue intake uses that configuration to retrieve the authoritative brief, essential references, and native blocking relationships. The selected requirements and source identity travel into review.
 
-Changed domain behavior uses [codebase-design](codebase-design.md) for functional contracts, alongside `tdd` for verification. Include those dependencies when installing selected skills.
+Issue intake uses the model-invoked [issue-brief](issue-brief.md). Changed domain behavior uses [codebase-design](codebase-design.md) for functional contracts, alongside `tdd` for verification. Include those dependencies when installing selected skills.
 
 ## What one run does
 
 A run has five steps, in order:
 
-1. Read the work and its applicable contracts, following parent-spec references where needed, and recover agreed seams.
+1. Read the work and its applicable contracts, following parent-spec references where needed, and recover agreed seams. For an Issue, use its designated triage brief when present, otherwise its body or explicitly supplied agreed requirements. Retrieve native prerequisites and surface missing essential context or material conflicts before dependent work.
 2. Drive [tdd](tdd.md) at those seams, establishing the smallest useful types and signatures for one behavior before its red-green slice.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
@@ -46,7 +46,7 @@ One run covers one ticket. The tickets [to-tickets](to-tickets.md) produces are 
 
 The skill's central idea is the **seam**, the public boundary you observe behaviour at without reaching inside. Tests live at seams. When the seam is agreed before any code exists, the tests last, and you can rewrite the implementation underneath without changing them.
 
-The agreement travels with the contract and verification decisions in the spec or ticket. `implement` follows parent-spec references when needed and uses `tdd` to resolve missing agreements. It reuses existing agreements rather than asking again. Stable pure-domain interfaces and integration interfaces may both be needed when they cover different risks.
+The agreement travels with the contract and verification decisions in the spec or ticket. `implement` follows applicable parent-spec references and uses `tdd` for verification choices. Missing product decisions remain explicit questions; test guidance cannot decide them. It reuses existing agreements rather than asking again. Stable pure-domain interfaces and integration interfaces may both be needed when they cover different risks.
 
 Verification stays proportionate: examples for concrete cases, properties for useful laws, and integration checks for effects. A justified example-only decision survives implementation. Before review, the agent accounts for contract obligations and assumptions, including temporary holes or unsafe assertions introduced during development.
 
@@ -105,7 +105,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-Its neighbours are [to-tickets](to-tickets.md), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](tdd.md), which it drives internally at each seam; and [code-review](code-review.md), which it runs against checkpoint commits and uses to verify repairs. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
+Its neighbours are [to-tickets](to-tickets.md), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](tdd.md), which it drives internally at each seam; and [code-review](code-review.md), which it runs against checkpoint commits and uses to verify repairs. It sits downstream of the planning skills and preserves their agreed scope. [issue-brief](issue-brief.md) checks completeness and consistency at existing Issue intake, accepting equivalent legacy layouts without rewriting them. A ready label does not settle missing requirements, and parentage alone does not establish a blocking edge.
 
 That trust is why [wayfinder](wayfinder.md) merges onto the chain at [to-spec](to-spec.md) rather than looping its map straight into `implement`. Go straight to `implement` from a map only when the effort turned out small.
 

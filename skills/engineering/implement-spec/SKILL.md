@@ -16,6 +16,8 @@ The issue tracker should have been provided to you. If not, tell the user to run
 
 ## 1. Establish the graph and checkpoints
 
+Call the Skill tool with "issue-brief" during Issue intake. Retrieve the authoritative briefs, relevant discussion, essential references, and native blocking relationships through the configured tracker; apply the shared interpretation and material-gap checks. Preserve source identity, applicable constraints, and dependency rationale in the existing handoffs.
+
 Read the spec, tickets, blocking edges, and applicable repository instructions. Check for missing prerequisites and cycles. Include shared schemas, interfaces, generated artifacts, and behavioral contracts when deciding whether ready tickets are independent; different files alone are insufficient. Order overlapping work. Record and enforce newly discovered safety dependencies locally immediately; ask before changing tracked issues, their dependency graph, or acceptance criteria. Issue sizing belongs to the user. Supporting delegation may adapt within the existing scope while preserving implementer ownership and independent review; routine tracker actions already authorized by this workflow remain permitted.
 
 Create or resume the integration branch, recording its initial review base and last accepted SHA. Keep a small durable ledger accessible to future workers: ticket status, dependencies, worktree/branch, base and candidate SHAs, checks, review findings and dispositions, and accepted integration SHA. Report its location when handing off or stopping.
@@ -50,7 +52,7 @@ Dispatch only independent ready tickets, within available capacity. If explorati
 
 Each implementer receives a precise brief containing:
 
-- The assigned ticket, parent spec, acceptance criteria, contracts, repository rules, and relevant decisions or research pointers.
+- The assigned Issue's authoritative brief and source identity, parent spec, slice acceptance criteria, applicable contracts, prerequisite information and rationale, deferred obligations, repository rules, and relevant decisions or research pointers. Carry the shared Issue interpretation into this handoff and provide its installed entry point when the worker needs to resolve new or changed Issue context.
 - Its exclusive worktree and branch, based on the accepted integration SHA, plus any local prerequisites needed to run checks. Preserve existing work when resuming; reconcile a stale base without discarding changes.
 - The resolved absolute installed `SKILL.md` paths for required model-invoked dependencies, accessible from the worker's workspace, alongside their registered names. Workers load those entry points using the loader or catalog fallback above; supporting files resolve relative to their containing file.
 - Instructions to call the Skill tool with `codebase-design` for changed domain contracts, then separately with `tdd` to build one behavior at a time from its smallest useful types and signatures. Report unavailable dependencies.
@@ -64,7 +66,7 @@ When a worker signals a contract conflict, record the constraint and contain aff
 
 ## 3. Review each candidate and resolve findings
 
-For each committed candidate, dispatch a fresh review agent with instructions to call the Skill tool with `code-review`. Supply the resolved installed `code-review` entry-point path and its required dependency paths as well as the exact base and candidate SHAs, ticket as the immediate spec, parent contracts, standards, and verification evidence. Parent requirements inform the slice without treating later tickets' behavior as missing from this ticket. The review skill supplies the independent Standards and Spec axes.
+For each committed candidate, dispatch a fresh review agent with instructions to call the Skill tool with `code-review`. Supply the resolved installed `code-review` entry-point path and its required dependency paths as well as the exact base and candidate SHAs, the authoritative Issue brief and source identity as the immediate spec, applicable parent contracts, slice scope and deferred obligations, standards, and verification evidence. Parent requirements inform the slice without treating later tickets' behavior as missing from this ticket. The review skill supplies the independent Standards and Spec axes.
 
 Return actionable findings to the same implementer. Keep finding IDs and dispositions: fixed, rejected with evidence, or awaiting a decision. Requirement violations and defects block acceptance; optional recommendations require judgement rather than automatic implementation. Preserve the separate review axes when making dispositions.
 

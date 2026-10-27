@@ -16,7 +16,7 @@ You invoke this by typing `/to-tickets`. The agent won't reach for it on its own
 | Nothing is decided yet | [grill-with-docs](grill-with-docs.md), then [to-spec](to-spec.md) |
 | A [wayfinder](wayfinder.md) map has cleared | [to-spec](to-spec.md) first, to collapse the map, then `/to-tickets` |
 
-Tickets that `to-tickets` produced are agent-ready by construction. Don't run [triage](triage.md) over them. Triage is for work that arrived from someone else.
+Generated Issues do not need a mandatory [triage](triage.md) pass. Their readiness depends on settled requirements: material open questions leave the breakdown in draft by default. Explicit publication of unfinished planning work preserves its unfinished status. A fully specified Issue can still have unsatisfied prerequisites.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ This is the rule people break most often. One team ran a 26-ticket stack sliced 
 
 Two things happen before anything is published. `to-tickets` looks for prefactoring (the principle "make the change easy, then make the easy change") and orders that work first. Then it presents the breakdown as a numbered list and quizzes you on it: is the granularity right, are the blocking edges real, should anything merge or split. Nothing reaches the tracker until you approve, and that quiz is the place to push back.
 
-Each slice carries the applicable domain contracts, assumptions, agreed test seams, and verification choices. A fresh implementer should be able to recover legal inputs, important invariants, and expected failures without the previous conversation. Type design stays with its behavior unless a shared contract genuinely blocks other slices. A justified example-only test choice survives the handoff.
+The model-invoked [issue-brief](issue-brief.md) supplies the shared format during drafting. Every new Issue states its outcome and acceptance criteria; constraints, verification, and context sections appear where useful. Each slice carries the applicable domain contracts, assumptions, agreed test seams, and verification choices. A fresh implementer should be able to recover legal inputs, important invariants, and expected failures without the previous conversation. Type design stays with its behavior unless a shared contract genuinely blocks other slices. A justified example-only test choice survives the handoff.
 
 ## Blocking edges
 
@@ -39,9 +39,9 @@ The edges are the point of the artifact. They work in two ways, depending on the
 | Tracker | Where the edges live | How you work them |
 | --- | --- | --- |
 | Local markdown | Text in one file per ticket under `.scratch/<feature>/issues/<NN>-<slug>.md`, numbered blockers-first | Top to bottom, by hand |
-| A real tracker (GitHub, Linear) | Native blocking links, or sub-issues where the tracker has them | Any ticket whose blockers are done is on the **frontier** and can be grabbed |
+| A real tracker (GitHub, Linear) | Native blocking links; sub-Issue parentage records hierarchy separately | An Issue joins the **frontier** after its prerequisites are integrated and verified |
 
-The edges live in the ticket either way. A prerequisite releases its dependants after review, integration, and the agreed verification. The tracker records the edges; independent sessions or an orchestrator act on them. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
+The edges are recorded as native relationships where supported, or as explicit references in local files and trackers without native blocking. Parentage alone does not establish a prerequisite. Non-obvious dependency rationale stays in the brief even when the edge is native. A prerequisite releases its dependants after review, integration, and the agreed verification. The tracker records the edges; independent sessions or an orchestrator act on them. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
 
 A consequential breakdown receives independent challenge through [codebase-design](codebase-design.md) before the approval quiz. Reviewers cross-check acceptance criteria against sibling outputs, shared foundations, and interface decisions. This catches hidden prerequisites that separate domain labels or file paths can disguise. The agent resolves supported findings, and you still approve the breakdown. Include codebase-design when installing selected skills for this flow.
 
@@ -70,7 +70,7 @@ Only when their shared foundations and contracts permit independent work. A tick
 
 **Will the tickets preserve the testing decisions from the spec?**
 
-Both ticket formats now include contract and verification information. The agent carries forward relevant guarantees and agreed seams, and marks unresolved agreements explicitly. This addresses the missing handoff described in [upstream issue 1078](https://github.com/mattpocock/skills/issues/1078). Simple behavior can have a short entry; the section is not a demand for property tests.
+Both Issue formats carry applicable contract and verification information through [issue-brief](issue-brief.md). The agent preserves relevant guarantees and agreed seams. Material unresolved agreements remain draft by default; ordinary implementation choices stay with the implementer. This addresses the missing handoff described in [upstream issue 1078](https://github.com/mattpocock/skills/issues/1078). Simple behavior can have a short entry; the section is not a demand for property tests.
 
 **It produced twelve tickets for a three-line change.**
 Over-decomposition is the most reported problem with this skill, and many users see it. The model defaults to atomic units and loses the grouping that would make them meaningful. The quiz step is where you fix this. Ask it to merge tickets, and it will. There is also a lower limit. If the whole change fits in one context window, you don't need this skill at all. Go straight to [implement](implement.md).
@@ -90,8 +90,8 @@ They did, and that was a bug. A single shared file also caused race conditions w
 **It kept truncating when it tried to read my spec.**
 A very large spec can outgrow what a tracker issue serves back cleanly. There is no local copy to fall back on, so the agent spends tool calls fetching chunks again and never reaches the end. Don't clear or compact between `/to-spec` and `/to-tickets`. Run them in the same context window and the agent never has to fetch the spec back.
 
-**The acceptance criteria graded nothing: some passed before any work was done.**
-The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that only work in another ticket can satisfy, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it, because a slice that delivers new behaviour fails at the base commit by construction. The check is still worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
+**Must every acceptance criterion fail before implementation?**
+No. Preservation criteria and invariants may already hold. Each criterion should describe an observable condition this slice must satisfy. A future slice's deliverable belongs with that slice; a deferred guarantee needs an explicit later owner. Verification describes how to assess success, while prior observations and eventual check results remain separate evidence.
 
 **The tickets are published. How do I actually run them?**
 The skill stops at the artifact, and there is no auto-dispatch mode. For manual dispatch, select tickets whose prerequisites are integrated and verified, then give each independent implementer a fresh context and separate worktree. [implement-spec](implement-spec.md) can instead orchestrate the graph, including per-ticket review and serialized integration. [implement](implement.md) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so you update the ticket's state yourself.
@@ -101,7 +101,8 @@ The skill stops at the artifact, and there is no auto-dispatch mode. For manual 
 - Every ticket has an answer to "what can I demo when this is done?", and the answer is behaviour, not a layer.
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
 - Proposed parallel groups have settled shared contracts and do not depend on mechanisms another member is about to introduce.
-- The ticket at the top has no blockers and can be started immediately.
+- Material open questions are visible in the draft, and a ready label is not used to hide them.
+- Prerequisites are explicit, including any external blockers on the first Issue; implementation follows your authorization and applicable gates.
 - Tickets preserve contracts and agreed verification choices; concise type or state sketches appear only when they express an agreed decision better than prose.
 - Each ticket reads like something a fresh session could finish without you in the room.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
