@@ -30,7 +30,19 @@ Across tickets, the orchestrator works the **frontier** of ready work. Separate 
 
 An expand-contract migration can explicitly defer a guarantee to its final integrate-and-verify ticket. Each intermediate slice still meets its own declared obligations, and final acceptance waits for the deferred guarantees.
 
-The orchestrator keeps durable ticket states and accepted integration commits through context pointers. Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
+The orchestrator keeps ticket states, active ownership, pending checks, and accepted and provisional integration commits in one durable ledger. After compaction or interruption, it checks that snapshot against available agent, Git, and verification evidence before dispatching or integrating. Unknown worker state remains unresolved, so a lost session does not silently create a second writer. Tracker closure and implementation readiness are separate: a prerequisite can be integrated and verified while its issue remains open until the final PR merges.
+
+## Keeping the frontier moving
+
+The orchestrator considers the whole pipeline when capacity becomes available. Reviewing a completed candidate can unblock more work than starting another implementation. Useful preparation can happen while workers run: a provisional dependent brief or an outline for review may shorten the next handoff. Preparation stays small and yields to actionable results. Workers send early messages about consequential blockers or contract conflicts; a conflict pauses affected work while the orchestrator contains it and checks the actual changes.
+
+| Current state | What can advance |
+| --- | --- |
+| Integration checks are pending | Safe independent work from the last accepted commit; further integration and dependent implementation wait |
+| No useful action is ready, but active work can advance | Wait for a result using the harness's available mechanisms |
+| Neither ready nor active work can advance | Report the blocker and preserve the checkpoint |
+
+Ticket sizing and changes to tracked dependencies remain your decisions. Newly discovered safety dependencies constrain work immediately while any tracker change awaits agreement. The aim is less avoidable delay; this guidance has not established a measured speedup.
 
 ## Common questions
 
@@ -38,10 +50,17 @@ The orchestrator keeps durable ticket states and accepted integration commits th
 
 No. Runtime instructions come from installed skill entry points and their bundled supporting files. Dependencies are located through the harness loader or skill catalog; fresh agents receive resolved installed paths. These docs links are for navigation in the fork, not runtime dependencies.
 
-
 **How is this different from running `/implement` on each ticket myself?**
 
 With `implement`, you dispatch each ticket and keep track of its dependants. `implement-spec` owns that coordination, including ticket review, repair verification, and final whole-spec review. It uses its own worker instructions rather than invoking the user-only `implement` skill.
+
+**Why is the orchestrator waiting while agents run?**
+
+Waiting is appropriate when nothing worthwhile can advance. A completed candidate, an actionable conflict, or cheap preparation that would remove a later delay should prompt coordination first. Counting wait calls alone cannot tell you whether the run is wasting time, and the orchestrator does not invent work to keep every slot busy.
+
+**What changes after context compaction?**
+
+The orchestrator reconciles its saved ledger with the work that is actually observable, including ownership, candidate commits, check results, prior review dispositions, and the remaining repair budget. Missing evidence stays unknown. If ownership cannot be recovered safely, it preserves the work and reports a blocker instead of guessing that a worker finished.
 
 **Does every ready ticket run in parallel?**
 
@@ -77,7 +96,8 @@ No. The configured tracker determines close-out. A PR is created when that workf
 - Each ticket has an identifiable checkpoint, independent review, and verified repair commits.
 - A dependant starts only after its prerequisites are integrated and affected checks pass.
 - Ticket reviews stay within ticket scope, and final review checks the combined spec.
-- Interrupted or blocked work leaves enough state to resume without rediscovering accepted commits and findings.
+- Review-ready candidates get attention while independent implementation continues; preparation does not hold up actionable results.
+- Interrupted or blocked work preserves ownership, accepted commits, findings, and budget state, with uncertain evidence reported explicitly.
 - The report distinguishes completed code, unresolved verification, and tracker or PR state.
 
 ## Where it fits
