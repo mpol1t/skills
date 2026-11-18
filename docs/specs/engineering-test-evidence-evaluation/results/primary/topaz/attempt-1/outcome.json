@@ -1,0 +1,32 @@
+{
+  "trial": "topaz",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "0eb2bc074883569d948f428cb57bf5e12da7e940",
+    "candidate": "b819f4440e421d79eb79ec5afa900669446fb244",
+    "working_tree_sha256": "3ea8a1cda865e173c7abf303f13593ab2b0f527c0c00a03789af6a56d0631b61"
+  },
+  "starting_head": "b819f4440e421d79eb79ec5afa900669446fb244",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/topaz-wghxncik/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 84.503,
+  "usage": {
+    "input_tokens": 243414,
+    "cached_input_tokens": 222592,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2473,
+    "reasoning_output_tokens": 245
+  },
+  "status": "completed",
+  "total_seconds": 85.137
+}

@@ -14,17 +14,38 @@ def read_json(path):
     return json.loads(path.read_text())
 
 
-def records(path):
-    if path.is_file():
-        for line in path.read_text().splitlines():
-            try:
-                yield json.loads(line)
-            except json.JSONDecodeError:
+def records(path, interrupted):
+    lines = path.read_bytes().splitlines(keepends=True)
+    for index, line in enumerate(lines, start=1):
+        try:
+            yield json.loads(line)
+        except json.JSONDecodeError:
+            if interrupted and index == len(lines) and not line.endswith(b"\n"):
                 continue
+            raise
 
 
-def counts(attempt):
-    events = list(records(attempt / "events.jsonl"))
+def counts(attempt, outcome):
+    status = outcome["status"]
+    if status == "setup-failed-before-dispatch":
+        events = []
+    else:
+        assert (attempt / "stderr.txt").is_file(), attempt
+        tree = attempt / "tree.json"
+        if tree.is_file():
+            commands = read_json(tree)
+            assert isinstance(commands, list) and commands, tree
+            assert all(isinstance(row["command"], list) and isinstance(row["output"], str)
+                       for row in commands), tree
+        else:
+            assert outcome.get("collection_error"), tree
+        events = list(records(attempt / "events.jsonl", bool(outcome.get("timed_out"))))
+    completed = [event for event in events if event["type"] == "turn.completed"]
+    if status == "completed":
+        assert len(completed) == 1 and completed[0] == events[-1], attempt
+        assert outcome["exit_code"] == 0 and completed[0].get("usage") == outcome.get("usage"), attempt
+    if status == "budget-exhausted":
+        assert outcome["timed_out"] and not completed, attempt
     commands = sum(
         event["type"] == "item.completed"
         and event.get("item", {}).get("type") == "command_execution" for event in events
@@ -38,6 +59,11 @@ def counts(attempt):
                 payload = json.loads(line)["payload"]
                 if payload.get("type") == "custom_tool_call" and payload.get("name") == "exec":
                     shell_calls += payload.get("input", "").count("tools.exec_command(")
+    contacted_agent = status == "completed" or any(
+        event["type"].startswith("item.") for event in events
+    )
+    if contacted_agent:
+        assert child_sessions > 0, f"Missing session trace: {attempt}"
     return {
         "top_level_completed_commands": commands,
         "recorded_sessions_including_root": child_sessions,
@@ -45,9 +71,18 @@ def counts(attempt):
     }
 
 
-def reconcile(evidence, scores_file):
-    plan = read_json(PLAN)["trials"]
-    fixtures = read_json(FIXTURES)
+def reconcile(evidence, scores_file, group):
+    if group == "clean":
+        clean = ROOT / "controller/clean-refactor"
+        plan = read_json(clean / "trials.json")["trials"]
+        fixtures = read_json(clean / "fixture-revisions.json")
+    else:
+        plan = read_json(PLAN)["trials"]
+        fixtures = read_json(FIXTURES)
+    if group == "git":
+        expected = read_json(ROOT / "runtime/git_recovery.json")["trials"]
+        plan = [trial for trial in plan if trial["id"] in expected]
+        assert len(plan) == len(expected), "Missing Git recovery entries"
     scores = read_json(scores_file)
     ids = [entry["id"] for entry in plan]
     assert len(ids) == len(set(ids)), "Duplicate planned trial"
@@ -71,10 +106,12 @@ def reconcile(evidence, scores_file):
             assert outcome["skill"] == trial["skill"], path
             if outcome["status"] != "setup-failed-before-dispatch":
                 assert outcome["fixture"] == fixtures[trial["fixture"]], path
+                assert outcome["starting_head"] == fixtures[trial["fixture"]]["candidate"], path
+                assert outcome["elapsed_seconds"] >= 0, path
                 assert "Pass:" in (path / "isolation.txt").read_text(), path
                 prompt = (path / "prompt.txt").read_text()
                 assert prompt.endswith(trial["prompt"] + "\n"), path
-            row = {**outcome, **counts(path)}
+            row = {**outcome, **counts(path, outcome)}
             all_status[row["status"]] += 1
             attempts.append(row)
         if len(attempts) == 2:
@@ -97,5 +134,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("evidence", type=Path)
     parser.add_argument("scores", type=Path)
+    parser.add_argument("--group", choices=("primary", "git", "clean"), default="primary")
     args = parser.parse_args()
-    print(json.dumps(reconcile(args.evidence, args.scores), indent=2))
+    print(json.dumps(reconcile(args.evidence, args.scores, args.group), indent=2))

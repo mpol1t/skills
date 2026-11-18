@@ -1,0 +1,32 @@
+{
+  "trial": "jade",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "6ffbd2fb7cb1d5e1ee704ca9f41f5905c67c1940",
+    "candidate": "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+    "working_tree_sha256": "2189388959d3dc73b20f1b9fa3461b02c6d4198807f12cec487eace0436bd5a1"
+  },
+  "starting_head": "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/jade-pdvir5le/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 81.293,
+  "usage": {
+    "input_tokens": 216083,
+    "cached_input_tokens": 200448,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2906,
+    "reasoning_output_tokens": 337
+  },
+  "status": "completed",
+  "total_seconds": 81.728
+}

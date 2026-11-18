@@ -1,0 +1,32 @@
+{
+  "trial": "saffron",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "63faaf9676ac037a5770bcb16dcf02b4e203aa45",
+    "candidate": "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+    "working_tree_sha256": "0a7c3b6ba80c5532a4b55c100f7e8ed4e12aeb82183b549c9fb8a56676b387ca"
+  },
+  "starting_head": "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/saffron-vl4aow7r/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 84.82,
+  "usage": {
+    "input_tokens": 238432,
+    "cached_input_tokens": 206208,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2271,
+    "reasoning_output_tokens": 139
+  },
+  "status": "completed",
+  "total_seconds": 85.329
+}

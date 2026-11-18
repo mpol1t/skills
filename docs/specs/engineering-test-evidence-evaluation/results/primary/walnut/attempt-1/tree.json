@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/walnut-g1ojh886/repo\nHEAD 899a875b4b0b5fe950c3ca8e6a19f565ec7ee156\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "899a875 (HEAD -> main, tag: starting-point, tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

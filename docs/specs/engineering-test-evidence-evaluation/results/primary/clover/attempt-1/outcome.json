@@ -1,0 +1,32 @@
+{
+  "trial": "clover",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "2fca2bdae231825d227688b8f6f3c0f1b2a87952",
+    "candidate": "da135099ac5c86de9f1270f9cf2322279a5a904d",
+    "working_tree_sha256": "ad2b5123509c94db31bebf9b1193a58d0f34967ded3a08a19f9dad29ccf3c4aa"
+  },
+  "starting_head": "da135099ac5c86de9f1270f9cf2322279a5a904d",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/clover-auag_kmv/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 90.215,
+  "usage": {
+    "input_tokens": 310993,
+    "cached_input_tokens": 248576,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2509,
+    "reasoning_output_tokens": 257
+  },
+  "status": "completed",
+  "total_seconds": 90.698
+}

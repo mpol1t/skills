@@ -1,0 +1,1 @@
+2026-11-18T21:34:27.413228Z ERROR codex_core::tools::router: error=failed to parse function arguments: unknown field `target`, expected one of `message`, `task_name`, `agent_type`, `model`, `reasoning_effort`, `fork_turns`, `fork_context` at line 1 column 9

@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": "M app.py\n M test_app.py"
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/aspen-d29hd_k3/repo\nHEAD d2727955c7dd3ec7c12baef608783f483b8949dc\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "d272795 (HEAD -> main, tag: starting-point, tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d2727955c7dd3ec7c12baef608783f483b8949dc"
+    ],
+    "output": "diff --git a/app.py b/app.py\nindex 508b662..d8504d7 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,11 @@\n+from decimal import Decimal\n+\n+\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    \"\"\"Format a nonnegative shelf ID.\"\"\"\n+    # Decimal preserves all digits beyond Python's int-to-string limit.\n+    return f\"shelf:{Decimal(identifier):02f}\"\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..4e19385 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,14 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label_pads_single_digit_ids(self):\n+        self.assertEqual(app.shelf_label(4), \"shelf:04\")\n+\n+    def test_shelf_label_preserves_all_digits_for_larger_ids(self):\n+        self.assertEqual(app.shelf_label(10), \"shelf:10\")\n+        self.assertEqual(app.shelf_label(123), \"shelf:123\")\n+\n+    def test_shelf_label_handles_ids_beyond_the_default_int_format_limit(self):\n+        expected = \"shelf:1\" + \"0\" * 4299 + \"1\"\n+        self.assertEqual(app.shelf_label(10**4300 + 1), expected)"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d2727955c7dd3ec7c12baef608783f483b8949dc",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

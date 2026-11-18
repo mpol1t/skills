@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/saffron-vl4aow7r/repo\nHEAD eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "eb3735b (HEAD -> main, tag: starting-point) Proposed change\n63faaf9 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

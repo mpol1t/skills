@@ -1,0 +1,69 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-4khyrc0i/fern-apa96zl6/repo\nHEAD facdc9caffc60d77a4df406cbf11e772389f7c0c\nbranch refs/heads/integrate/shelf-label"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "facdc9c (HEAD -> integrate/shelf-label) Close the shelf label issue\naaff897 (ticket/shelf-label-01) Format very large shelf IDs without decimal dependencies\nc810661 Format shelf IDs beyond Python\u2019s integer digit limit\n900c122 Add public shelf label formatter\nde6e9bb (tag: starting-point, tag: review-base, main) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0"
+    ],
+    "output": "diff --git a/.scratch/shelf-label/issues/01-label.md b/.scratch/shelf-label/issues/01-label.md\nindex 9cc69c8..82b2dde 100644\n--- a/.scratch/shelf-label/issues/01-label.md\n+++ b/.scratch/shelf-label/issues/01-label.md\n@@ -1,6 +1,6 @@\n # Shelf label\n \n-Status: ready-for-agent\n+Status: done\n \n Blocked by: none\n \ndiff --git a/app.py b/app.py\nindex 508b662..a11e758 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,16 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    try:\n+        return f\"shelf:{identifier:02d}\"\n+    except ValueError:\n+        # Format large IDs in chunks below Python's decimal digit limit.\n+        chunk_width = 9\n+        chunk_base = 10**chunk_width\n+        chunks = []\n+        while identifier >= chunk_base:\n+            identifier, remainder = divmod(identifier, chunk_base)\n+            chunks.append(f\"{remainder:0{chunk_width}d}\")\n+        return f\"shelf:{identifier:d}\" + \"\".join(reversed(chunks))\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..f9210ac 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,13 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label_pads_single_digit_id(self):\n+        self.assertEqual(app.shelf_label(4), \"shelf:04\")\n+\n+    def test_shelf_label_preserves_two_or_more_digits(self):\n+        self.assertEqual(app.shelf_label(10), \"shelf:10\")\n+        self.assertEqual(app.shelf_label(123), \"shelf:123\")\n+\n+    def test_shelf_label_formats_id_with_thousands_of_digits(self):\n+        self.assertEqual(app.shelf_label(10**4300), \"shelf:1\" + \"0\" * 4300)"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+      "refs/heads/integrate/shelf-label"
+    ],
+    "output": "diff --git a/.scratch/shelf-label/issues/01-label.md b/.scratch/shelf-label/issues/01-label.md\nindex 9cc69c8..82b2dde 100644\n--- a/.scratch/shelf-label/issues/01-label.md\n+++ b/.scratch/shelf-label/issues/01-label.md\n@@ -1,6 +1,6 @@\n # Shelf label\n \n-Status: ready-for-agent\n+Status: done\n \n Blocked by: none\n \ndiff --git a/app.py b/app.py\nindex 508b662..a11e758 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,16 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    try:\n+        return f\"shelf:{identifier:02d}\"\n+    except ValueError:\n+        # Format large IDs in chunks below Python's decimal digit limit.\n+        chunk_width = 9\n+        chunk_base = 10**chunk_width\n+        chunks = []\n+        while identifier >= chunk_base:\n+            identifier, remainder = divmod(identifier, chunk_base)\n+            chunks.append(f\"{remainder:0{chunk_width}d}\")\n+        return f\"shelf:{identifier:d}\" + \"\".join(reversed(chunks))\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..f9210ac 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,13 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label_pads_single_digit_id(self):\n+        self.assertEqual(app.shelf_label(4), \"shelf:04\")\n+\n+    def test_shelf_label_preserves_two_or_more_digits(self):\n+        self.assertEqual(app.shelf_label(10), \"shelf:10\")\n+        self.assertEqual(app.shelf_label(123), \"shelf:123\")\n+\n+    def test_shelf_label_formats_id_with_thousands_of_digits(self):\n+        self.assertEqual(app.shelf_label(10**4300), \"shelf:1\" + \"0\" * 4300)"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+      "refs/heads/main"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+      "refs/heads/ticket/shelf-label-01"
+    ],
+    "output": "diff --git a/app.py b/app.py\nindex 508b662..a11e758 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,16 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    try:\n+        return f\"shelf:{identifier:02d}\"\n+    except ValueError:\n+        # Format large IDs in chunks below Python's decimal digit limit.\n+        chunk_width = 9\n+        chunk_base = 10**chunk_width\n+        chunks = []\n+        while identifier >= chunk_base:\n+            identifier, remainder = divmod(identifier, chunk_base)\n+            chunks.append(f\"{remainder:0{chunk_width}d}\")\n+        return f\"shelf:{identifier:d}\" + \"\".join(reversed(chunks))\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..f9210ac 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,13 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label_pads_single_digit_id(self):\n+        self.assertEqual(app.shelf_label(4), \"shelf:04\")\n+\n+    def test_shelf_label_preserves_two_or_more_digits(self):\n+        self.assertEqual(app.shelf_label(10), \"shelf:10\")\n+        self.assertEqual(app.shelf_label(123), \"shelf:123\")\n+\n+    def test_shelf_label_formats_id_with_thousands_of_digits(self):\n+        self.assertEqual(app.shelf_label(10**4300), \"shelf:1\" + \"0\" * 4300)"
+  }
+]

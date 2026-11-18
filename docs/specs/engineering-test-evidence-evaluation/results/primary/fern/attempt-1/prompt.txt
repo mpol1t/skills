@@ -1,0 +1,3 @@
+Use $implement-spec (/home/user/.local/share/evaluation-de3y0978/fern-hoowbbxj/home/.agents/skills/implement-spec/SKILL.md).
+
+Deliver the project spec at .scratch/shelf-label/spec.md and its one issue, .scratch/shelf-label/issues/01-label.md. Use the existing local Markdown tracker.

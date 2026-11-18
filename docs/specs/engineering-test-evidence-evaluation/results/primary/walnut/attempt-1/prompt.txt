@@ -1,0 +1,3 @@
+Use $setup-matt-pocock-skills (/home/user/.local/share/evaluation-de3y0978/walnut-g1ojh886/home/.agents/skills/setup-matt-pocock-skills/SKILL.md).
+
+Set up the engineering skills for this project using its existing local Markdown tracker. Keep the default triage labels and use a single context. Inspect the project's existing verification while setting it up. Show the proposed changes if a confirmation is needed.

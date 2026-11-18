@@ -1,0 +1,25 @@
+{
+  "trial": "fern",
+  "attempt": 1,
+  "skill": "implement-spec",
+  "fixture": {
+    "base": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+    "candidate": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+    "working_tree_sha256": "206ed69d3ffce8559fe488ee31a6438565981233586e827e9ee096b72f438797"
+  },
+  "starting_head": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/fern-hoowbbxj/repo",
+    "-"
+  ],
+  "timeout_seconds": 540,
+  "timed_out": true,
+  "elapsed_seconds": 540.008,
+  "status": "budget-exhausted",
+  "total_seconds": 540.501
+}

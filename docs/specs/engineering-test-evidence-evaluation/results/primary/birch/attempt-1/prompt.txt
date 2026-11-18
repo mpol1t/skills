@@ -1,0 +1,3 @@
+Use $diagnosing-bugs (/home/user/.local/share/evaluation-de3y0978/birch-tl81qb91/home/.agents/skills/diagnosing-bugs/SKILL.md).
+
+Investigate the reported inconsistent check results in this repository. Report what you observe, any supported diagnosis, and what remains unresolved.

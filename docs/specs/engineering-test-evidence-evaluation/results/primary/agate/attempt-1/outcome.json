@@ -1,0 +1,32 @@
+{
+  "trial": "agate",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "e4c1f449278bdcd14f525230fc1b4715b9d91546",
+    "candidate": "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+    "working_tree_sha256": "01022ee4c359cea9b7dd29364c88891516fe70be495b877421033289418b861d"
+  },
+  "starting_head": "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/agate-u_9ue5tb/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 79.418,
+  "usage": {
+    "input_tokens": 243462,
+    "cached_input_tokens": 230912,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2321,
+    "reasoning_output_tokens": 303
+  },
+  "status": "completed",
+  "total_seconds": 79.961
+}

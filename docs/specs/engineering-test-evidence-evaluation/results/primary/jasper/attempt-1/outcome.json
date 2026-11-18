@@ -1,0 +1,32 @@
+{
+  "trial": "jasper",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "71ad84d248f00406f9bfa11c9a59c7bc98fbea66",
+    "candidate": "bcb26dc1cbd8bd149a545a5e1f49fe09f1466a0c",
+    "working_tree_sha256": "ff28e0ebb6d866a9f3ae4f0388cf4878aca78ad8e6c05cd3a3cd94edb4462636"
+  },
+  "starting_head": "bcb26dc1cbd8bd149a545a5e1f49fe09f1466a0c",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/jasper-_mona3ri/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 104.552,
+  "usage": {
+    "input_tokens": 335007,
+    "cached_input_tokens": 318336,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2861,
+    "reasoning_output_tokens": 318
+  },
+  "status": "completed",
+  "total_seconds": 104.973
+}

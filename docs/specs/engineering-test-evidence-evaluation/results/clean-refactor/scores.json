@@ -1,0 +1,35 @@
+[
+  {
+    "id": "larch",
+    "score": "met",
+    "evidence": "attempt-1/events.jsonl item_10 ran the existing public examples. Item_11 checked 11 representative integers against both pinned revisions without adding a test. Item_14 approved the diff, with one optional design concern and no requests for redundant tests.",
+    "metrics": {
+      "clean_wrongly_blocked": false,
+      "redundant_tests": 0,
+      "required_first": 1,
+      "required_first_failed": 0,
+      "required_initial_failures_retried": 0,
+      "required_initial_failures_later_passed": 0
+    },
+    "test_inventory": {
+      "new_tests": 0,
+      "new_test_methods": [],
+      "planned_or_requested_remaining_test_cases": 0,
+      "redundant_tests_added": 0,
+      "redundant_tests_requested": 0,
+      "redundant_tests": 0,
+      "requested_test_cases": [],
+      "final_test_recommendations_observed": true,
+      "evidence": [
+        {
+          "source": "attempt-1/tree.json",
+          "observation": "Compared captured working tree and local branches against the starting revision."
+        },
+        {
+          "source": "attempt-1/events.jsonl:29",
+          "observation": "Recorded recommendation or disposition."
+        }
+      ]
+    }
+  }
+]

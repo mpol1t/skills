@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-4khyrc0i/acorn-drpkny2f/repo\nHEAD 57d446a1a9880dede9b1a2fd5507c96b78827887\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "57d446a (HEAD -> main) Handle shelf IDs beyond Python decimal conversion limit\n2b69522 Add public shelf label formatter\nbcff8b7 (tag: starting-point, tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "bcff8b7ebcf00ec1e21a75996a0eb21492652acd"
+    ],
+    "output": "diff --git a/app.py b/app.py\nindex 508b662..777c686 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,15 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    \"\"\"Format a nonnegative shelf identifier.\"\"\"\n+    # Keep each decimal conversion below Python's minimum configurable limit.\n+    chunk_width = 500\n+    chunk_base = 10**chunk_width\n+    chunks = []\n+    while identifier >= chunk_base:\n+        identifier, remainder = divmod(identifier, chunk_base)\n+        chunks.append(f\"{remainder:0{chunk_width}d}\")\n+    chunks.append(f\"{identifier:d}\")\n+    return \"shelf:\" + \"\".join(reversed(chunks)).zfill(2)\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..9fab135 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,20 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label(self):\n+        examples = [\n+            (0, \"shelf:00\"),\n+            (4, \"shelf:04\"),\n+            (10, \"shelf:10\"),\n+            (123, \"shelf:123\"),\n+        ]\n+        for identifier, expected in examples:\n+            with self.subTest(identifier=identifier):\n+                self.assertEqual(app.shelf_label(identifier), expected)\n+\n+    def test_shelf_label_with_very_large_identifier(self):\n+        self.assertEqual(\n+            app.shelf_label(10**5000 + 42),\n+            \"shelf:1\" + \"0\" * 4998 + \"42\",\n+        )"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+      "refs/heads/main"
+    ],
+    "output": "diff --git a/app.py b/app.py\nindex 508b662..777c686 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,15 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    \"\"\"Format a nonnegative shelf identifier.\"\"\"\n+    # Keep each decimal conversion below Python's minimum configurable limit.\n+    chunk_width = 500\n+    chunk_base = 10**chunk_width\n+    chunks = []\n+    while identifier >= chunk_base:\n+        identifier, remainder = divmod(identifier, chunk_base)\n+        chunks.append(f\"{remainder:0{chunk_width}d}\")\n+    chunks.append(f\"{identifier:d}\")\n+    return \"shelf:\" + \"\".join(reversed(chunks)).zfill(2)\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..9fab135 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,20 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label(self):\n+        examples = [\n+            (0, \"shelf:00\"),\n+            (4, \"shelf:04\"),\n+            (10, \"shelf:10\"),\n+            (123, \"shelf:123\"),\n+        ]\n+        for identifier, expected in examples:\n+            with self.subTest(identifier=identifier):\n+                self.assertEqual(app.shelf_label(identifier), expected)\n+\n+    def test_shelf_label_with_very_large_identifier(self):\n+        self.assertEqual(\n+            app.shelf_label(10**5000 + 42),\n+            \"shelf:1\" + \"0\" * 4998 + \"42\",\n+        )"
+  }
+]

@@ -144,17 +144,24 @@ print("Pass: pinned skill readable; private files, symlink, socket and tracker u
         link.unlink()
 
 
-def save_tree(repo, starting, path):
+def save_tree(repo, starting, path, launcher, env):
+    def collect(*command):
+        sandboxed_git = launcher + [
+            "sandbox", "-C", str(repo), "-P", "trial",
+            "/usr/bin/git", "-C", str(repo), *command,
+        ]
+        return capture(sandboxed_git, cwd=repo, env=env, timeout=20)
+
     outputs = []
     commands = [
         ["status", "--porcelain=v1", "--untracked-files=all"],
         ["worktree", "list", "--porcelain"], ["log", "--all", "--oneline", "--decorate"],
         ["diff", "--binary", starting],
     ]
-    refs = git(repo, "for-each-ref", "--format=%(refname)", "refs/heads").splitlines()
+    refs = collect("for-each-ref", "--format=%(refname)", "refs/heads").splitlines()
     commands += [["diff", "--binary", starting, ref] for ref in refs]
     for command in commands:
-        outputs.append({"command": ["git", *command], "output": git(repo, *command)})
+        outputs.append({"command": ["git", *command], "output": collect(*command)})
     write_json(path, outputs)
 
 
@@ -221,10 +228,13 @@ def run_trial(trial, args, runtime_root):
                 "budget-exhausted" if record.get("timed_out") else
                 "interrupted-after-interaction" if interacted else "runtime-failed-before-interaction"
             )
-            save_tree(repo, starting, result / "tree.json")
             sessions = job / "config/sessions"
             for index, logfile in enumerate(sorted(sessions.rglob("*.jsonl")), start=1):
                 shutil.copyfile(logfile, result / f"session-{index}.jsonl")
+            try:
+                save_tree(repo, starting, result / "tree.json", launcher, env)
+            except (subprocess.SubprocessError, OSError) as error:
+                record["collection_error"] = str(error)
         except Exception as error:
             record.setdefault("status", "setup-failed-before-dispatch")
             record["error"] = str(error)

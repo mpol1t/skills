@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/maple-oo4fbewx/repo\nHEAD db569de6965fb9da542aeb16abffec167548b761\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "db569de (HEAD -> main, tag: starting-point) Proposed change\nd9ef023 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "db569de6965fb9da542aeb16abffec167548b761"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "db569de6965fb9da542aeb16abffec167548b761",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

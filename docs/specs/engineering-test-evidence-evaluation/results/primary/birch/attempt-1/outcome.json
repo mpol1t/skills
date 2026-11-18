@@ -1,0 +1,32 @@
+{
+  "trial": "birch",
+  "attempt": 1,
+  "skill": "diagnosing-bugs",
+  "fixture": {
+    "base": "13c501ce159d6072b34bca27b7f61c6faf7d129a",
+    "candidate": "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+    "working_tree_sha256": "b705dad3b3541ed1cf9a1d5a50c9a65add6810989848a61c702f355718b51f8a"
+  },
+  "starting_head": "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/birch-tl81qb91/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 49.497,
+  "usage": {
+    "input_tokens": 107113,
+    "cached_input_tokens": 96768,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1716,
+    "reasoning_output_tokens": 99
+  },
+  "status": "completed",
+  "total_seconds": 49.926
+}

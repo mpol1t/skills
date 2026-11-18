@@ -22,3 +22,7 @@ standard-library trace-based fixture instrument, with branch outcome logic
 limited to the declared return alternatives for the admission and reservation
 projects. Runner loss and readiness receipts are deterministic simulations.
 These inputs test the workflow's evidence handling in controlled projects.
+
+[The baseline report](baseline.md) records the first attempts and distinct
+recovery runs. [Runner and replay instructions](runtime/README.md) describe
+how to recover the pinned skill snapshot and run the three frozen sets.

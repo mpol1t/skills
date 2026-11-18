@@ -1,0 +1,174 @@
+{
+  "planned": 4,
+  "first_status": {
+    "completed": 3,
+    "budget-exhausted": 1
+  },
+  "all_status": {
+    "completed": 3,
+    "budget-exhausted": 1
+  },
+  "first_scores": {
+    "met": 3,
+    "missed": 1
+  },
+  "results": [
+    {
+      "id": "acorn",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "acorn",
+          "attempt": 1,
+          "skill": "implement",
+          "fixture": {
+            "base": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+            "candidate": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+            "working_tree_sha256": "9101838547af5d6a9de39c0f618a0a7a1b278cf5eb4c5360edafb299914fe58e"
+          },
+          "starting_head": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-4khyrc0i/acorn-drpkny2f/repo",
+            "-"
+          ],
+          "timeout_seconds": 360,
+          "exit_code": 0,
+          "elapsed_seconds": 211.752,
+          "usage": {
+            "input_tokens": 804431,
+            "cached_input_tokens": 758528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6011,
+            "reasoning_output_tokens": 1141
+          },
+          "status": "completed",
+          "total_seconds": 212.357,
+          "top_level_completed_commands": 21,
+          "recorded_sessions_including_root": 5,
+          "shell_call_expressions_in_session_traces": 57
+        }
+      ]
+    },
+    {
+      "id": "hazel",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "hazel",
+          "attempt": 1,
+          "skill": "tdd",
+          "fixture": {
+            "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+          },
+          "starting_head": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-4khyrc0i/hazel-uc6jygrd/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 48.214,
+          "usage": {
+            "input_tokens": 193875,
+            "cached_input_tokens": 171008,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1235,
+            "reasoning_output_tokens": 262
+          },
+          "status": "completed",
+          "total_seconds": 48.79,
+          "top_level_completed_commands": 14,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 14
+        }
+      ]
+    },
+    {
+      "id": "aspen",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "aspen",
+          "attempt": 1,
+          "skill": "implement",
+          "fixture": {
+            "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+          },
+          "starting_head": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-4khyrc0i/aspen-335_qahn/repo",
+            "-"
+          ],
+          "timeout_seconds": 360,
+          "exit_code": 0,
+          "elapsed_seconds": 241.383,
+          "usage": {
+            "input_tokens": 964124,
+            "cached_input_tokens": 914304,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5860,
+            "reasoning_output_tokens": 1054
+          },
+          "status": "completed",
+          "total_seconds": 241.941,
+          "top_level_completed_commands": 28,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 69
+        }
+      ]
+    },
+    {
+      "id": "fern",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "fern",
+          "attempt": 1,
+          "skill": "implement-spec",
+          "fixture": {
+            "base": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+            "candidate": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+            "working_tree_sha256": "206ed69d3ffce8559fe488ee31a6438565981233586e827e9ee096b72f438797"
+          },
+          "starting_head": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-4khyrc0i/fern-apa96zl6/repo",
+            "-"
+          ],
+          "timeout_seconds": 540,
+          "timed_out": true,
+          "elapsed_seconds": 540.01,
+          "status": "budget-exhausted",
+          "total_seconds": 540.54,
+          "top_level_completed_commands": 24,
+          "recorded_sessions_including_root": 14,
+          "shell_call_expressions_in_session_traces": 255
+        }
+      ]
+    }
+  ]
+}

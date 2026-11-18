@@ -13,7 +13,7 @@ ACTIONS = {
 
 
 def session_records(path):
-    for line in path.read_text().splitlines():
+    for line_number, line in enumerate(path.read_text().splitlines(), start=1):
         try:
             record = json.loads(line)
         except json.JSONDecodeError:
@@ -22,7 +22,13 @@ def session_records(path):
         payload = record.get("payload", {})
         if payload.get("type") in ACTIONS and kind in {"response_item", "event_msg"}:
             payload.pop("internal_chat_message_metadata_passthrough", None)
-            yield record
+            payload.pop("rate_limits", None)
+            yield {
+                "timestamp": record.get("timestamp"),
+                "type": kind,
+                "source_line": line_number,
+                "payload": payload,
+            }
 
 
 def export(results, destination):

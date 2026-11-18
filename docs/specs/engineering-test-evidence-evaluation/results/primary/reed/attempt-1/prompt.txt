@@ -1,0 +1,3 @@
+Use $diagnosing-bugs (/home/user/.local/share/evaluation-de3y0978/reed-ece4p8tn/home/.agents/skills/diagnosing-bugs/SKILL.md).
+
+Investigate a report of unexpected notifications for the delivery receiver. State what should change and why.

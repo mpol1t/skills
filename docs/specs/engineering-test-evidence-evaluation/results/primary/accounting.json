@@ -1,0 +1,1077 @@
+{
+  "planned": 26,
+  "first_status": {
+    "completed": 25,
+    "budget-exhausted": 1
+  },
+  "all_status": {
+    "completed": 25,
+    "budget-exhausted": 1
+  },
+  "first_scores": {
+    "met": 20,
+    "missed": 5,
+    "unobserved": 1
+  },
+  "results": [
+    {
+      "id": "quartz",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "quartz",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "915b177d61759413bb1a1fd575a73611238e0cd6",
+            "candidate": "3e007bee176c6bb8b9df6bcead313dbe81a7d85b",
+            "working_tree_sha256": "0c6af147c90a8c60496c9c245cf483482cbf59d3a9e033f54a4ccc8cf8fb1565"
+          },
+          "starting_head": "3e007bee176c6bb8b9df6bcead313dbe81a7d85b",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/quartz-cp0yd_06/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 81.799,
+          "usage": {
+            "input_tokens": 236756,
+            "cached_input_tokens": 222080,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2399,
+            "reasoning_output_tokens": 110
+          },
+          "status": "completed",
+          "total_seconds": 82.321,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 34
+        }
+      ]
+    },
+    {
+      "id": "saffron",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "saffron",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "63faaf9676ac037a5770bcb16dcf02b4e203aa45",
+            "candidate": "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+            "working_tree_sha256": "0a7c3b6ba80c5532a4b55c100f7e8ed4e12aeb82183b549c9fb8a56676b387ca"
+          },
+          "starting_head": "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/saffron-vl4aow7r/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 84.82,
+          "usage": {
+            "input_tokens": 238432,
+            "cached_input_tokens": 206208,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2271,
+            "reasoning_output_tokens": 139
+          },
+          "status": "completed",
+          "total_seconds": 85.329,
+          "top_level_completed_commands": 9,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 30
+        }
+      ]
+    },
+    {
+      "id": "elm",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "elm",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "4fb8dad8963da0e368ecd940402fcb24d9e6887b",
+            "candidate": "585de1e10268915df80d16f17921f143cda7af27",
+            "working_tree_sha256": "14e2e62ed795ea6d09fe32f24c7a6ed9e0aefeb24db274c8a52f74ea3514bc4f"
+          },
+          "starting_head": "585de1e10268915df80d16f17921f143cda7af27",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/elm-hp3z3g5_/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 87.154,
+          "usage": {
+            "input_tokens": 246529,
+            "cached_input_tokens": 230528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2540,
+            "reasoning_output_tokens": 181
+          },
+          "status": "completed",
+          "total_seconds": 87.766,
+          "top_level_completed_commands": 13,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 29
+        }
+      ]
+    },
+    {
+      "id": "ochre",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "ochre",
+          "attempt": 1,
+          "skill": "diagnosing-bugs",
+          "fixture": {
+            "base": "8c4c78492208df36920fa947c881af4611bedd40",
+            "candidate": "d02a07b6fb499e1574324fa769b68889d0d65a67",
+            "working_tree_sha256": "ab87a8d4cfef6527a56dea09a036107e632307eb925e92a0a579351596ef714d"
+          },
+          "starting_head": "d02a07b6fb499e1574324fa769b68889d0d65a67",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/ochre-dfmiczf6/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 73.883,
+          "usage": {
+            "input_tokens": 126763,
+            "cached_input_tokens": 115840,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1989,
+            "reasoning_output_tokens": 96
+          },
+          "status": "completed",
+          "total_seconds": 74.433,
+          "top_level_completed_commands": 9,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 10
+        }
+      ]
+    },
+    {
+      "id": "drift",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "drift",
+          "attempt": 1,
+          "skill": "diagnosing-bugs",
+          "fixture": {
+            "base": "921c4aca2b904e50b408b1a4cab17e216b73a623",
+            "candidate": "cbdb26738be35080bd578c126205999cea3ddc20",
+            "working_tree_sha256": "c5bbc0a282d9b0685b85b62156d49b7b447951b262ac51be18806b4393e1be29"
+          },
+          "starting_head": "cbdb26738be35080bd578c126205999cea3ddc20",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/drift-vnesl_8m/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 61.319,
+          "usage": {
+            "input_tokens": 84973,
+            "cached_input_tokens": 76416,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1567,
+            "reasoning_output_tokens": 133
+          },
+          "status": "completed",
+          "total_seconds": 61.841,
+          "top_level_completed_commands": 7,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 7
+        }
+      ]
+    },
+    {
+      "id": "birch",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "birch",
+          "attempt": 1,
+          "skill": "diagnosing-bugs",
+          "fixture": {
+            "base": "13c501ce159d6072b34bca27b7f61c6faf7d129a",
+            "candidate": "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+            "working_tree_sha256": "b705dad3b3541ed1cf9a1d5a50c9a65add6810989848a61c702f355718b51f8a"
+          },
+          "starting_head": "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/birch-tl81qb91/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 49.497,
+          "usage": {
+            "input_tokens": 107113,
+            "cached_input_tokens": 96768,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1716,
+            "reasoning_output_tokens": 99
+          },
+          "status": "completed",
+          "total_seconds": 49.926,
+          "top_level_completed_commands": 11,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 11
+        }
+      ]
+    },
+    {
+      "id": "jade",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "jade",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "6ffbd2fb7cb1d5e1ee704ca9f41f5905c67c1940",
+            "candidate": "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+            "working_tree_sha256": "2189388959d3dc73b20f1b9fa3461b02c6d4198807f12cec487eace0436bd5a1"
+          },
+          "starting_head": "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/jade-pdvir5le/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 81.293,
+          "usage": {
+            "input_tokens": 216083,
+            "cached_input_tokens": 200448,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2906,
+            "reasoning_output_tokens": 337
+          },
+          "status": "completed",
+          "total_seconds": 81.728,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 30
+        }
+      ]
+    },
+    {
+      "id": "reed",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "reed",
+          "attempt": 1,
+          "skill": "diagnosing-bugs",
+          "fixture": {
+            "base": "43b0ae7c7f75c2cb71e1d2c42dac09c6077fa709",
+            "candidate": "838efcb4c62924775c9b12b936aff6acaa0c7086",
+            "working_tree_sha256": "8e5027304b5566d6dc891a1e63cc1fa83899c5000342763335745891eae0f5ae"
+          },
+          "starting_head": "838efcb4c62924775c9b12b936aff6acaa0c7086",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/reed-ece4p8tn/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 29.825,
+          "usage": {
+            "input_tokens": 83322,
+            "cached_input_tokens": 75904,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 830,
+            "reasoning_output_tokens": 0
+          },
+          "status": "completed",
+          "total_seconds": 30.256,
+          "top_level_completed_commands": 7,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 7
+        }
+      ]
+    },
+    {
+      "id": "lilac",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "lilac",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "ad8074e2b90d8da68278fd44abde6308233dc98f",
+            "candidate": "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+            "working_tree_sha256": "3f375f3b75d096118eda047d77b128b04905351d5ee83560a2b69817e44a5b87"
+          },
+          "starting_head": "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/lilac-qw7q2_kj/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 90.245,
+          "usage": {
+            "input_tokens": 235380,
+            "cached_input_tokens": 221312,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2653,
+            "reasoning_output_tokens": 82
+          },
+          "status": "completed",
+          "total_seconds": 90.651,
+          "top_level_completed_commands": 14,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 31
+        }
+      ]
+    },
+    {
+      "id": "crane",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "crane",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "de0929f8b71b979f186d9bbd726ff3db2c19e46e",
+            "candidate": "316d047fbfd332b054e31b0dc363140ee264b0f8",
+            "working_tree_sha256": "3f760cd7b417d77c46826c779ce4bee87dbe2dd085ad2ef8474c66dce23a4372"
+          },
+          "starting_head": "316d047fbfd332b054e31b0dc363140ee264b0f8",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/crane-wyo4zyyj/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 108.842,
+          "usage": {
+            "input_tokens": 291542,
+            "cached_input_tokens": 256640,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3630,
+            "reasoning_output_tokens": 229
+          },
+          "status": "completed",
+          "total_seconds": 109.264,
+          "top_level_completed_commands": 13,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 35
+        }
+      ]
+    },
+    {
+      "id": "willow",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "willow",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "0ee0216b20fa6dd8104a007280868c7e78774340",
+            "candidate": "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+            "working_tree_sha256": "92a5f7f2c1415acf627f7bd11c589d575ca699bdaa18d3b05c2bbb33a744505a"
+          },
+          "starting_head": "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/willow-pymk063y/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 105.413,
+          "usage": {
+            "input_tokens": 316331,
+            "cached_input_tokens": 299776,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3334,
+            "reasoning_output_tokens": 430
+          },
+          "status": "completed",
+          "total_seconds": 105.808,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 33
+        }
+      ]
+    },
+    {
+      "id": "walnut",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "walnut",
+          "attempt": 1,
+          "skill": "setup-matt-pocock-skills",
+          "fixture": {
+            "base": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+            "candidate": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+            "working_tree_sha256": "9ff09d70f49ee4f46df609c1c2ca523781daf6d06d195d1f912e46c93071394a"
+          },
+          "starting_head": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/walnut-g1ojh886/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 44.008,
+          "usage": {
+            "input_tokens": 145201,
+            "cached_input_tokens": 117888,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 1451,
+            "reasoning_output_tokens": 359
+          },
+          "status": "completed",
+          "total_seconds": 44.486,
+          "top_level_completed_commands": 14,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 6
+        }
+      ]
+    },
+    {
+      "id": "acorn",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "acorn",
+          "attempt": 1,
+          "skill": "implement",
+          "fixture": {
+            "base": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+            "candidate": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+            "working_tree_sha256": "9101838547af5d6a9de39c0f618a0a7a1b278cf5eb4c5360edafb299914fe58e"
+          },
+          "starting_head": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/acorn-w03evg8_/repo",
+            "-"
+          ],
+          "timeout_seconds": 360,
+          "exit_code": 0,
+          "elapsed_seconds": 243.639,
+          "usage": {
+            "input_tokens": 1158204,
+            "cached_input_tokens": 1101184,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 7496,
+            "reasoning_output_tokens": 1321
+          },
+          "status": "completed",
+          "total_seconds": 244.037,
+          "top_level_completed_commands": 38,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 84
+        }
+      ]
+    },
+    {
+      "id": "plum",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "plum",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "27cb8276b07bc1db2153a2f401675403f04cbed8",
+            "candidate": "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+            "working_tree_sha256": "81c7d06839359f3d71bb76d7cbd7d863ebddb15815dcce03e3cffee5696d72d9"
+          },
+          "starting_head": "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/plum-trt32zow/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 78.668,
+          "usage": {
+            "input_tokens": 261302,
+            "cached_input_tokens": 237440,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2434,
+            "reasoning_output_tokens": 102
+          },
+          "status": "completed",
+          "total_seconds": 79.25,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 36
+        }
+      ]
+    },
+    {
+      "id": "teal",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "teal",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "befd5197b4def1fea4478bae1450b08d36bfd559",
+            "candidate": "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+            "working_tree_sha256": "5fca8a284ff2a38ef05c9a0172d413ffecbf625beaddcfc3b5a95ab4fd575b4f"
+          },
+          "starting_head": "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/teal-x_g06f9g/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 90.33,
+          "usage": {
+            "input_tokens": 246959,
+            "cached_input_tokens": 228864,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2914,
+            "reasoning_output_tokens": 242
+          },
+          "status": "completed",
+          "total_seconds": 90.75,
+          "top_level_completed_commands": 10,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 36
+        }
+      ]
+    },
+    {
+      "id": "agate",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "agate",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "e4c1f449278bdcd14f525230fc1b4715b9d91546",
+            "candidate": "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+            "working_tree_sha256": "01022ee4c359cea9b7dd29364c88891516fe70be495b877421033289418b861d"
+          },
+          "starting_head": "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/agate-u_9ue5tb/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 79.418,
+          "usage": {
+            "input_tokens": 243462,
+            "cached_input_tokens": 230912,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2321,
+            "reasoning_output_tokens": 303
+          },
+          "status": "completed",
+          "total_seconds": 79.961,
+          "top_level_completed_commands": 10,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 38
+        }
+      ]
+    },
+    {
+      "id": "rose",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "rose",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "855df961aca55bca196336d2ba54bdaab7d8573d",
+            "candidate": "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+            "working_tree_sha256": "a5287693d28350d10b6dceaad178a8b0d9dc95927b846d0f1c516f9837b05691"
+          },
+          "starting_head": "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/rose-eugrbbjv/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 94.063,
+          "usage": {
+            "input_tokens": 238979,
+            "cached_input_tokens": 214784,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2927,
+            "reasoning_output_tokens": 144
+          },
+          "status": "completed",
+          "total_seconds": 94.486,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 39
+        }
+      ]
+    },
+    {
+      "id": "pearl",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "pearl",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "15629cf8ed3e1349310cfa2bee997169cb42ae18",
+            "candidate": "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+            "working_tree_sha256": "c4ca39967643935c3ec3036bc07d896b0075116d9beaf620f61a94b46f5491e6"
+          },
+          "starting_head": "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/pearl-q3rlcel4/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 95.231,
+          "usage": {
+            "input_tokens": 293519,
+            "cached_input_tokens": 264320,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3313,
+            "reasoning_output_tokens": 449
+          },
+          "status": "completed",
+          "total_seconds": 95.686,
+          "top_level_completed_commands": 12,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 40
+        }
+      ]
+    },
+    {
+      "id": "clover",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "clover",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "2fca2bdae231825d227688b8f6f3c0f1b2a87952",
+            "candidate": "da135099ac5c86de9f1270f9cf2322279a5a904d",
+            "working_tree_sha256": "ad2b5123509c94db31bebf9b1193a58d0f34967ded3a08a19f9dad29ccf3c4aa"
+          },
+          "starting_head": "da135099ac5c86de9f1270f9cf2322279a5a904d",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/clover-auag_kmv/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 90.215,
+          "usage": {
+            "input_tokens": 310993,
+            "cached_input_tokens": 248576,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2509,
+            "reasoning_output_tokens": 257
+          },
+          "status": "completed",
+          "total_seconds": 90.698,
+          "top_level_completed_commands": 10,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 27
+        }
+      ]
+    },
+    {
+      "id": "moss",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "moss",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "8264511d81429abf994ca0f41687219f236a2c5e",
+            "candidate": "8689aaf9a0aeb2524934d503b77c1ff98c0bab8b",
+            "working_tree_sha256": "92a10000e5ea5db5bfce2d53e93d491a26bf35572ebb31b111700b5ce7d1fb8e"
+          },
+          "starting_head": "8689aaf9a0aeb2524934d503b77c1ff98c0bab8b",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/moss-imoa4b_5/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 88.889,
+          "usage": {
+            "input_tokens": 242913,
+            "cached_input_tokens": 230912,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2530,
+            "reasoning_output_tokens": 154
+          },
+          "status": "completed",
+          "total_seconds": 89.456,
+          "top_level_completed_commands": 9,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 20
+        }
+      ]
+    },
+    {
+      "id": "maple",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "maple",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "d9ef023e44ccc55d9905dc26ad5dacbd79f09150",
+            "candidate": "db569de6965fb9da542aeb16abffec167548b761",
+            "working_tree_sha256": "9e10d8268f43f7daa8f56f5ba770dddb9839c54acf8e9720dc9034733057114e"
+          },
+          "starting_head": "db569de6965fb9da542aeb16abffec167548b761",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/maple-oo4fbewx/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 81.286,
+          "usage": {
+            "input_tokens": 220817,
+            "cached_input_tokens": 209024,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2226,
+            "reasoning_output_tokens": 201
+          },
+          "status": "completed",
+          "total_seconds": 81.733,
+          "top_level_completed_commands": 13,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 34
+        }
+      ]
+    },
+    {
+      "id": "jasper",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "jasper",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "71ad84d248f00406f9bfa11c9a59c7bc98fbea66",
+            "candidate": "bcb26dc1cbd8bd149a545a5e1f49fe09f1466a0c",
+            "working_tree_sha256": "ff28e0ebb6d866a9f3ae4f0388cf4878aca78ad8e6c05cd3a3cd94edb4462636"
+          },
+          "starting_head": "bcb26dc1cbd8bd149a545a5e1f49fe09f1466a0c",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/jasper-_mona3ri/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 104.552,
+          "usage": {
+            "input_tokens": 335007,
+            "cached_input_tokens": 318336,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2861,
+            "reasoning_output_tokens": 318
+          },
+          "status": "completed",
+          "total_seconds": 104.973,
+          "top_level_completed_commands": 13,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 27
+        }
+      ]
+    },
+    {
+      "id": "topaz",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "topaz",
+          "attempt": 1,
+          "skill": "code-review",
+          "fixture": {
+            "base": "0eb2bc074883569d948f428cb57bf5e12da7e940",
+            "candidate": "b819f4440e421d79eb79ec5afa900669446fb244",
+            "working_tree_sha256": "3ea8a1cda865e173c7abf303f13593ab2b0f527c0c00a03789af6a56d0631b61"
+          },
+          "starting_head": "b819f4440e421d79eb79ec5afa900669446fb244",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/topaz-wghxncik/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 84.503,
+          "usage": {
+            "input_tokens": 243414,
+            "cached_input_tokens": 222592,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2473,
+            "reasoning_output_tokens": 245
+          },
+          "status": "completed",
+          "total_seconds": 85.137,
+          "top_level_completed_commands": 14,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 48
+        }
+      ]
+    },
+    {
+      "id": "hazel",
+      "score": "met",
+      "attempts": [
+        {
+          "trial": "hazel",
+          "attempt": 1,
+          "skill": "tdd",
+          "fixture": {
+            "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+          },
+          "starting_head": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/hazel-6h1hwpwz/repo",
+            "-"
+          ],
+          "timeout_seconds": 240,
+          "exit_code": 0,
+          "elapsed_seconds": 30.425,
+          "usage": {
+            "input_tokens": 101922,
+            "cached_input_tokens": 87552,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 816,
+            "reasoning_output_tokens": 112
+          },
+          "status": "completed",
+          "total_seconds": 30.83,
+          "top_level_completed_commands": 7,
+          "recorded_sessions_including_root": 1,
+          "shell_call_expressions_in_session_traces": 7
+        }
+      ]
+    },
+    {
+      "id": "aspen",
+      "score": "missed",
+      "attempts": [
+        {
+          "trial": "aspen",
+          "attempt": 1,
+          "skill": "implement",
+          "fixture": {
+            "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+            "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+          },
+          "starting_head": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/aspen-d29hd_k3/repo",
+            "-"
+          ],
+          "timeout_seconds": 360,
+          "exit_code": 0,
+          "elapsed_seconds": 150.458,
+          "usage": {
+            "input_tokens": 611834,
+            "cached_input_tokens": 568320,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 4222,
+            "reasoning_output_tokens": 290
+          },
+          "status": "completed",
+          "total_seconds": 150.868,
+          "top_level_completed_commands": 18,
+          "recorded_sessions_including_root": 3,
+          "shell_call_expressions_in_session_traces": 48
+        }
+      ]
+    },
+    {
+      "id": "fern",
+      "score": "unobserved",
+      "attempts": [
+        {
+          "trial": "fern",
+          "attempt": 1,
+          "skill": "implement-spec",
+          "fixture": {
+            "base": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+            "candidate": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+            "working_tree_sha256": "206ed69d3ffce8559fe488ee31a6438565981233586e827e9ee096b72f438797"
+          },
+          "starting_head": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+          "launch": [
+            "/usr/bin/node",
+            "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+            "exec",
+            "--json",
+            "-C",
+            "/home/user/.local/share/evaluation-de3y0978/fern-hoowbbxj/repo",
+            "-"
+          ],
+          "timeout_seconds": 540,
+          "timed_out": true,
+          "elapsed_seconds": 540.008,
+          "status": "budget-exhausted",
+          "total_seconds": 540.501,
+          "top_level_completed_commands": 29,
+          "recorded_sessions_including_root": 12,
+          "shell_call_expressions_in_session_traces": 127
+        }
+      ]
+    }
+  ]
+}

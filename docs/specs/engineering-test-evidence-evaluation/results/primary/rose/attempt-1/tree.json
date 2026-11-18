@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/rose-eugrbbjv/repo\nHEAD fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "fe97f58 (HEAD -> main, tag: starting-point) Proposed change\n855df96 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

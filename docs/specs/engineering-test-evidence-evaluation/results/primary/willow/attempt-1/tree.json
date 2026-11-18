@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/willow-pymk063y/repo\nHEAD 483f02ad131c9c69646ae3536f59eb27d1ee0822\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "483f02a (HEAD -> main, tag: starting-point) Proposed change\n0ee0216 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "483f02ad131c9c69646ae3536f59eb27d1ee0822"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

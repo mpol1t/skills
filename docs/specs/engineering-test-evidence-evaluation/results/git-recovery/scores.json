@@ -1,0 +1,298 @@
+[
+  {
+    "id": "acorn",
+    "score": "met",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed",
+        "elapsed_seconds": 211.752,
+        "top_level_commands": 21,
+        "child_exec_tool_calls": 14,
+        "child_sessions": 4
+      }
+    ],
+    "evidence": [
+      {
+        "source": "attempt-1/events.jsonl:16",
+        "observation": "Read the isolated issue, contract, pre-commit hook, Labels CI workflow and its check script in the fresh implementation checkout."
+      },
+      {
+        "source": "attempt-1/events.jsonl:36",
+        "observation": "At first commit 2b695223, ran the full suite and package gate; report was 8/10, above 70%."
+      },
+      {
+        "source": "attempt-1/events.jsonl:46",
+        "observation": "Independent review reproduced the digit-limit failure for a nonnegative ID."
+      },
+      {
+        "source": "attempt-1/events.jsonl:64",
+        "observation": "Reran required checks from archive of repair commit 57d446a1 and retained same-scope report and low digit-limit run."
+      },
+      {
+        "source": "attempt-1/events.jsonl:73",
+        "observation": "Final report kept all evidence tied to reviewed commit 57d446a1, with both review axes clear."
+      }
+    ],
+    "metrics": {
+      "new_tests": 2,
+      "redundant_tests": 0,
+      "required_command_first_runs": 2,
+      "required_command_first_failures": 0,
+      "initial_failures_retried": 0,
+      "initial_failures_later_passed": 0,
+      "deliberate_behavior_reds": 2
+    },
+    "test_inventory": {
+      "new_tests": 2,
+      "new_test_methods": [
+        "test_shelf_label",
+        "test_shelf_label_with_very_large_identifier"
+      ],
+      "planned_or_requested_remaining_test_cases": 0,
+      "redundant_tests_added": 0,
+      "redundant_tests_requested": 0,
+      "redundant_tests": 0,
+      "requested_test_cases": [],
+      "final_test_recommendations_observed": true,
+      "evidence": [
+        {
+          "source": "attempt-1/tree.json",
+          "observation": "Compared captured working tree and local branches against the starting revision."
+        },
+        {
+          "source": "attempt-1/events.jsonl:73",
+          "observation": "Recorded recommendation or disposition."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hazel",
+    "score": "met",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed",
+        "elapsed_seconds": 48.214,
+        "top_level_commands": 14,
+        "child_exec_tool_calls": 0,
+        "child_sessions": 0
+      }
+    ],
+    "evidence": [
+      {
+        "source": "attempt-1/events.jsonl:3",
+        "observation": "Explicit user TDD request activated the TDD skill."
+      },
+      {
+        "source": "attempt-1/events.jsonl:26",
+        "observation": "Public example for ID 4 failed because shelf_label did not yet exist."
+      },
+      {
+        "source": "attempt-1/events.jsonl:30",
+        "observation": "First implementation made ID 4 pass."
+      },
+      {
+        "source": "attempt-1/events.jsonl:34",
+        "observation": "Second public example at ID 10 failed under the initial padding behavior."
+      },
+      {
+        "source": "attempt-1/events.jsonl:40",
+        "observation": "Adjusted implementation and passed all three tests. Final response traces both red-green cycles."
+      }
+    ],
+    "metrics": {
+      "tdd_activated": true,
+      "new_tests": 2,
+      "redundant_tests": 0,
+      "required_command_first_runs": 1,
+      "required_command_first_failures": 0,
+      "initial_failures_retried": 0,
+      "initial_failures_later_passed": 0,
+      "deliberate_behavior_reds": 2
+    },
+    "test_inventory": {
+      "new_tests": 2,
+      "new_test_methods": [
+        "test_shelf_label_omits_padding_at_ten",
+        "test_shelf_label_pads_single_digit_id"
+      ],
+      "planned_or_requested_remaining_test_cases": 0,
+      "redundant_tests_added": 0,
+      "redundant_tests_requested": 0,
+      "redundant_tests": 0,
+      "requested_test_cases": [],
+      "final_test_recommendations_observed": true,
+      "evidence": [
+        {
+          "source": "attempt-1/tree.json",
+          "observation": "Compared captured working tree and local branches against the starting revision."
+        },
+        {
+          "source": "attempt-1/events.jsonl:41",
+          "observation": "Recorded recommendation or disposition."
+        }
+      ]
+    }
+  },
+  {
+    "id": "aspen",
+    "score": "missed",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed",
+        "elapsed_seconds": 241.383,
+        "top_level_commands": 28,
+        "child_exec_tool_calls": 16,
+        "child_sessions": 2
+      }
+    ],
+    "evidence": [
+      {
+        "source": "attempt-1/events.jsonl:8",
+        "observation": "Ordinary implementation expressly activated the tdd skill."
+      },
+      {
+        "source": "attempt-1/events.jsonl:20",
+        "observation": "Ran test-first failure for the missing public function."
+      },
+      {
+        "source": "attempt-1/events.jsonl:26",
+        "observation": "Ran the passing test after implementation."
+      },
+      {
+        "source": "attempt-1/events.jsonl:48",
+        "observation": "Added and demonstrated a separate red for a large-ID edge found by review."
+      },
+      {
+        "source": "attempt-1/events.jsonl:79",
+        "observation": "Committed a portability fix at cc42a7f and passed all three tests."
+      },
+      {
+        "source": "attempt-1/events.jsonl:92",
+        "observation": "Reported successful repair and independent review, while the undesired TDD activation remained directly observed."
+      }
+    ],
+    "metrics": {
+      "tdd_activated": true,
+      "new_tests": 2,
+      "redundant_tests": 0,
+      "required_command_first_runs": 1,
+      "required_command_first_failures": 0,
+      "initial_failures_retried": 0,
+      "initial_failures_later_passed": 0,
+      "deliberate_behavior_reds": 3
+    },
+    "test_inventory": {
+      "new_tests": 2,
+      "new_test_methods": [
+        "test_shelf_label",
+        "test_shelf_label_with_very_large_identifier"
+      ],
+      "planned_or_requested_remaining_test_cases": 0,
+      "redundant_tests_added": 0,
+      "redundant_tests_requested": 0,
+      "redundant_tests": 0,
+      "requested_test_cases": [],
+      "final_test_recommendations_observed": true,
+      "evidence": [
+        {
+          "source": "attempt-1/tree.json",
+          "observation": "Compared captured working tree and local branches against the starting revision."
+        },
+        {
+          "source": "attempt-1/events.jsonl:92",
+          "observation": "Recorded recommendation or disposition."
+        }
+      ]
+    }
+  },
+  {
+    "id": "fern",
+    "score": "met",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "budget-exhausted",
+        "elapsed_seconds": 540.01,
+        "top_level_commands": 24,
+        "child_exec_tool_calls": 147,
+        "child_sessions": 13
+      }
+    ],
+    "evidence": [
+      {
+        "source": "attempt-1/events.jsonl:21",
+        "observation": "Created integration branch and exclusive ticket worktree after local one-Issue intake."
+      },
+      {
+        "source": "attempt-1/events.jsonl:35",
+        "observation": "Recorded isolated worker checkpoint with three passing tests and dispatched independent review."
+      },
+      {
+        "source": "attempt-1/events.jsonl:46",
+        "observation": "Independent review reproduced Python's digit conversion limit and authority re-review later found a pure-Python fallback defect."
+      },
+      {
+        "source": "attempt-1/events.jsonl:72",
+        "observation": "Recorded portable repair checkpoint aaff897892e588247f49869f6076707a68e51720 after both repair cycles."
+      },
+      {
+        "source": "attempt-1/events.jsonl:81",
+        "observation": "Serialized fast-forward after approval to aaff897892e588247f49869f6076707a68e51720."
+      },
+      {
+        "source": "attempt-1/events.jsonl:83",
+        "observation": "Verified integrated revision with ./check, the low digit-limit variant, and git diff --check."
+      },
+      {
+        "source": "attempt-1/events.jsonl:92",
+        "observation": "After whole-spec review, committed only local issue closure at facdc9caffc60d77a4df406cbf11e772389f7c0c, and reverified both suite variants on that commit."
+      },
+      {
+        "source": "attempt-1/outcome.json",
+        "observation": "The runtime ended at the 540-second budget before a final answer; recorded actions establish the rubric's full handoff criterion."
+      }
+    ],
+    "metrics": {
+      "new_tests": 3,
+      "redundant_tests": 0,
+      "local_intake": true,
+      "worker_checkpoint": true,
+      "independent_review": true,
+      "integration": true,
+      "integrated_verification": true,
+      "required_command_first_runs": 1,
+      "required_command_first_failures": 0,
+      "initial_failures_retried": 0,
+      "initial_failures_later_passed": 0,
+      "deliberate_behavior_reds": 2
+    },
+    "test_inventory": {
+      "new_tests": 3,
+      "new_test_methods": [
+        "test_shelf_label_formats_id_with_thousands_of_digits",
+        "test_shelf_label_pads_single_digit_id",
+        "test_shelf_label_preserves_two_or_more_digits"
+      ],
+      "planned_or_requested_remaining_test_cases": 0,
+      "redundant_tests_added": 0,
+      "redundant_tests_requested": 0,
+      "redundant_tests": 0,
+      "requested_test_cases": [],
+      "final_test_recommendations_observed": null,
+      "evidence": [
+        {
+          "source": "attempt-1/tree.json",
+          "observation": "Compared captured working tree and local branches against the starting revision."
+        },
+        {
+          "source": "attempt-1/events.jsonl:84",
+          "observation": "Last progress message before the session deadline. Parent/worker traces still establish concrete additions and observed requests."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,1 @@
+Pass: pinned skill readable; private files, symlink, socket and tracker unavailable.

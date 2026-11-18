@@ -1,0 +1,32 @@
+{
+  "trial": "maple",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "d9ef023e44ccc55d9905dc26ad5dacbd79f09150",
+    "candidate": "db569de6965fb9da542aeb16abffec167548b761",
+    "working_tree_sha256": "9e10d8268f43f7daa8f56f5ba770dddb9839c54acf8e9720dc9034733057114e"
+  },
+  "starting_head": "db569de6965fb9da542aeb16abffec167548b761",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/maple-oo4fbewx/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 81.286,
+  "usage": {
+    "input_tokens": 220817,
+    "cached_input_tokens": 209024,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2226,
+    "reasoning_output_tokens": 201
+  },
+  "status": "completed",
+  "total_seconds": 81.733
+}

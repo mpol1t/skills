@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/plum-trt32zow/repo\nHEAD 6ba1e76975edad384ba84dfe54bad01c0ea41dae\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "6ba1e76 (HEAD -> main, tag: starting-point) Proposed change\n27cb827 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "6ba1e76975edad384ba84dfe54bad01c0ea41dae"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

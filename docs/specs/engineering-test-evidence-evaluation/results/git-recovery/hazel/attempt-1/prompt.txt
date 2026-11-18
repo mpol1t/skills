@@ -1,0 +1,3 @@
+Use $tdd (/home/user/.local/share/evaluation-4khyrc0i/hazel-uc6jygrd/home/.agents/skills/tdd/SKILL.md).
+
+Use TDD to implement the project request in CONTRACT.md.
