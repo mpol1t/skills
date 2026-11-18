@@ -1,0 +1,160 @@
+{
+  "trials": [
+    {
+      "id": "quartz",
+      "fixture": "quartz",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "saffron",
+      "fixture": "saffron",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "elm",
+      "fixture": "elm",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "ochre",
+      "fixture": "ochre",
+      "skill": "diagnosing-bugs",
+      "prompt": "Investigate the reported inconsistent check results in this repository. Report what you observe, any supported diagnosis, and what remains unresolved."
+    },
+    {
+      "id": "drift",
+      "fixture": "drift",
+      "skill": "diagnosing-bugs",
+      "prompt": "Investigate the reported inconsistent check results in this repository. Report what you observe, any supported diagnosis, and what remains unresolved."
+    },
+    {
+      "id": "birch",
+      "fixture": "birch",
+      "skill": "diagnosing-bugs",
+      "prompt": "Investigate the reported inconsistent check results in this repository. Report what you observe, any supported diagnosis, and what remains unresolved."
+    },
+    {
+      "id": "jade",
+      "fixture": "jade",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it. Give the disposition separately for 2026-03-15 and 2026-04-03."
+    },
+    {
+      "id": "reed",
+      "fixture": "reed",
+      "skill": "diagnosing-bugs",
+      "prompt": "Investigate a report of unexpected notifications for the delivery receiver. State what should change and why."
+    },
+    {
+      "id": "lilac",
+      "fixture": "lilac",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "crane",
+      "fixture": "crane",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "willow",
+      "fixture": "willow",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "walnut",
+      "fixture": "walnut",
+      "skill": "setup-matt-pocock-skills",
+      "prompt": "Set up the engineering skills for this project using its existing local Markdown tracker. Keep the default triage labels and use a single context. Inspect the project's existing verification while setting it up. Show the proposed changes if a confirmation is needed."
+    },
+    {
+      "id": "acorn",
+      "fixture": "acorn",
+      "skill": "implement",
+      "prompt": "Implement the issue at .scratch/labels/issues/01-shelf-label.md. Use the existing local Markdown tracker."
+    },
+    {
+      "id": "plum",
+      "fixture": "plum",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "teal",
+      "fixture": "teal",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "agate",
+      "fixture": "agate",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "rose",
+      "fixture": "rose",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "pearl",
+      "fixture": "pearl",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "clover",
+      "fixture": "clover",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "moss",
+      "fixture": "moss",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "maple",
+      "fixture": "maple",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "jasper",
+      "fixture": "jasper",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "topaz",
+      "fixture": "topaz",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    },
+    {
+      "id": "hazel",
+      "fixture": "hazel",
+      "skill": "tdd",
+      "prompt": "Use TDD to implement the project request in CONTRACT.md."
+    },
+    {
+      "id": "aspen",
+      "fixture": "aspen",
+      "skill": "implement",
+      "prompt": "Implement the project request in CONTRACT.md."
+    },
+    {
+      "id": "fern",
+      "fixture": "fern",
+      "skill": "implement-spec",
+      "prompt": "Deliver the project spec at .scratch/shelf-label/spec.md and its one issue, .scratch/shelf-label/issues/01-label.md. Use the existing local Markdown tracker."
+    }
+  ]
+}
