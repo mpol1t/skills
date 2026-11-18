@@ -23,9 +23,12 @@ available. Keep all outside the fixture and out of prompts. The runtime
 checks a direct file read, a symlink to private material, a raw socket and
 an HTTPS request before each dispatch. Logs go outside the replay workspace.
 
+From the evaluation directory, verify and fetch the bundle into the same
+repository passed as the runner's `--source`.
+
 ```sh
-git bundle verify runtime/skill-input.bundle
-git fetch runtime/skill-input.bundle issue-4-baseline-skill-input
+git -C /path/to/skills bundle verify "$PWD/runtime/skill-input.bundle"
+git -C /path/to/skills fetch "$PWD/runtime/skill-input.bundle" issue-4-baseline-skill-input
 python3 runtime/qualification.py /path/to/skills /path/to/codex-package /path/to/auth.json /path/to/new-qualification-directory
 python3 runtime/run.py /path/to/new-results \
   --source /path/to/skills --package /path/to/codex-package \
