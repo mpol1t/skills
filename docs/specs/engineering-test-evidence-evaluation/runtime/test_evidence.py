@@ -142,6 +142,27 @@ class EvidenceTest(unittest.TestCase):
             self.assertEqual([1], [json.loads(line)["source_line"] for line in stream])
         self.assertEqual(good + bad_tail, session.read_bytes())
 
+    def test_timeout_with_no_complete_session_actions_remains_reconcilable(self):
+        attempt = self.root / "raw/sample/attempt-1"
+        attempt.mkdir(parents=True)
+        outcome = {
+            "status": "budget-exhausted", "timed_out": True, "launch": ["codex"],
+            "timeout_seconds": 1, "elapsed_seconds": 1.1, "collection_error": "not available",
+        }
+        (attempt / "outcome.json").write_text(json.dumps(outcome))
+        (attempt / "events.jsonl").write_bytes(jsonl(START))
+        (attempt / "stderr.txt").touch()
+        (attempt / "session-1.jsonl").write_bytes(
+            jsonl([{"type": "session_meta", "payload": {}}]) + b'{"type":"event_msg"',
+        )
+        destination = self.root / "exported"
+        export_evidence.export(self.root / "raw", destination)
+        exported = destination / "sample/attempt-1"
+        self.assertFalse((exported / "session-1.jsonl.gz").exists())
+        tail = json.loads((exported / "truncated_sessions.json").read_text())
+        self.assertEqual(2, tail["session-1.jsonl"]["source_line"])
+        self.assertEqual(0, reconcile.counts(exported, outcome)["recorded_sessions_including_root"])
+
     def test_collector_preserves_porcelain_columns_and_newline(self):
         repo = self.root / "repo"
         subprocess.run(["git", "init", "-q", "--template=", str(repo)], check=True)

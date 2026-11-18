@@ -62,7 +62,8 @@ def export_attempt(attempt, out):
             json.dumps(event) + "\n"
             for event in session_records(session, truncated=tail if interrupted else None)
         )
-        (out / f"{session.name}.gz").write_bytes(gzip.compress(lines.encode(), mtime=0))
+        if lines or not tail:
+            (out / f"{session.name}.gz").write_bytes(gzip.compress(lines.encode(), mtime=0))
         if tail:
             truncated_sessions[session.name] = tail
     if truncated_sessions:

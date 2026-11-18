@@ -74,7 +74,8 @@ The controller preserves the original CLI event bytes, including an
 unterminated record split inside a UTF-8 character. An interrupted attempt
 may report that final record's source line, byte count and SHA-256 digest.
 The minimized session export likewise records partial session tails in
-`truncated_sessions.json`. The private raw session files retain the bytes.
+`truncated_sessions.json`. The private raw session files retain the bytes. A session torn before
+its first retained action has a tail record and no compressed action trace.
 An invalid interior record fails the export, and an invalid final record
 fails export for a completed attempt. The reconciler checks each status
 against dispatch, exit, terminal and timeout evidence. A dispatched run
