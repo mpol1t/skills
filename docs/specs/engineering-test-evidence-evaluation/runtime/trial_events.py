@@ -3,6 +3,12 @@ from hashlib import sha256
 import json
 
 
+INTERACTION_RECORD_TYPES = frozenset({
+    "agent_message", "function_call", "function_call_output", "custom_tool_call",
+    "custom_tool_call_output", "web_search_call", "mcp_tool_call",
+})
+
+
 def records(path, *, truncated=None):
     with path.open("rb") as stream:
         for number, line in enumerate(stream, 1):

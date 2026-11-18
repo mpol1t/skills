@@ -75,13 +75,14 @@ unterminated record split inside a UTF-8 character. An interrupted attempt
 may report that final record's source line, byte count and SHA-256 digest.
 The minimized session export likewise records partial session tails in
 `truncated_sessions.json`. The private raw session files retain the bytes.
-An interrupted session with no retained actions produces no compressed
+An interrupted session with no retained records produces no compressed
 trace, whether it ends at a complete record boundary or has a partial tail.
 Reconciliation accepts zero traces when the CLI events show no interaction.
-Interaction still requires a nonempty action trace. Export fails on invalid
-interior records and on an invalid final record in a completed attempt. The
-reconciler checks each status
-against dispatch, exit, terminal and timeout evidence. A dispatched run
+After interaction, reconciliation requires an agent message, tool call or
+tool result in the session trace. Token counts, lifecycle signals and errors
+stay in the archive for diagnosis. Export fails on invalid interior records
+and on an invalid final record in a completed attempt. The reconciler checks
+each status against dispatch, exit, terminal and timeout evidence. A dispatched run
 with inconsistent evidence is preserved for diagnosis and fails
 reconciliation.
 

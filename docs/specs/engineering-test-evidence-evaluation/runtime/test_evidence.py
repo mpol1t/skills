@@ -174,11 +174,49 @@ class EvidenceTest(unittest.TestCase):
                 else:
                     self.assertFalse(tail_path.exists())
                 if actions_started:
-                    with self.assertRaisesRegex(AssertionError, "Missing session trace"):
+                    with self.assertRaisesRegex(AssertionError, "Missing interaction evidence"):
                         reconcile.counts(exported, outcome)
                 else:
                     self.assertEqual(0, reconcile.counts(exported, outcome)["recorded_sessions_including_root"])
                 self.assertEqual(metadata + suffix, session.read_bytes())
+
+    def test_interrupted_interaction_requires_more_than_telemetry(self):
+        attempt = self.root / "raw/sample/attempt-1"
+        attempt.mkdir(parents=True)
+        outcome = {
+            "status": "budget-exhausted", "timed_out": True, "launch": ["codex"],
+            "timeout_seconds": 1, "elapsed_seconds": 1.1, "collection_error": "not available",
+        }
+        (attempt / "outcome.json").write_text(json.dumps(outcome))
+        (attempt / "stderr.txt").touch()
+        command = {"type": "command_execution", "command": "git status", "status": "in_progress"}
+        (attempt / "events.jsonl").write_bytes(jsonl([*START, {"type": "item.started", "item": command}]))
+        telemetry = {"type": "event_msg", "payload": {"type": "token_count", "info": {"total_tokens": 42}}}
+        action = {"type": "response_item", "payload": {
+            "type": "custom_tool_call", "name": "exec", "input": "tools.exec_command({cmd: 'git status'})",
+        }}
+        torn = b'{"type":"response_item","payload":'
+        session = attempt / "session-1.jsonl"
+        for name, actions in (("telemetry-only", []), ("with-action", [action])):
+            with self.subTest(case=name):
+                raw = jsonl([telemetry, *actions]) + torn
+                session.write_bytes(raw)
+                destination = self.root / name
+                export_evidence.export(self.root / "raw", destination)
+                exported = destination / "sample/attempt-1"
+                with gzip.open(exported / "session-1.jsonl.gz", "rt") as stream:
+                    self.assertEqual(
+                        [row["payload"] for row in [telemetry, *actions]],
+                        [json.loads(line)["payload"] for line in stream],
+                    )
+                tail = json.loads((exported / "truncated_sessions.json").read_text())
+                self.assertEqual(len(actions) + 2, tail["session-1.jsonl"]["source_line"])
+                self.assertEqual(raw, session.read_bytes())
+                if actions:
+                    self.assertEqual(1, reconcile.counts(exported, outcome)["recorded_sessions_including_root"])
+                else:
+                    with self.assertRaisesRegex(AssertionError, "Missing interaction evidence"):
+                        reconcile.counts(exported, outcome)
 
     def test_collector_preserves_porcelain_columns_and_newline(self):
         repo = self.root / "repo"

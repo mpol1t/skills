@@ -6,20 +6,16 @@ from pathlib import Path
 import shutil
 import tempfile
 
-from trial_events import records
+from trial_events import INTERACTION_RECORD_TYPES, records
 
-ACTIONS = {
-    "agent_message", "function_call", "function_call_output", "custom_tool_call",
-    "custom_tool_call_output", "task_complete", "token_count", "error",
-    "web_search_call", "mcp_tool_call",
-}
+RETAINED_RECORD_TYPES = INTERACTION_RECORD_TYPES | {"task_complete", "token_count", "error"}
 
 
 def session_records(path, *, truncated=None):
     for line_number, record in records(path, truncated=truncated):
         kind = record.get("type")
         payload = record.get("payload", {})
-        if payload.get("type") in ACTIONS and kind in {"response_item", "event_msg"}:
+        if payload.get("type") in RETAINED_RECORD_TYPES and kind in {"response_item", "event_msg"}:
             payload.pop("internal_chat_message_metadata_passthrough", None)
             payload.pop("rate_limits", None)
             yield {

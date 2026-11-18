@@ -6,7 +6,7 @@ import json
 import math
 from pathlib import Path
 
-from trial_events import classify, records
+from trial_events import INTERACTION_RECORD_TYPES, classify, records
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "controller/trials.json"
@@ -72,6 +72,7 @@ def counts(attempt, outcome):
     )
     child_sessions = 0
     shell_calls = 0
+    has_interaction_evidence = False
     for path in sorted(attempt.glob("session-*.jsonl.gz")):
         child_sessions += 1
         previous_line = 0
@@ -83,6 +84,8 @@ def counts(attempt, outcome):
                 assert entry["type"] in {"response_item", "event_msg"}, path
                 previous_line = source_line
                 payload = entry["payload"]
+                if payload.get("type") in INTERACTION_RECORD_TYPES:
+                    has_interaction_evidence = True
                 if payload.get("type") == "custom_tool_call" and payload.get("name") == "exec":
                     shell_calls += payload.get("input", "").count("tools.exec_command(")
         assert previous_line, f"Empty session trace: {path}"
@@ -90,7 +93,7 @@ def counts(attempt, outcome):
         event["type"].startswith("item.") for event in events
     )
     if contacted_agent:
-        assert child_sessions > 0, f"Missing session trace: {attempt}"
+        assert has_interaction_evidence, f"Missing interaction evidence: {attempt}"
     return {
         "top_level_completed_commands": commands,
         "recorded_sessions_including_root": child_sessions,
