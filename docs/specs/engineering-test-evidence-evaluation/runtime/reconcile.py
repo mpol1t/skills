@@ -99,6 +99,8 @@ def counts(attempt, outcome):
 
 
 def reconcile(evidence, scores_file, group):
+    if not __debug__:
+        raise RuntimeError("Reconciliation requires Python assertions enabled")
     if group == "clean":
         clean = ROOT / "controller/clean-refactor"
         plan = read_json(clean / "trials.json")["trials"]

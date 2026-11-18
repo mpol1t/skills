@@ -61,6 +61,14 @@ class EvidenceTest(unittest.TestCase):
                     with self.assertRaises((AssertionError, ValueError)):
                         reconcile.trial_events(self.root, outcome)
 
+    def test_reconciliation_fails_closed_with_assertions_disabled(self):
+        result = subprocess.run(
+            [sys.executable, "-B", "-O", reconcile.__file__, str(self.root), str(self.root / "scores.json")],
+            capture_output=True, text=True,
+        )
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Reconciliation requires Python assertions enabled", result.stderr)
+
     def test_timeout_preserves_split_utf8_and_session_trace(self):
         self.root.joinpath("results").mkdir()
         script = self.root / "fake_cli.py"
