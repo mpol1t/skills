@@ -11,8 +11,11 @@ and describe the fresh Linux session configuration.
 
 The first attempts use the protocol at
 `01b4dcfb2fe437f95d0cb02abdcef49e9fdead87`. It names one independent
-session per trial, with two deliberately identical starting projects for
-the explicit and ordinary implementation prompts. The
+session per trial. Hazel and Aspen start from identical project contents.
+Hazel explicitly invokes `tdd` with a 240-second budget. Aspen invokes
+`implement` with a 360-second budget and also activates TDD. The traces
+establish those two workflow observations. The entry points and time budgets
+differ, so they cannot isolate the effect of changing only the prompt wording. The
 [trial plan](controller/trials.json),
 [fixture revisions](controller/fixture-revisions.json), and
 [controller-only rubric and key](controller/rubric.md) were frozen before
@@ -40,13 +43,16 @@ disposition or report. Workflow outcomes are scored separately.
   subtype, so the reported block cannot establish a false positive. The
   separate larch trial approved a valid refactor and requested zero redundant
   tests. Willow and larch both recorded zero redundant test requests or additions.
-- Intermittent failures correctly localized: **2/2 observed**, with
-  0 unobserved. Drift separately classified a runner failure correctly.
-  It retained the same-revision green replacement and withheld credit for it.
-- Initially failing required fixture checks: **6/29 observed
-  first checks**. Of initially failing required checks that were rerun,
-  **4/6 later passed**. Base controls, deliberate TDD red steps,
-  and unsuccessful attempts to start a check are separate from these counts.
+- Both intermittent-failure trials met their frozen scenario criteria.
+  **One cause was localized** when Ochre identified the leaking shared fixture.
+  **One cause was correctly left unresolved** when Birch found that the
+  recorded observations lacked the evidence needed to explain readiness.
+  Drift classified a runner failure correctly and retained the same-revision
+  green replacement while withholding credit for it.
+- **6 of 36 observed first executions** of documented verification checks
+  returned a nonzero exit. **4 of the 6 initially failing checks that were
+  rerun** later returned zero. Five scoped checks were unobserved.
+  See the [check inventory and counting rules](results/primary/check-metrics.md).
 - New tests and requests: **11 added methods** in the 26 primary traces, with
   no redundant additions. The traces contain **six** additional proposed
   cases, of which **one** was redundant. Final recommendations were observable
@@ -71,6 +77,9 @@ numbers, with unrelated account and harness metadata omitted. Repository
 paths in tool output refer to disposable checkouts. Commit and command
 evidence from trials that used a private temporary clone is in the traces.
 The per-trial score JSON carries more evidence references and counting detail.
+It preserves the original scope counts and intermittent scoring fields for
+audit. The corrected aggregate uses the separately linked check inventory
+and distinguishes the two intermittent outcomes above.
 For compressed traces, use the saved `source_line` to resolve original JSONL
 line references.
 

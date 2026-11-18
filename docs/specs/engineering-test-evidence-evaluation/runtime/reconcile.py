@@ -3,7 +3,10 @@ import argparse
 from collections import Counter
 import gzip
 import json
+import math
 from pathlib import Path
+
+from trial_events import classify, records
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "controller/trials.json"
@@ -14,22 +17,46 @@ def read_json(path):
     return json.loads(path.read_text())
 
 
-def records(path, interrupted):
-    lines = path.read_bytes().splitlines(keepends=True)
-    for index, line in enumerate(lines, start=1):
-        try:
-            yield json.loads(line)
-        except json.JSONDecodeError:
-            if interrupted and index == len(lines) and not line.endswith(b"\n"):
-                continue
-            raise
+def trial_events(attempt, outcome):
+    status = outcome["status"]
+    event_path = attempt / "events.jsonl"
+    if status == "setup-failed-before-dispatch":
+        assert outcome.get("error"), attempt
+        process_fields = {"launch", "exit_code", "timed_out", "timeout_seconds",
+                          "elapsed_seconds", "usage", "truncated_event_tail"}
+        assert process_fields.isdisjoint(outcome), attempt
+        assert not event_path.exists() or not event_path.read_bytes(), attempt
+        assert not list(attempt.glob("session-*.jsonl.gz")), attempt
+        assert not (attempt / "tree.json").exists(), attempt
+        return []
+
+    launch = outcome.get("launch")
+    assert isinstance(launch, list) and launch and all(isinstance(arg, str) for arg in launch), attempt
+    timeout = outcome["timeout_seconds"]
+    elapsed = outcome["elapsed_seconds"]
+    assert type(timeout) in {int, float} and math.isfinite(timeout) and timeout > 0, attempt
+    assert type(elapsed) in {int, float} and math.isfinite(elapsed) and elapsed >= 0, attempt
+    timed_out = outcome.get("timed_out", False)
+    assert type(timed_out) is bool, attempt
+    assert not timed_out or elapsed >= timeout, attempt
+
+    tail = {}
+    interrupted = timed_out or outcome.get("exit_code") != 0
+    events = [event for _, event in records(event_path, truncated=tail if interrupted else None)]
+    assert tail == outcome.get("truncated_event_tail", {}), attempt
+    expected = classify(events, exit_code=outcome.get("exit_code"), timed_out=timed_out)
+    assert status == expected, f"{attempt}: recorded {status}, evidence implies {expected}"
+    if status == "completed":
+        assert events[-1].get("usage") == outcome.get("usage"), attempt
+    else:
+        assert "usage" not in outcome, attempt
+    return events
 
 
 def counts(attempt, outcome):
+    events = trial_events(attempt, outcome)
     status = outcome["status"]
-    if status == "setup-failed-before-dispatch":
-        events = []
-    else:
+    if status != "setup-failed-before-dispatch":
         assert (attempt / "stderr.txt").is_file(), attempt
         tree = attempt / "tree.json"
         if tree.is_file():
@@ -39,13 +66,6 @@ def counts(attempt, outcome):
                        for row in commands), tree
         else:
             assert outcome.get("collection_error"), tree
-        events = list(records(attempt / "events.jsonl", bool(outcome.get("timed_out"))))
-    completed = [event for event in events if event["type"] == "turn.completed"]
-    if status == "completed":
-        assert len(completed) == 1 and completed[0] == events[-1], attempt
-        assert outcome["exit_code"] == 0 and completed[0].get("usage") == outcome.get("usage"), attempt
-    if status == "budget-exhausted":
-        assert outcome["timed_out"] and not completed, attempt
     commands = sum(
         event["type"] == "item.completed"
         and event.get("item", {}).get("type") == "command_execution" for event in events
@@ -90,6 +110,7 @@ def reconcile(evidence, scores_file, group):
         expected = read_json(ROOT / "runtime/git_recovery.json")["trials"]
         plan = [trial for trial in plan if trial["id"] in expected]
         assert len(plan) == len(expected), "Missing Git recovery entries"
+    timeouts = read_json(ROOT / "runtime/runtime.json")["timeouts_seconds"]
     scores = read_json(scores_file)
     ids = [entry["id"] for entry in plan]
     assert len(ids) == len(set(ids)), "Duplicate planned trial"
@@ -114,7 +135,7 @@ def reconcile(evidence, scores_file, group):
             if outcome["status"] != "setup-failed-before-dispatch":
                 assert outcome["fixture"] == fixtures[trial["fixture"]], path
                 assert outcome["starting_head"] == fixtures[trial["fixture"]]["candidate"], path
-                assert outcome["elapsed_seconds"] >= 0, path
+                assert outcome["timeout_seconds"] == timeouts.get(trial["skill"], timeouts["default"]), path
                 assert "Pass:" in (path / "isolation.txt").read_text(), path
                 prompt = (path / "prompt.txt").read_text()
                 assert prompt.endswith(trial["prompt"] + "\n"), path

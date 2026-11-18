@@ -15,6 +15,8 @@ import tarfile
 import tempfile
 import time
 
+from trial_events import classify, records
+
 HERE = Path(__file__).resolve().parent
 PROTOCOL = json.loads((HERE / "runtime.json").read_text())
 ROOT = HERE.parent
@@ -29,14 +31,14 @@ def write_json(path, data):
 
 
 def capture(args, **kwargs):
-    return subprocess.check_output(args, text=True, **kwargs).strip()
+    return subprocess.check_output(args, text=True, **kwargs)
 
 
 def git(repo, *args):
-    return capture(["/usr/bin/git", "-C", str(repo), *args])
+    return capture(["/usr/bin/git", "-C", str(repo), *args]).strip()
 
 
-def build_trial(job, repo, package, auth, revision, source):
+def build_trial(job, repo, package, auth, revision, source, *, writable_fixture_git=False):
     home = job / "home"
     installed = home / ".agents/skills"
     installed.mkdir(parents=True)
@@ -70,6 +72,8 @@ def build_trial(job, repo, package, auth, revision, source):
 
     allowed_reads = (installed, config / "tmp/arg0-linux", (package / CODEX_BINARY).parent)
     rules = "\n".join(f"{json.dumps(str(path))} = \"read\"" for path in allowed_reads)
+    if writable_fixture_git:
+        rules += f'\n{json.dumps(str(repo / ".git"))} = "write"'
     options = f"""
 default_permissions = "trial"
 approval_policy = "never"
@@ -188,70 +192,76 @@ def run_trial(trial, args, runtime_root):
             record["starting_head"] = starting
             launcher, env, installed = build_trial(
                 job, repo, args.package, args.auth, args.revision, args.source,
+                writable_fixture_git=args.writable_fixture_git,
             )
             verify(launcher, env, repo, job, installed, args.protected, result / "isolation.txt")
             skill_path = installed / trial["skill"] / "SKILL.md"
             prompt = f"Use ${trial['skill']} ({skill_path}).\n\n{trial['prompt']}"
             (result / "prompt.txt").write_text(prompt + "\n")
             command = launcher + ["exec", "--json", "-C", str(repo), "-"]
-            record["launch"] = command
-            record["timeout_seconds"] = PROTOCOL["timeouts_seconds"].get(
+            budget = PROTOCOL["timeouts_seconds"].get(
                 trial["skill"], PROTOCOL["timeouts_seconds"]["default"]
             )
             started = time.monotonic()
-            with (result / "events.jsonl").open("wb") as output, (result / "stderr.txt").open("wb") as error:
-                with subprocess.Popen(
-                    command, cwd=repo, env=env, stdin=subprocess.PIPE,
-                    stdout=output, stderr=error, start_new_session=True,
-                ) as process:
-                    try:
-                        process.communicate(prompt.encode(), timeout=record["timeout_seconds"])
-                        record["exit_code"] = process.returncode
-                    except subprocess.TimeoutExpired:
-                        os.killpg(process.pid, signal.SIGKILL)
-                        process.wait()
-                        record["timed_out"] = True
-            record["elapsed_seconds"] = round(time.monotonic() - started, 3)
-            lines = (result / "events.jsonl").read_text().splitlines()
-            events = []
-            for line in lines:
-                try:
-                    events.append(json.loads(line))
-                except json.JSONDecodeError:
-                    continue
-            terminal = [event for event in events if event.get("type") == "turn.completed"]
-            interacted = any(event.get("type", "").startswith("item.") for event in events)
-            if terminal:
-                record["usage"] = terminal[-1].get("usage")
-            record["status"] = (
-                "completed" if terminal and record.get("exit_code") == 0 else
-                "budget-exhausted" if record.get("timed_out") else
-                "interrupted-after-interaction" if interacted else "runtime-failed-before-interaction"
+            try:
+                with (result / "events.jsonl").open("wb") as output, (result / "stderr.txt").open("wb") as error:
+                    with subprocess.Popen(
+                        command, cwd=repo, env=env, stdin=subprocess.PIPE,
+                        stdout=output, stderr=error, start_new_session=True,
+                    ) as process:
+                        record.update(launch=command, timeout_seconds=budget)
+                        try:
+                            process.communicate(prompt.encode(), timeout=budget)
+                            record["exit_code"] = process.returncode
+                        except subprocess.TimeoutExpired:
+                            record["timed_out"] = True
+                            os.killpg(process.pid, signal.SIGKILL)
+                            process.wait()
+            finally:
+                if "launch" in record:
+                    record["elapsed_seconds"] = round(time.monotonic() - started, 3)
+                    sessions = job / "config/sessions"
+                    for index, logfile in enumerate(sorted(sessions.rglob("*.jsonl")), start=1):
+                        shutil.copyfile(logfile, result / f"session-{index}.jsonl")
+
+            tail = {}
+            interrupted = record.get("timed_out") or record.get("exit_code") != 0
+            events = [event for _, event in records(
+                result / "events.jsonl", truncated=tail if interrupted else None,
+            )]
+            if tail:
+                record["truncated_event_tail"] = tail
+            record["status"] = classify(
+                events, exit_code=record.get("exit_code"), timed_out=record.get("timed_out", False),
             )
-            sessions = job / "config/sessions"
-            for index, logfile in enumerate(sorted(sessions.rglob("*.jsonl")), start=1):
-                shutil.copyfile(logfile, result / f"session-{index}.jsonl")
+            if record["status"] == "completed":
+                record["usage"] = events[-1].get("usage")
             try:
                 save_tree(repo, starting, result / "tree.json", launcher, env)
             except (subprocess.SubprocessError, OSError) as error:
                 record["collection_error"] = str(error)
         except Exception as error:
-            record.setdefault("status", "setup-failed-before-dispatch")
+            fallback = "invalid-evidence-after-dispatch" if "launch" in record else "setup-failed-before-dispatch"
+            record.setdefault("status", fallback)
             record["error"] = str(error)
         finally:
-            (job / "config/auth.json").unlink(missing_ok=True)
-            for subdirectory in (job / "home/.agents/skills").rglob("*"):
-                if subdirectory.is_dir():
-                    subdirectory.chmod(0o755)
-            shutil.rmtree(job)
-            record["total_seconds"] = round(time.monotonic() - began, 3)
-            write_json(result / "outcome.json", record)
+            try:
+                (job / "config/auth.json").unlink(missing_ok=True)
+                for subdirectory in (job / "home/.agents/skills").rglob("*"):
+                    if subdirectory.is_dir():
+                        subdirectory.chmod(0o755)
+                shutil.rmtree(job)
+            except OSError as error:
+                record["cleanup_error"] = str(error)
+            finally:
+                record["total_seconds"] = round(time.monotonic() - began, 3)
+                write_json(result / "outcome.json", record)
         print(f"{trial_id} {attempt} {record['status']}", flush=True)
         if record["status"] != "runtime-failed-before-interaction":
             break
 
 
-def main():
+def main(*, trial_ids=None, writable_fixture_git=False):
     parser = argparse.ArgumentParser()
     parser.add_argument("results", type=Path)
     parser.add_argument("--package", type=Path, required=True)
@@ -260,6 +270,7 @@ def main():
     parser.add_argument("--revision", default=PROTOCOL["skill_revision"])
     parser.add_argument("--protected", type=Path, action="append", default=[])
     args = parser.parse_args()
+    args.writable_fixture_git = writable_fixture_git
     args.results = args.results.resolve()
     args.package = args.package.resolve()
     args.auth = args.auth.resolve()
@@ -272,10 +283,15 @@ def main():
         Path.home() / ".agents/skills/tdd/SKILL.md", Path.home() / ".claude/skills/tdd/SKILL.md",
     ]
     args.fixtures = json.loads((ROOT / "controller/fixture-revisions.json").read_text())
-    args.results.mkdir()
     plan = json.loads((ROOT / "controller/trials.json").read_text())["trials"]
     assert len(plan) == len({item["id"] for item in plan})
     assert all(re.fullmatch("[a-z0-9-]+", item["id"]) for item in plan)
+    if trial_ids is not None:
+        selected = set(trial_ids)
+        plan = [item for item in plan if item["id"] in selected]
+        if len(plan) != len(trial_ids):
+            parser.error("Expected unique known trial IDs")
+    args.results.mkdir()
     with tempfile.TemporaryDirectory(prefix="evaluation-", dir=Path.home() / ".local/share") as root:
         with ThreadPoolExecutor(max_workers=PROTOCOL["max_parallel_trials"]) as pool:
             list(pool.map(lambda item: run_trial(item, args, Path(root)), plan))

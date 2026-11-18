@@ -67,3 +67,26 @@ same recovery settings during any later candidate comparison.
 
 Pass previous results using additional `--protected` file probes. Paths
 remain outside the read allowlist independently of the probes.
+
+## Interrupted replay evidence
+
+The controller preserves the original CLI event bytes, including an
+unterminated record split inside a UTF-8 character. An interrupted attempt
+may report that final record's source line, byte count and SHA-256 digest.
+The minimized session export likewise records partial session tails in
+`truncated_sessions.json`. The private raw session files retain the bytes.
+An invalid interior record fails the export, and an invalid final record
+fails export for a completed attempt. The reconciler checks each status
+against dispatch, exit, terminal and timeout evidence. A dispatched run
+with inconsistent evidence is preserved for diagnosis and fails
+reconciliation.
+
+Run the model-free regression checks from this directory with
+`python3 -B -m unittest -v test_evidence`.
+
+Git collection preserves the status columns and line endings in new
+captures. The original Hazel tree export lost the first status column.
+The contemporaneous `item_10` output shows an unstaged modification for
+both files. The retained tree export and original command output document
+the discrepancy. [Tree export](../results/primary/hazel/attempt-1/tree.json)
+[Command events](../results/primary/hazel/attempt-1/events.jsonl)
