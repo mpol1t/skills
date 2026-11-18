@@ -150,18 +150,35 @@ class EvidenceTest(unittest.TestCase):
             "timeout_seconds": 1, "elapsed_seconds": 1.1, "collection_error": "not available",
         }
         (attempt / "outcome.json").write_text(json.dumps(outcome))
-        (attempt / "events.jsonl").write_bytes(jsonl(START))
         (attempt / "stderr.txt").touch()
-        (attempt / "session-1.jsonl").write_bytes(
-            jsonl([{"type": "session_meta", "payload": {}}]) + b'{"type":"event_msg"',
-        )
-        destination = self.root / "exported"
-        export_evidence.export(self.root / "raw", destination)
-        exported = destination / "sample/attempt-1"
-        self.assertFalse((exported / "session-1.jsonl.gz").exists())
-        tail = json.loads((exported / "truncated_sessions.json").read_text())
-        self.assertEqual(2, tail["session-1.jsonl"]["source_line"])
-        self.assertEqual(0, reconcile.counts(exported, outcome)["recorded_sessions_including_root"])
+        session = attempt / "session-1.jsonl"
+        metadata = jsonl([{"type": "session_meta", "payload": {}}])
+        for name, suffix, actions_started in (
+            ("metadata-only", b"", False),
+            ("partial-action", b'{"type":"event_msg"', False),
+            ("missing-action-evidence", b"", True),
+        ):
+            with self.subTest(case=name):
+                events = [*START, {"type": "item.started"}] if actions_started else START
+                (attempt / "events.jsonl").write_bytes(jsonl(events))
+                session.write_bytes(metadata + suffix)
+                destination = self.root / name
+                export_evidence.export(self.root / "raw", destination)
+                exported = destination / "sample/attempt-1"
+
+                self.assertFalse((exported / "session-1.jsonl.gz").exists())
+                tail_path = exported / "truncated_sessions.json"
+                if suffix:
+                    tail = json.loads(tail_path.read_text())
+                    self.assertEqual(2, tail["session-1.jsonl"]["source_line"])
+                else:
+                    self.assertFalse(tail_path.exists())
+                if actions_started:
+                    with self.assertRaisesRegex(AssertionError, "Missing session trace"):
+                        reconcile.counts(exported, outcome)
+                else:
+                    self.assertEqual(0, reconcile.counts(exported, outcome)["recorded_sessions_including_root"])
+                self.assertEqual(metadata + suffix, session.read_bytes())
 
     def test_collector_preserves_porcelain_columns_and_newline(self):
         repo = self.root / "repo"
