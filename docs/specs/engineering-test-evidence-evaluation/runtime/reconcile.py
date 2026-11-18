@@ -54,11 +54,18 @@ def counts(attempt, outcome):
     shell_calls = 0
     for path in sorted(attempt.glob("session-*.jsonl.gz")):
         child_sessions += 1
+        previous_line = 0
         with gzip.open(path, mode="rt") as file:
             for line in file:
-                payload = json.loads(line)["payload"]
+                entry = json.loads(line)
+                source_line = entry["source_line"]
+                assert isinstance(source_line, int) and source_line > previous_line, path
+                assert entry["type"] in {"response_item", "event_msg"}, path
+                previous_line = source_line
+                payload = entry["payload"]
                 if payload.get("type") == "custom_tool_call" and payload.get("name") == "exec":
                     shell_calls += payload.get("input", "").count("tools.exec_command(")
+        assert previous_line, f"Empty session trace: {path}"
     contacted_agent = status == "completed" or any(
         event["type"].startswith("item.") for event in events
     )
