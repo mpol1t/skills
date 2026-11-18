@@ -1,0 +1,10 @@
+{
+  "trials": [
+    {
+      "id": "larch",
+      "fixture": "larch",
+      "skill": "code-review",
+      "prompt": "Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it."
+    }
+  ]
+}
