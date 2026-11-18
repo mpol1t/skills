@@ -1,0 +1,7 @@
+{
+  "primary_protocol": "01b4dcfb2fe437f95d0cb02abdcef49e9fdead87",
+  "trials": ["acorn", "hazel", "aspen", "fern"],
+  "reason": "Codex default protection of fixture .git prevents the intended local checkpoint and worktree commands. The primary trial set remains unchanged.",
+  "permission_delta": "Add a write rule for each disposable fixture's own .git directory.",
+  "attempt_policy": "Use the primary runtime's existing limits and retry handling. Report these runs separately from primary attempts."
+}
