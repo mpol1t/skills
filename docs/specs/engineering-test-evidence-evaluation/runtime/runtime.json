@@ -1,0 +1,25 @@
+{
+  "skill_revision": "75f0fb80d731f53716d74904d0eb31d4a3833777",
+  "codex_version": "0.170.0",
+  "codex_sha256": "880819aab735adcf16f36cd628940b9f1e652a36c01d10a5d32f83cc84902971",
+  "model": "gpt-6.2-sol",
+  "reasoning_effort": "medium",
+  "max_parallel_trials": 5,
+  "maximum_attempts": 2,
+  "timeouts_seconds": {
+    "default": 240,
+    "implement": 360,
+    "implement-spec": 540
+  },
+  "skills": [
+    "ask-matt",
+    "code-review",
+    "codebase-design",
+    "diagnosing-bugs",
+    "implement",
+    "implement-spec",
+    "issue-brief",
+    "setup-matt-pocock-skills",
+    "tdd"
+  ]
+}
