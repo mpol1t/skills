@@ -1,0 +1,32 @@
+{
+  "trial": "pearl",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "15629cf8ed3e1349310cfa2bee997169cb42ae18",
+    "candidate": "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+    "working_tree_sha256": "c4ca39967643935c3ec3036bc07d896b0075116d9beaf620f61a94b46f5491e6"
+  },
+  "starting_head": "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/pearl-q3rlcel4/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 95.231,
+  "usage": {
+    "input_tokens": 293519,
+    "cached_input_tokens": 264320,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3313,
+    "reasoning_output_tokens": 449
+  },
+  "status": "completed",
+  "total_seconds": 95.686
+}

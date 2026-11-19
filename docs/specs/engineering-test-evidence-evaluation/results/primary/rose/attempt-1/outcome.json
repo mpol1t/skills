@@ -1,0 +1,32 @@
+{
+  "trial": "rose",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "855df961aca55bca196336d2ba54bdaab7d8573d",
+    "candidate": "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+    "working_tree_sha256": "a5287693d28350d10b6dceaad178a8b0d9dc95927b846d0f1c516f9837b05691"
+  },
+  "starting_head": "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/rose-eugrbbjv/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 94.063,
+  "usage": {
+    "input_tokens": 238979,
+    "cached_input_tokens": 214784,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2927,
+    "reasoning_output_tokens": 144
+  },
+  "status": "completed",
+  "total_seconds": 94.486
+}

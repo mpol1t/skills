@@ -1,0 +1,32 @@
+{
+  "trial": "lilac",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "ad8074e2b90d8da68278fd44abde6308233dc98f",
+    "candidate": "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+    "working_tree_sha256": "3f375f3b75d096118eda047d77b128b04905351d5ee83560a2b69817e44a5b87"
+  },
+  "starting_head": "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/lilac-qw7q2_kj/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 90.245,
+  "usage": {
+    "input_tokens": 235380,
+    "cached_input_tokens": 221312,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2653,
+    "reasoning_output_tokens": 82
+  },
+  "status": "completed",
+  "total_seconds": 90.651
+}

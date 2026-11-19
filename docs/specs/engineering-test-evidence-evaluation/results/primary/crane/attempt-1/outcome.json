@@ -1,0 +1,32 @@
+{
+  "trial": "crane",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "de0929f8b71b979f186d9bbd726ff3db2c19e46e",
+    "candidate": "316d047fbfd332b054e31b0dc363140ee264b0f8",
+    "working_tree_sha256": "3f760cd7b417d77c46826c779ce4bee87dbe2dd085ad2ef8474c66dce23a4372"
+  },
+  "starting_head": "316d047fbfd332b054e31b0dc363140ee264b0f8",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/crane-wyo4zyyj/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 108.842,
+  "usage": {
+    "input_tokens": 291542,
+    "cached_input_tokens": 256640,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3630,
+    "reasoning_output_tokens": 229
+  },
+  "status": "completed",
+  "total_seconds": 109.264
+}

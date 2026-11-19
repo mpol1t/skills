@@ -1,0 +1,3 @@
+Use $code-review (/home/user/.local/share/evaluation-de3y0978/jasper-_mona3ri/home/.agents/skills/code-review/SKILL.md).
+
+Review the proposed change from review-base to starting-point against the project's contract. Give a disposition and cite the evidence behind it.

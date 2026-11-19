@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/agate-u_9ue5tb/repo\nHEAD d459cfa44a3b205b32cb39d9ef5387c3b942041c\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "d459cfa (HEAD -> main, tag: starting-point) Proposed change\ne4c1f44 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d459cfa44a3b205b32cb39d9ef5387c3b942041c"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

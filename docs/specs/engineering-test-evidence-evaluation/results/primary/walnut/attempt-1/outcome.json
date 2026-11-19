@@ -1,0 +1,32 @@
+{
+  "trial": "walnut",
+  "attempt": 1,
+  "skill": "setup-matt-pocock-skills",
+  "fixture": {
+    "base": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+    "candidate": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+    "working_tree_sha256": "9ff09d70f49ee4f46df609c1c2ca523781daf6d06d195d1f912e46c93071394a"
+  },
+  "starting_head": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/walnut-g1ojh886/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 44.008,
+  "usage": {
+    "input_tokens": 145201,
+    "cached_input_tokens": 117888,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1451,
+    "reasoning_output_tokens": 359
+  },
+  "status": "completed",
+  "total_seconds": 44.486
+}

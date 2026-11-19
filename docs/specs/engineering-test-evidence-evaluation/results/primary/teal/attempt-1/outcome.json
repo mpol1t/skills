@@ -1,0 +1,32 @@
+{
+  "trial": "teal",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "befd5197b4def1fea4478bae1450b08d36bfd559",
+    "candidate": "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+    "working_tree_sha256": "5fca8a284ff2a38ef05c9a0172d413ffecbf625beaddcfc3b5a95ab4fd575b4f"
+  },
+  "starting_head": "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/teal-x_g06f9g/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 90.33,
+  "usage": {
+    "input_tokens": 246959,
+    "cached_input_tokens": 228864,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2914,
+    "reasoning_output_tokens": 242
+  },
+  "status": "completed",
+  "total_seconds": 90.75
+}

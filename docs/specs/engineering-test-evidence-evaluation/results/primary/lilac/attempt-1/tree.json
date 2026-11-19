@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/lilac-qw7q2_kj/repo\nHEAD cdbd102c4ad91b664cd36df1212193f20fd27e83\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "cdbd102 (HEAD -> main, tag: starting-point) Proposed change\nad8074e (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "cdbd102c4ad91b664cd36df1212193f20fd27e83"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

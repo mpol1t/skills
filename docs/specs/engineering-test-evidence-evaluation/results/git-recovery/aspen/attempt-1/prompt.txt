@@ -1,0 +1,3 @@
+Use $implement (/home/user/.local/share/evaluation-4khyrc0i/aspen-335_qahn/home/.agents/skills/implement/SKILL.md).
+
+Implement the project request in CONTRACT.md.

@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/jade-pdvir5le/repo\nHEAD 1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "1ed40ec (HEAD -> main, tag: starting-point) Proposed change\n6ffbd2f (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

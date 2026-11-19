@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/teal-x_g06f9g/repo\nHEAD fe282906df635f2a95628c2ac9db7d6c9d80ed34\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "fe28290 (HEAD -> main, tag: starting-point) Proposed change\nbefd519 (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "fe282906df635f2a95628c2ac9db7d6c9d80ed34"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

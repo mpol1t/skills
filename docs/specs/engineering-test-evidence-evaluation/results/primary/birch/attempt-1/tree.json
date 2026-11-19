@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/birch-tl81qb91/repo\nHEAD b5fa6c218c937fb9f4e6f1303489f7e1d555c516\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "b5fa6c2 (HEAD -> main, tag: starting-point) Proposed change\n13c501c (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "b5fa6c218c937fb9f4e6f1303489f7e1d555c516"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "trial": "willow",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "0ee0216b20fa6dd8104a007280868c7e78774340",
+    "candidate": "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+    "working_tree_sha256": "92a5f7f2c1415acf627f7bd11c589d575ca699bdaa18d3b05c2bbb33a744505a"
+  },
+  "starting_head": "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/willow-pymk063y/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 105.413,
+  "usage": {
+    "input_tokens": 316331,
+    "cached_input_tokens": 299776,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3334,
+    "reasoning_output_tokens": 430
+  },
+  "status": "completed",
+  "total_seconds": 105.808
+}

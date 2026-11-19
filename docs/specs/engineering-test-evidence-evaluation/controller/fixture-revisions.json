@@ -1,0 +1,132 @@
+{
+  "acorn": {
+    "base": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+    "candidate": "bcff8b7ebcf00ec1e21a75996a0eb21492652acd",
+    "working_tree_sha256": "9101838547af5d6a9de39c0f618a0a7a1b278cf5eb4c5360edafb299914fe58e"
+  },
+  "agate": {
+    "base": "e4c1f449278bdcd14f525230fc1b4715b9d91546",
+    "candidate": "d459cfa44a3b205b32cb39d9ef5387c3b942041c",
+    "working_tree_sha256": "01022ee4c359cea9b7dd29364c88891516fe70be495b877421033289418b861d"
+  },
+  "aspen": {
+    "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+    "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+    "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+  },
+  "birch": {
+    "base": "13c501ce159d6072b34bca27b7f61c6faf7d129a",
+    "candidate": "b5fa6c218c937fb9f4e6f1303489f7e1d555c516",
+    "working_tree_sha256": "b705dad3b3541ed1cf9a1d5a50c9a65add6810989848a61c702f355718b51f8a"
+  },
+  "clover": {
+    "base": "2fca2bdae231825d227688b8f6f3c0f1b2a87952",
+    "candidate": "da135099ac5c86de9f1270f9cf2322279a5a904d",
+    "working_tree_sha256": "ad2b5123509c94db31bebf9b1193a58d0f34967ded3a08a19f9dad29ccf3c4aa"
+  },
+  "crane": {
+    "base": "de0929f8b71b979f186d9bbd726ff3db2c19e46e",
+    "candidate": "316d047fbfd332b054e31b0dc363140ee264b0f8",
+    "working_tree_sha256": "3f760cd7b417d77c46826c779ce4bee87dbe2dd085ad2ef8474c66dce23a4372"
+  },
+  "drift": {
+    "base": "921c4aca2b904e50b408b1a4cab17e216b73a623",
+    "candidate": "cbdb26738be35080bd578c126205999cea3ddc20",
+    "working_tree_sha256": "c5bbc0a282d9b0685b85b62156d49b7b447951b262ac51be18806b4393e1be29"
+  },
+  "elm": {
+    "base": "4fb8dad8963da0e368ecd940402fcb24d9e6887b",
+    "candidate": "585de1e10268915df80d16f17921f143cda7af27",
+    "working_tree_sha256": "14e2e62ed795ea6d09fe32f24c7a6ed9e0aefeb24db274c8a52f74ea3514bc4f"
+  },
+  "fern": {
+    "base": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+    "candidate": "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+    "working_tree_sha256": "206ed69d3ffce8559fe488ee31a6438565981233586e827e9ee096b72f438797"
+  },
+  "hazel": {
+    "base": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+    "candidate": "d2727955c7dd3ec7c12baef608783f483b8949dc",
+    "working_tree_sha256": "8f4db940774d34e1411b75810bc7f956da01491bafa89cc0907652d5fd193849"
+  },
+  "jade": {
+    "base": "6ffbd2fb7cb1d5e1ee704ca9f41f5905c67c1940",
+    "candidate": "1ed40ec8e74fd5cd5a7c1ce1219f183029c081f7",
+    "working_tree_sha256": "2189388959d3dc73b20f1b9fa3461b02c6d4198807f12cec487eace0436bd5a1"
+  },
+  "jasper": {
+    "base": "71ad84d248f00406f9bfa11c9a59c7bc98fbea66",
+    "candidate": "bcb26dc1cbd8bd149a545a5e1f49fe09f1466a0c",
+    "working_tree_sha256": "ff28e0ebb6d866a9f3ae4f0388cf4878aca78ad8e6c05cd3a3cd94edb4462636"
+  },
+  "lilac": {
+    "base": "ad8074e2b90d8da68278fd44abde6308233dc98f",
+    "candidate": "cdbd102c4ad91b664cd36df1212193f20fd27e83",
+    "working_tree_sha256": "3f375f3b75d096118eda047d77b128b04905351d5ee83560a2b69817e44a5b87"
+  },
+  "maple": {
+    "base": "d9ef023e44ccc55d9905dc26ad5dacbd79f09150",
+    "candidate": "db569de6965fb9da542aeb16abffec167548b761",
+    "working_tree_sha256": "9e10d8268f43f7daa8f56f5ba770dddb9839c54acf8e9720dc9034733057114e"
+  },
+  "moss": {
+    "base": "8264511d81429abf994ca0f41687219f236a2c5e",
+    "candidate": "8689aaf9a0aeb2524934d503b77c1ff98c0bab8b",
+    "working_tree_sha256": "92a10000e5ea5db5bfce2d53e93d491a26bf35572ebb31b111700b5ce7d1fb8e"
+  },
+  "ochre": {
+    "base": "8c4c78492208df36920fa947c881af4611bedd40",
+    "candidate": "d02a07b6fb499e1574324fa769b68889d0d65a67",
+    "working_tree_sha256": "ab87a8d4cfef6527a56dea09a036107e632307eb925e92a0a579351596ef714d"
+  },
+  "pearl": {
+    "base": "15629cf8ed3e1349310cfa2bee997169cb42ae18",
+    "candidate": "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+    "working_tree_sha256": "c4ca39967643935c3ec3036bc07d896b0075116d9beaf620f61a94b46f5491e6"
+  },
+  "plum": {
+    "base": "27cb8276b07bc1db2153a2f401675403f04cbed8",
+    "candidate": "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+    "working_tree_sha256": "81c7d06839359f3d71bb76d7cbd7d863ebddb15815dcce03e3cffee5696d72d9"
+  },
+  "quartz": {
+    "base": "915b177d61759413bb1a1fd575a73611238e0cd6",
+    "candidate": "3e007bee176c6bb8b9df6bcead313dbe81a7d85b",
+    "working_tree_sha256": "0c6af147c90a8c60496c9c245cf483482cbf59d3a9e033f54a4ccc8cf8fb1565"
+  },
+  "reed": {
+    "base": "43b0ae7c7f75c2cb71e1d2c42dac09c6077fa709",
+    "candidate": "838efcb4c62924775c9b12b936aff6acaa0c7086",
+    "working_tree_sha256": "8e5027304b5566d6dc891a1e63cc1fa83899c5000342763335745891eae0f5ae"
+  },
+  "rose": {
+    "base": "855df961aca55bca196336d2ba54bdaab7d8573d",
+    "candidate": "fe97f58fa07d9b8cbfc26b67aba432a09dcfdfe4",
+    "working_tree_sha256": "a5287693d28350d10b6dceaad178a8b0d9dc95927b846d0f1c516f9837b05691"
+  },
+  "saffron": {
+    "base": "63faaf9676ac037a5770bcb16dcf02b4e203aa45",
+    "candidate": "eb3735b0ce1775ed0b3a51c95ac9a1e4609e79c5",
+    "working_tree_sha256": "0a7c3b6ba80c5532a4b55c100f7e8ed4e12aeb82183b549c9fb8a56676b387ca"
+  },
+  "teal": {
+    "base": "befd5197b4def1fea4478bae1450b08d36bfd559",
+    "candidate": "fe282906df635f2a95628c2ac9db7d6c9d80ed34",
+    "working_tree_sha256": "5fca8a284ff2a38ef05c9a0172d413ffecbf625beaddcfc3b5a95ab4fd575b4f"
+  },
+  "topaz": {
+    "base": "0eb2bc074883569d948f428cb57bf5e12da7e940",
+    "candidate": "b819f4440e421d79eb79ec5afa900669446fb244",
+    "working_tree_sha256": "3ea8a1cda865e173c7abf303f13593ab2b0f527c0c00a03789af6a56d0631b61"
+  },
+  "walnut": {
+    "base": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+    "candidate": "899a875b4b0b5fe950c3ca8e6a19f565ec7ee156",
+    "working_tree_sha256": "9ff09d70f49ee4f46df609c1c2ca523781daf6d06d195d1f912e46c93071394a"
+  },
+  "willow": {
+    "base": "0ee0216b20fa6dd8104a007280868c7e78774340",
+    "candidate": "483f02ad131c9c69646ae3536f59eb27d1ee0822",
+    "working_tree_sha256": "92a5f7f2c1415acf627f7bd11c589d575ca699bdaa18d3b05c2bbb33a744505a"
+  }
+}

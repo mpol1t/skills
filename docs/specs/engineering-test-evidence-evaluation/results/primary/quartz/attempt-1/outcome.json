@@ -1,0 +1,32 @@
+{
+  "trial": "quartz",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "915b177d61759413bb1a1fd575a73611238e0cd6",
+    "candidate": "3e007bee176c6bb8b9df6bcead313dbe81a7d85b",
+    "working_tree_sha256": "0c6af147c90a8c60496c9c245cf483482cbf59d3a9e033f54a4ccc8cf8fb1565"
+  },
+  "starting_head": "3e007bee176c6bb8b9df6bcead313dbe81a7d85b",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/quartz-cp0yd_06/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 81.799,
+  "usage": {
+    "input_tokens": 236756,
+    "cached_input_tokens": 222080,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2399,
+    "reasoning_output_tokens": 110
+  },
+  "status": "completed",
+  "total_seconds": 82.321
+}

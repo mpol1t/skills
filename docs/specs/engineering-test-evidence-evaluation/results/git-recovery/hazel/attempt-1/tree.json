@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": "M app.py\n M test_app.py"
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-4khyrc0i/hazel-uc6jygrd/repo\nHEAD d2727955c7dd3ec7c12baef608783f483b8949dc\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "d272795 (HEAD -> main, tag: starting-point, tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d2727955c7dd3ec7c12baef608783f483b8949dc"
+    ],
+    "output": "diff --git a/app.py b/app.py\nindex 508b662..e9f70f6 100644\n--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,6 @@\n def label(value: int) -> str:\n     return f\"bin:{value:03d}\"\n+\n+\n+def shelf_label(identifier: int) -> str:\n+    return f\"shelf:{identifier:02d}\"\ndiff --git a/test_app.py b/test_app.py\nindex 4bda683..cc65c7b 100644\n--- a/test_app.py\n+++ b/test_app.py\n@@ -6,3 +6,9 @@ import app\n class AppTests(unittest.TestCase):\n     def test_label(self):\n         self.assertEqual(app.label(4), \"bin:004\")\n+\n+    def test_shelf_label_pads_single_digit_id(self):\n+        self.assertEqual(app.shelf_label(4), \"shelf:04\")\n+\n+    def test_shelf_label_omits_padding_at_ten(self):\n+        self.assertEqual(app.shelf_label(10), \"shelf:10\")"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "d2727955c7dd3ec7c12baef608783f483b8949dc",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

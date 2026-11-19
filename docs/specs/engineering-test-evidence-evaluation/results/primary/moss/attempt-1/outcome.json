@@ -1,0 +1,32 @@
+{
+  "trial": "moss",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "8264511d81429abf994ca0f41687219f236a2c5e",
+    "candidate": "8689aaf9a0aeb2524934d503b77c1ff98c0bab8b",
+    "working_tree_sha256": "92a10000e5ea5db5bfce2d53e93d491a26bf35572ebb31b111700b5ce7d1fb8e"
+  },
+  "starting_head": "8689aaf9a0aeb2524934d503b77c1ff98c0bab8b",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/moss-imoa4b_5/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 88.889,
+  "usage": {
+    "input_tokens": 242913,
+    "cached_input_tokens": 230912,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2530,
+    "reasoning_output_tokens": 154
+  },
+  "status": "completed",
+  "total_seconds": 89.456
+}

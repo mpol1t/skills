@@ -1,0 +1,32 @@
+{
+  "trial": "drift",
+  "attempt": 1,
+  "skill": "diagnosing-bugs",
+  "fixture": {
+    "base": "921c4aca2b904e50b408b1a4cab17e216b73a623",
+    "candidate": "cbdb26738be35080bd578c126205999cea3ddc20",
+    "working_tree_sha256": "c5bbc0a282d9b0685b85b62156d49b7b447951b262ac51be18806b4393e1be29"
+  },
+  "starting_head": "cbdb26738be35080bd578c126205999cea3ddc20",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/drift-vnesl_8m/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 61.319,
+  "usage": {
+    "input_tokens": 84973,
+    "cached_input_tokens": 76416,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1567,
+    "reasoning_output_tokens": 133
+  },
+  "status": "completed",
+  "total_seconds": 61.841
+}

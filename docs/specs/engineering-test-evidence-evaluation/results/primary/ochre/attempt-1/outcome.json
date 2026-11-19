@@ -1,0 +1,32 @@
+{
+  "trial": "ochre",
+  "attempt": 1,
+  "skill": "diagnosing-bugs",
+  "fixture": {
+    "base": "8c4c78492208df36920fa947c881af4611bedd40",
+    "candidate": "d02a07b6fb499e1574324fa769b68889d0d65a67",
+    "working_tree_sha256": "ab87a8d4cfef6527a56dea09a036107e632307eb925e92a0a579351596ef714d"
+  },
+  "starting_head": "d02a07b6fb499e1574324fa769b68889d0d65a67",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/ochre-dfmiczf6/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 73.883,
+  "usage": {
+    "input_tokens": 126763,
+    "cached_input_tokens": 115840,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1989,
+    "reasoning_output_tokens": 96
+  },
+  "status": "completed",
+  "total_seconds": 74.433
+}

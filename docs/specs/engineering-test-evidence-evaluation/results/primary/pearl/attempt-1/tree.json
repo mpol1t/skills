@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/pearl-q3rlcel4/repo\nHEAD ff41c00baacbb6ecc23b5ecd5df03806630f831a\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "ff41c00 (HEAD -> main, tag: starting-point) Proposed change\n15629cf (tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "ff41c00baacbb6ecc23b5ecd5df03806630f831a"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "ff41c00baacbb6ecc23b5ecd5df03806630f831a",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

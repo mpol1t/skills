@@ -1,0 +1,32 @@
+{
+  "trial": "plum",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "27cb8276b07bc1db2153a2f401675403f04cbed8",
+    "candidate": "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+    "working_tree_sha256": "81c7d06839359f3d71bb76d7cbd7d863ebddb15815dcce03e3cffee5696d72d9"
+  },
+  "starting_head": "6ba1e76975edad384ba84dfe54bad01c0ea41dae",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-de3y0978/plum-trt32zow/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 78.668,
+  "usage": {
+    "input_tokens": 261302,
+    "cached_input_tokens": 237440,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2434,
+    "reasoning_output_tokens": 102
+  },
+  "status": "completed",
+  "total_seconds": 79.25
+}

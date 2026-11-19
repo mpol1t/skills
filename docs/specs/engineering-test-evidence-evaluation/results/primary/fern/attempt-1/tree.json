@@ -1,0 +1,49 @@
+[
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "output": "worktree /home/user/.local/share/evaluation-de3y0978/fern-hoowbbxj/repo\nHEAD de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0\nbranch refs/heads/main"
+  },
+  {
+    "command": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "output": "de6e9bb (HEAD -> main, tag: starting-point, tag: review-base) Initial project"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0"
+    ],
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--binary",
+      "de6e9bbfd9b3d1cd7faa2b1d066249384bac2ad0",
+      "refs/heads/main"
+    ],
+    "output": ""
+  }
+]

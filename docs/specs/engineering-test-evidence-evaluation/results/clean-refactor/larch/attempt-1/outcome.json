@@ -1,0 +1,32 @@
+{
+  "trial": "larch",
+  "attempt": 1,
+  "skill": "code-review",
+  "fixture": {
+    "base": "333d2f7443c79e9e1e3dd42f1e3afad84a5b3a3d",
+    "candidate": "c0e1b0f50b84e8a019edcfb5a74732d7bd62518d",
+    "working_tree_sha256": "218462bd6b02c5d32fbf2889315e7e57272ec4e78f665482ece728142d8b4e51"
+  },
+  "starting_head": "c0e1b0f50b84e8a019edcfb5a74732d7bd62518d",
+  "launch": [
+    "/usr/bin/node",
+    "/home/user/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "--json",
+    "-C",
+    "/home/user/.local/share/evaluation-_mj9isbi/larch-q2yrx4mh/repo",
+    "-"
+  ],
+  "timeout_seconds": 240,
+  "exit_code": 0,
+  "elapsed_seconds": 91.32,
+  "usage": {
+    "input_tokens": 310870,
+    "cached_input_tokens": 283136,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2641,
+    "reasoning_output_tokens": 374
+  },
+  "status": "completed",
+  "total_seconds": 91.766
+}
